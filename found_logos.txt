@@ -1,0 +1,43 @@
+26: /* partner logo strip              */
+236: .splash-logo {
+241: .splash-logo img {
+247: .splash-logo p {
+479: .navbar-logo {
+489: .navbar-logo img {
+1334: .partner-logo-item {
+1341: .partner-logo-item:hover {
+1346: .partner-logo-item img {
+2145: .industry-logo {
+2613: .pc-logos {
+2629: .pc-company-logo {
+3585: .partner-logo-box {
+3601: .partner-card.wide .partner-logo-box,
+3602: .partner-card.feature .partner-logo-box {
+3607: .partner-card.feature .partner-logo-box {
+3613: .partner-card:hover .partner-logo-box {
+3619: .partner-logo-box img {
+3628: .partner-card.wide .partner-logo-box img,
+3629: .partner-card.feature .partner-logo-box img {
+3634: .partner-card:hover .partner-logo-box img {
+4084: .inst-nav-logo {
+4092: .inst-logo-img {
+4098: .inst-logo-tag {
+4846: .inst-logo-item {
+4860: .inst-logo-item img {
+4866: .inst-logo-item:hover {
+6073: .partner-logo-box {
+6089: .partner-card.wide .partner-logo-box,
+6090: .partner-card.feature .partner-logo-box {
+6095: .partner-card.feature .partner-logo-box {
+6101: .partner-card:hover .partner-logo-box {
+6107: .partner-logo-box img {
+6116: .partner-card.wide .partner-logo-box img,
+6117: .partner-card.feature .partner-logo-box img {
+6122: .partner-card:hover .partner-logo-box img {
+6620: #page-junior-student .logo img,
+6621: #page-school-inst .logo img {
+8009: #page-junior-student .footer-logo {
+8185: #page-school-inst .logo {
+8196: #page-school-inst .logo img {
+8789: #page-school-inst .footer-logo {
+8801: #page-school-inst .footer-logo img {

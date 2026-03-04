@@ -1,0 +1,200 @@
+      <div class="splash-bar">
+        <div class="splash-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PORTAL SELECTION PAGE ===== -->
+  <div id="page-portal" class="page active">
+    <div class="portal-hero">
+      <div class="container">
+        <div class="tag" style="margin-bottom:20px;background:rgba(255,255,255,0.2);color:#fff">Welcome to MSEED</div>
+        <h1>Choose Your Learning Portal</h1>
+        <p>Transforming education through industry-aligned skill development for students at every stage</p>
+      </div>
+    </div>
+    <div class="portal-cards">
+      <div class="portal-card" onclick="navigate('mseed')">
+        <div class="portal-card-icon">🎓</div>
+        <div class="sub">Higher Education</div>
+        <h2>MSEED</h2>
+        <p>College students, institutions & industry-ready career acceleration programs with ATS-optimized tools</p>
+        <button class="btn btn-primary portal-btn">Enter MSEED Portal →</button>
+      </div>
+      <div class="portal-card" onclick="navigate('junior')">
+        <div class="portal-card-icon">🌱</div>
+        <div class="sub">School Education</div>
+        <h2>MSEED Junior</h2>
+        <p>Foundational skill-building programs, career awareness & digital curriculum for school students</p>
+        <button class="btn btn-primary portal-btn">Enter Junior Portal →</button>
+      </div>
+    </div>
+    <div style="text-align:center;padding-bottom:60px">
+      <p style="color:var(--grey-mid);font-size:14px">Trusted by <strong>500+</strong> institutions across India
+        &nbsp;·&nbsp; <strong>50,000+</strong> students trained &nbsp;·&nbsp; <strong>85%</strong> placement rate</p>
+    </div>
+  </div>
+
+  <!-- ===== MSEED PORTAL ===== -->
+  <div id="page-mseed" class="page">
+    <div id="mseed-portal-select">
+      <div class="portal-hero">
+        <div class="container">
+          <div style="margin-bottom:20px"><button class="back-btn" onclick="navigate('portal')"><svg width="16"
+                height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 12H5M12 5l-7 7 7 7" />
+              </svg> Back to Portal Select</button></div>
+          <div class="tag" style="margin-bottom:20px;background:rgba(255,255,255,0.2);color:#fff">MSEED</div>
+          <h1>Who are you?</h1>
+          <p>Select your portal to access customized resources, tools and programs</p>
+        </div>
+      </div>
+      <div class="portal-cards">
+        <div class="portal-card" onclick="navigate('college-student')">
+          <div class="portal-card-icon">📚</div>
+          <div class="sub">For Students</div>
+          <h2>Student Portal</h2>
+          <p>Resume tools, live classes, skill games, resources and career-building programs tailored for college
+            students</p>
+          <button class="btn btn-primary portal-btn">Enter Student Portal →</button>
+        </div>
+        <div class="portal-card" onclick="navigate('institution')">
+          <div class="portal-card-icon">🏛️</div>
+          <div class="sub">For Institutions</div>
+          <h2>Institution Portal</h2>
+          <p>Campus connect solutions, dashboards, industry tie-ups and comprehensive placement training</p>
+          <button class="btn btn-primary portal-btn">Enter Institution Portal →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== COLLEGE STUDENT PORTAL ===== -->
+  <div id="page-college-student" class="page">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-logo">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="MSEED"
+            style="height:38px;object-fit:contain;display:block">
+          <span
+            style="font-size:13px;color:var(--grey-mid);font-family:'DM Sans',sans-serif;font-weight:400;margin-left:8px">Student</span>
+        </div>
+        <div class="nav-links" id="student-nav-links">
+          <span class="nav-link active" onclick="showTab('home')">Home</span>
+          <span class="nav-link" onclick="showTab('courses')">Live Classes</span>
+          <span class="nav-link" onclick="showTab('resources')">Resources</span>
+          <span class="nav-link" onclick="showTab('games')">Games</span>
+          <span class="nav-link" onclick="showTab('ats')">ATS Tools</span>
+          <span class="nav-link" onclick="showTab('pdfs')">Content PDFs</span>
+        </div>
+        <div class="nav-actions">
+          <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+          <button class="back-btn" onclick="navigate('mseed')"><svg width="14" height="14" fill="none"
+              stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 12H5M12 5l-7 7 7 7" />
+            </svg> Portals</button>
+          <button class="btn btn-primary" style="padding:10px 20px;font-size:13px"
+            onclick="openEnrollModal('General')">Enroll Now</button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div class="mobile-menu hidden" id="mobile-menu">
+        <span class="nav-link" onclick="showTab('home');closeMobileMenu()">Home</span>
+        <span class="nav-link" onclick="showTab('courses');closeMobileMenu()">Live Classes</span>
+        <span class="nav-link" onclick="showTab('resources');closeMobileMenu()">Resources</span>
+        <span class="nav-link" onclick="showTab('games');closeMobileMenu()">Games</span>
+        <span class="nav-link" onclick="showTab('ats');closeMobileMenu()">ATS Tools</span>
+        <span class="nav-link" onclick="showTab('pdfs');closeMobileMenu()">Content PDFs</span>
+      </div>
+    </nav>
+
+    <!-- ===== TAB: HOME ===== -->
+    <div id="tab-home" class="tab-content">
+
+      <!-- HERO CAROUSEL -->
+      <section class="hero-carousel-wrap">
+        <div class="hc-track" id="hc-track">
+
+          <!-- SLIDE 1: Resume + Live Classes -->
+          <div class="hc-slide">
+            <div class="hc-bg hc-bg-1"></div>
+            <div class="container hc-inner">
+              <div class="hc-content">
+                <div class="hc-eyebrow"><span class="hc-live-dot"></span>🚀 India's #1 Career Readiness Platform</div>
+                <h1 class="hc-headline">Build a Career That<br><span class="hc-accent">Industry Demands</span></h1>
+                <p class="hc-sub">Industry-aligned programs, ATS-ready resumes, and real-world skill training that gets
+                  you hired — not just educated.</p>
+                <div class="hc-trust-pills">
+                  <span class="hc-pill">✅ 85% Placement Rate</span>
+                  <span class="hc-pill">✅ 500+ Hiring Partners</span>
+                  <span class="hc-pill">✅ ATS-Verified Resumes</span>
+                </div>
+                <div class="hc-actions">
+                  <button class="btn btn-white hc-btn" onclick="showTab('ats');setATSMode('checker')">🔍 Check Your
+                    Resume</button>
+                  <button class="btn hc-btn-ghost" onclick="showTab('courses')">Explore Live Classes →</button>
+                </div>
+              </div>
+              <div class="hc-visual">
+                <div class="hc-score-card">
+                  <div class="hc-score-top">
+                    <span class="hc-score-label">Your ATS Score</span>
+                    <span class="hc-score-num">73<small>/100</small></span>
+                  </div>
+                  <div class="hc-score-bars">
+                    <div class="hc-sbar-row"><span>Keyword Match</span>
+                      <div class="hc-sbar">
+                        <div class="hc-sbar-fill" style="width:72%"></div>
+                      </div><b>72%</b>
+                    </div>
+                    <div class="hc-sbar-row"><span>Format Score</span>
+                      <div class="hc-sbar">
+                        <div class="hc-sbar-fill" style="width:88%"></div>
+                      </div><b>88%</b>
+                    </div>
+                    <div class="hc-sbar-row"><span>Skill Match</span>
+                      <div class="hc-sbar">
+                        <div class="hc-sbar-fill" style="width:54%;background:linear-gradient(90deg,#F57F17,#FFB74D)">
+                        </div>
+                      </div><b style="color:#FFD180">54%</b>
+                    </div>
+                  </div>
+                  <div class="hc-score-cta" onclick="showTab('ats');setATSMode('checker')">Improve to 90+ →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: Live Class Bundles -->
+          <div class="hc-slide">
+            <div class="hc-bg hc-bg-2"></div>
+            <div class="container hc-inner">
+              <div class="hc-content">
+                <div class="hc-eyebrow"><span class="hc-live-dot" style="background:#FFD600"></span>📦 Smarter Learning,
+                  Better Savings</div>
+                <h1 class="hc-headline">Master More.<br><span class="hc-accent">Pay Less with Bundles</span></h1>
+                <p class="hc-sub">Live Class Bundles are hand-picked combinations of related skills — perfect for
+                  landing roles in top tech, analytics, and engineering companies. One bundle, one price, complete
+                  career readiness.</p>
+                <div class="hc-trust-pills">
+                  <span class="hc-pill">✅ Save up to 40%</span>
+                  <span class="hc-pill">✅ Industry-curated sets</span>
+                  <span class="hc-pill">✅ Dual Certificate</span>
+                </div>
+                <div class="hc-bundle-chips">
+                  <span class="hc-bundle-chip">🧠 AI + ML + Data Science</span>
+                  <span class="hc-bundle-chip">🌐 Web Dev + Cloud + DevOps</span>
+                  <span class="hc-bundle-chip">⚡ EV + CAD + Automation</span>
+                  <span class="hc-bundle-chip">🛡️ Cyber + Networking + IoT</span>
+                </div>
+                <div class="hc-actions">
+                  <button class="btn btn-white hc-btn"
+                    onclick="showTab('courses');setTimeout(()=>filterCourses('bundle',document.querySelector('[data-dept=bundle]')),100)">📦
+                    Explore Bundles</button>
+                  <button class="btn hc-btn-ghost" onclick="showTab('courses')">View All Live Classes →</button>
+                </div>
+              </div>
+              <div class="hc-visual">

@@ -1,0 +1,30 @@
+            </svg></button>
+        </div>
+        <div class="hc-progress-track">
+          <div class="hc-progress-fill" id="hc-progress"></div>
+        </div>
+      </section>
+
+      <!-- PARTNER LOGO STRIP -->
+      <section class="partner-strip-section">
+        <div class="partner-strip-label">Trusted by companies hiring our students</div>
+        <div class="partner-strip-wrap">
+          <div class="partner-strip-track">
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3ETCS%3C/text%3E%3C/svg%3E"
+                alt="TCS"></div>
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3EInfosys%3C/text%3E%3C/svg%3E"
+                alt="Infosys"></div>
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3EWipro%3C/text%3E%3C/svg%3E"
+                alt="Wipro"></div>
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3ECognizant%3C/text%3E%3C/svg%3E"
+                alt="Cognizant"></div>
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3EAccenture%3C/text%3E%3C/svg%3E"
+                alt="Accenture"></div>
+            <div class="partner-logo-item"><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='36'%3E%3Crect width='110' height='36' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13' font-weight='700' fill='%23444'%3EZoho%3C/text%3E%3C/svg%3E"
+                alt="Zoho"></div>
