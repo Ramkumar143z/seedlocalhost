@@ -3182,7 +3182,7 @@ textarea.form-input {
   letter-spacing: 2.5px;
   text-transform: uppercase;
   margin-bottom: 36px;
-  opacity: 0;
+  opacity: 1;
   backdrop-filter: blur(8px);
 }
 
@@ -3217,7 +3217,7 @@ textarea.form-input {
   letter-spacing: -2px;
   color: #fff;
   margin-bottom: 30px;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-headline em {
@@ -3248,7 +3248,7 @@ textarea.form-input {
   line-height: 1.85;
   max-width: 600px;
   margin: 0 auto 56px;
-  opacity: 0;
+  opacity: 1;
   font-weight: 300;
 }
 
@@ -3260,7 +3260,7 @@ textarea.form-input {
   border-radius: 20px;
   backdrop-filter: blur(20px);
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
 }
 
 .pstat {
@@ -3310,7 +3310,7 @@ textarea.form-input {
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-scroll-line {
@@ -3324,7 +3324,7 @@ textarea.form-input {
 @keyframes scrollPulse {
   0% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: top;
   }
 
@@ -3336,7 +3336,7 @@ textarea.form-input {
 
   100% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: bottom;
   }
 }
@@ -3374,7 +3374,7 @@ textarea.form-input {
   max-width: 1160px;
   margin: 0 auto 40px;
   padding: 0 40px;
-  opacity: 0;
+  opacity: 1;
 }
 
 .psl-line {
@@ -3425,7 +3425,7 @@ textarea.form-input {
   color: inherit;
   position: relative;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   background: var(--p-dark);
   transition: background 0.4s ease;
   cursor: pointer;
@@ -3478,7 +3478,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 60% at 20% 50%, rgba(0, 177, 123, 0.07) 0%, transparent 70%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
   pointer-events: none;
   z-index: 0;
@@ -3618,7 +3618,7 @@ textarea.form-input {
 .partner-card:not(.wide):not(.feature) .partner-collab {
   max-height: 0;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   margin-top: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
 }
@@ -3673,7 +3673,7 @@ textarea.form-input {
   align-items: center;
   justify-content: center;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  opacity: 0;
+  opacity: 1;
   z-index: 2;
   background: transparent;
 }
@@ -3784,7 +3784,7 @@ textarea.form-input {
   z-index: 2;
   max-width: 580px;
   margin: 0 auto;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-cta-tag {
@@ -3855,7 +3855,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -4123,7 +4123,7 @@ textarea.form-input {
 
 @keyframes instDropdown {
   from {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(-10px) scaleY(0.95);
   }
 
@@ -4300,7 +4300,7 @@ textarea.form-input {
   font-weight: 600;
   letter-spacing: 0.5px;
   margin-bottom: 28px;
-  opacity: 0;
+  opacity: 1;
   /* GSAP animates in */
 }
 
@@ -4336,7 +4336,7 @@ textarea.form-input {
   line-height: 1.08;
   margin-bottom: 24px;
   letter-spacing: -1px;
-  opacity: 0;
+  opacity: 1;
   /* GSAP */
 }
 
@@ -4367,7 +4367,7 @@ textarea.form-input {
   line-height: 1.75;
   max-width: 520px;
   margin-bottom: 28px;
-  opacity: 0;
+  opacity: 1;
   /* GSAP */
 }
 
@@ -4377,7 +4377,7 @@ textarea.form-input {
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 36px;
-  opacity: 0;
+  opacity: 1;
   /* GSAP */
 }
 
@@ -4407,7 +4407,7 @@ textarea.form-input {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  opacity: 0;
+  opacity: 1;
   /* GSAP */
 }
 
@@ -4433,7 +4433,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -4470,7 +4470,7 @@ textarea.form-input {
 
 /* ── RIGHT: Stats cluster ── */
 .inst-hero-right {
-  opacity: 0;
+  opacity: 1;
   /* GSAP */
 }
 
@@ -4502,7 +4502,7 @@ textarea.form-input {
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--inst-green), transparent);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -4633,7 +4633,7 @@ textarea.form-input {
 @keyframes lineGrow {
   0% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: top;
   }
 
@@ -4645,7 +4645,7 @@ textarea.form-input {
 
   100% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: bottom;
   }
 }
@@ -4870,7 +4870,7 @@ textarea.form-input {
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--inst-green), var(--inst-green-2));
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -5171,7 +5171,7 @@ textarea.form-input {
 }
 
 .inst-modal-overlay.hidden {
-  opacity: 0;
+  opacity: 1;
   visibility: hidden;
 }
 
@@ -5453,7 +5453,7 @@ textarea.form-input {
   max-width: 1200px;
   height: auto;
   object-fit: contain;
-  opacity: 0;
+  opacity: 1;
   transform: scale(0.95);
   will-change: transform, opacity;
 }
@@ -5714,7 +5714,7 @@ textarea.form-input {
   letter-spacing: 2.5px;
   text-transform: uppercase;
   margin-bottom: 36px;
-  opacity: 0;
+  opacity: 1;
   backdrop-filter: blur(8px);
 }
 
@@ -5749,7 +5749,7 @@ textarea.form-input {
   letter-spacing: -2px;
   color: #fff;
   margin-bottom: 30px;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-headline em {
@@ -5780,7 +5780,7 @@ textarea.form-input {
   line-height: 1.85;
   max-width: 600px;
   margin: 0 auto 56px;
-  opacity: 0;
+  opacity: 1;
   font-weight: 300;
 }
 
@@ -5792,7 +5792,7 @@ textarea.form-input {
   border-radius: 20px;
   backdrop-filter: blur(20px);
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
 }
 
 .pstat {
@@ -5840,7 +5840,7 @@ textarea.form-input {
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-scroll-line {
@@ -5854,7 +5854,7 @@ textarea.form-input {
 @keyframes scrollPulse {
   0% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: top;
   }
 
@@ -5866,7 +5866,7 @@ textarea.form-input {
 
   100% {
     transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
     transform-origin: bottom;
   }
 }
@@ -5904,7 +5904,7 @@ textarea.form-input {
   max-width: 1160px;
   margin: 0 auto 40px;
   padding: 0 40px;
-  opacity: 0;
+  opacity: 1;
 }
 
 .psl-line {
@@ -5955,7 +5955,7 @@ textarea.form-input {
   color: inherit;
   position: relative;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   background: var(--p-dark);
   transition: background 0.4s ease;
   cursor: pointer;
@@ -6007,7 +6007,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 60% at 20% 50%, rgba(0, 177, 123, 0.07) 0%, transparent 70%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
   pointer-events: none;
   z-index: 0;
@@ -6147,7 +6147,7 @@ textarea.form-input {
 .partner-card:not(.wide):not(.feature) .partner-collab {
   max-height: 0;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   margin-top: 0;
   transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
 }
@@ -6198,7 +6198,7 @@ textarea.form-input {
   align-items: center;
   justify-content: center;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  opacity: 0;
+  opacity: 1;
   z-index: 2;
   background: transparent;
 }
@@ -6309,7 +6309,7 @@ textarea.form-input {
   z-index: 2;
   max-width: 580px;
   margin: 0 auto;
-  opacity: 0;
+  opacity: 1;
 }
 
 .partners-cta-tag {
@@ -6380,7 +6380,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -6925,7 +6925,7 @@ textarea.form-input {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, var(--glow), transparent);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s;
 }
 
@@ -7829,7 +7829,7 @@ textarea.form-input {
 @keyframes slideIn {
   from {
     transform: translateX(120%);
-    opacity: 0;
+    opacity: 1;
   }
 
   to {
@@ -7840,7 +7840,7 @@ textarea.form-input {
 
 @keyframes fadeOut {
   to {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(8px);
   }
 }
@@ -7933,7 +7933,7 @@ textarea.form-input {
 
 @keyframes fadeUp {
   from {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
   }
 
@@ -7944,7 +7944,7 @@ textarea.form-input {
 }
 
 #page-junior-student .fade-in {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -8513,7 +8513,7 @@ textarea.form-input {
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  opacity: 0;
+  opacity: 1;
   transform: translateY(28px);
   transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.35s ease, border-color 0.25s ease;
 }
@@ -8718,7 +8718,7 @@ textarea.form-input {
 @keyframes slideIn {
   from {
     transform: translateX(120%);
-    opacity: 0;
+    opacity: 1;
   }
 
   to {
@@ -8729,7 +8729,7 @@ textarea.form-input {
 
 @keyframes fadeOut {
   to {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(8px);
   }
 }
@@ -8765,7 +8765,7 @@ textarea.form-input {
 }
 
 #page-school-inst .fade-in {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -8918,7 +8918,7 @@ textarea.form-input {
     bottom: 0;
     z-index: 998;
     display: none;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
   }
 
@@ -9109,7 +9109,7 @@ textarea.form-input {
 #tab-ats .upload-box input[type="file"] {
   position: absolute;
   inset: 0;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -9260,7 +9260,7 @@ textarea.form-input {
 #tab-ats .drop-form input[type="file"] {
   position: absolute;
   inset: 0;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -10025,7 +10025,7 @@ textarea.form-input {
 @keyframes ats-modal-in {
   from {
     transform: scale(0.88) translateY(20px);
-    opacity: 0;
+    opacity: 1;
   }
 
   to {
@@ -10726,3 +10726,30 @@ textarea.form-input {
 }
 
 /*ithoda instituition mutinchu
+/* ===== SPLASH SAFETY FALLBACK ===== */
+#splash {
+  animation: splashFallbackHide 0.5s ease 4s forwards;
+}
+
+@keyframes splashFallbackHide {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+#intro-logo {
+  animation: splashLogoFallback 0.8s ease 0.5s both;
+}
+
+@keyframes splashLogoFallback {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
