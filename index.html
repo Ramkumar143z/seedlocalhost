@@ -4487,7 +4487,7 @@
   <!-- Toast -->
   <div id="toast" class="toast hidden"></div>
 
-  <script src="script.js" defer></script>
+  <script type="module" src="script.js" defer></script>
   <div id="yt-modal" class="yt-modal-overlay hidden" onclick="closeYTModal(event)">
     <div class="yt-modal-box">
       <button class="yt-modal-close" onclick="closeYTModal(null, true)">✕</button>
@@ -4556,6 +4556,25 @@
         });
 
     }
+  </script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCWugNDmUVftJRSEJFKcUCUHkDBqY0bjOw",
+      authDomain: "mseed-2c18c.firebaseapp.com",
+      projectId: "mseed-2c18c",
+      storageBucket: "mseed-2c18c.firebasestorage.app",
+      messagingSenderId: "992641282727",
+      appId: "1:992641282727:web:364ba74e46b3e83dc8e182"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
   </script>
 </body>
 
