@@ -445,7 +445,10 @@ function renderCourses() {
     const btnClass = c.isFree ? 'btn btn-outline' : 'btn btn-primary';
     return `
       <div class="course-card">
-        <div class="course-card-img" style="${bgStyle}"><span>${c.emoji}</span>${badge}</div>
+        <div class="course-card-img" style="${bgStyle}">
+          <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg" alt="Course Icon" class="course-icon-img">
+          ${badge}
+        </div>
         <div class="course-card-body">
           <h3>${c.title}</h3>${priceRow}<p>${c.desc}</p>
           <div class="course-meta"><span class="duration">⏱ ${c.duration}</span><span class="course-level level-${(c.level || 'beginner').toLowerCase()}">${c.level}</span></div>
@@ -466,7 +469,8 @@ function renderHomeCourses() {
   home.innerHTML = featured.map(c => `
     <div class="course-card">
       <div class="course-card-img" style="${c.isFree ? 'background:linear-gradient(135deg,#1a2420,var(--green))' : 'background:linear-gradient(135deg,var(--green),#00c98c)'}">
-        <span>${c.emoji}</span>${c.isFree ? '<span class="free-badge">🆓 FREE</span>' : ''}
+        <img src="" alt="Course Icon" class="course-icon-img">
+        ${c.isFree ? '<span class="free-badge">🆓 FREE</span>' : ''}
       </div>
       <div class="course-card-body">
         <h3>${c.title}</h3><p>${c.desc}</p>
@@ -579,7 +583,9 @@ function renderPreCourses() {
             <source src="CLOUDINARY_VIDEO_LINK" type="video/mp4">
           </video>
           ${c.isFree ? '<div style="position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;"><span class="free-badge">🆓 FREE</span></div>' : ''}
-          <div style="position:absolute;top:12px;left:12px;z-index:2;font-size:24px;pointer-events:none;">${c.emoji || ''}</div>
+          <div style="position:absolute;top:12px;left:12px;z-index:2;font-size:24px;pointer-events:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;">
+            <img src="" alt="Course Icon" class="precourse-icon-img" style="position:absolute;width:100%;height:100%;object-fit:contain;z-index:3;">
+          </div>
         </div>
         <div class="course-card-body">
           <h3>${c.title}</h3><p>${c.desc}</p>
@@ -1070,6 +1076,14 @@ function openEnrollModal(courseName) {
   if (success) success.classList.add('hidden');
   const courseInput = document.getElementById('en-course');
   if (courseInput && courseName && courseName !== 'General') courseInput.value = courseName;
+
+  // Trigger one-time video playback exactly from the start when the modal opens
+  const enrollVid = document.getElementById('enrollVideo');
+  if (enrollVid) {
+    enrollVid.currentTime = 0;
+    enrollVid.play().catch(e => console.log('Video autoplay blocked or pending:', e));
+  }
+
   openModal('modal-enroll');
 }
 expose('openEnrollModal', openEnrollModal);
@@ -1616,7 +1630,11 @@ function renderAboutSection() {
         <p style="color:rgba(255,255,255,0.6);font-size:16px;margin-bottom:40px;">Whether you're a student, institution, or hiring partner — we'd love to hear from you.</p>
         <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
           <a href="mailto:info@mseed.in" style="display:inline-flex;align-items:center;gap:8px;background:#00b17b;color:#fff;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;">📧 info@mseed.in</a>
-          <a href="tel:+919000000000" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;border:1.5px solid rgba(255,255,255,0.25);">📞 +91 90000 00000</a>
+          <a href="tel:+91-9361286834
+
+" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;padding:14px 28px;border-radius:12px;text-decoration:none;font-weight:600;font-size:15px;border:1.5px solid rgba(255,255,255,0.25);">📞+91-9361286834
+
+ </a>
         </div>
         <div style="display:flex;gap:16px;justify-content:center;">
           ${['𝕏', 'in', '▶', '📷'].map(s => `<div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,177,123,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">${s}</div>`).join('')}

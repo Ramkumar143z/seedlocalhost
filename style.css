@@ -145,6 +145,55 @@ a {
   transform: translateY(-2px);
 }
 
+/* ===== ENROLL BUTTON PEEK ANIMATION ===== */
+button[onclick*="openEnrollModal"] {
+  position: relative;
+  /* Prevent the button from creating a stacking context */
+  z-index: auto !important;
+  /* Ensure the popping image isn't clipped by hidden overflow */
+  overflow: visible !important;
+}
+
+button[onclick*="openEnrollModal"]:hover {
+  /* Disable transform on hover so it doesn't suddenly create a stacking context */
+  transform: none !important;
+}
+
+button[onclick*="openEnrollModal"]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 80px;
+  height: 80px;
+  /* Peeking character image */
+  background-image: url("https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-6-01_mhijuj.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  /* Go completely behind the entire button, including its background */
+  z-index: -1;
+  /* Start hidden, scaled down, and completely behind the button */
+  transform: translate(-50%, 20px) scale(0.5);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+button[onclick*="openEnrollModal"]:hover::after {
+  /* On hover, scale up extra large, peek out higher from behind the top of the button */
+  transform: translate(-50%, -65px) scale(1.4);
+  opacity: 1;
+}
+
+/* Disable the effect for enroll buttons located within the desktop navbar */
+.navbar button[onclick*="openEnrollModal"]::after,
+.navbar button[onclick*="openEnrollModal"]:hover::after {
+  display: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
 .card {
   background: #fff;
   border-radius: var(--radius);
@@ -230,7 +279,8 @@ h4 {
 /* ===== PORTAL SELECTION ===== */
 .portal-hero {
   background: linear-gradient(135deg, var(--green) 0%, #00c98c 100%);
-  padding: 100px 24px 80px;
+  padding: 10px 24px 5px;
+  /* Minimal padding */
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -261,14 +311,15 @@ h4 {
 .portal-hero h1 {
   font-family: 'Playfair Display', serif;
   color: #fff;
-  font-size: 56px;
+  font-size: 32px;
   font-weight: 900;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+  /* Minimal margin */
 }
 
 .portal-hero p {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 20px;
+  font-size: 14px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -276,16 +327,19 @@ h4 {
 .portal-cards {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 60px 24px;
+  padding: 40px 24px 20px;
+  /* Adjusted padding to add gap between hero and cards */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 24px;
+  /* Reduced gap from 32px */
 }
 
 .portal-card {
   background: #fff;
-  border-radius: 24px;
-  padding: 48px 40px;
+  border-radius: 20px;
+  padding: 30px 30px;
+  /* Reduced padding inside the card */
   text-align: center;
   box-shadow: var(--shadow);
   cursor: pointer;
@@ -327,9 +381,22 @@ h4 {
   transition: var(--transition);
 }
 
+.portal-icon-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: var(--transition);
+}
+
 .portal-card:hover .portal-card-icon {
-  background: var(--green);
+  background: #fff;
   transform: scale(1.1);
+}
+
+.portal-card:hover .portal-icon-img {
+  transform: scale(1.6) translateY(-5px);
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .portal-card h2 {
@@ -1324,12 +1391,22 @@ h4 {
 }
 
 .course-card-img {
-  height: 160px;
+  height: fit-content;
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
   position: relative;
+  overflow: hidden;
+}
+
+.course-icon-img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  z-index: 10;
+  display: block;
 }
 
 .course-card-img .dept-tag {
@@ -1381,7 +1458,8 @@ h4 {
 .course-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
   font-size: 12px;
   color: var(--grey-mid);
 }
@@ -10751,5 +10829,115 @@ textarea.form-input {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* ===== MSEED PORTAL SELECT SPECIFIC STYLES ===== */
+#mseed-portal-select,
+#junior-portal-select {
+  background: linear-gradient(135deg, #0a1628 0%, rgba(10, 22, 40, 0.95) 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+#mseed-portal-select .portal-hero,
+#junior-portal-select .portal-hero {
+  background: transparent;
+}
+
+#mseed-portal-select::before,
+#mseed-portal-select::after,
+#junior-portal-select::before,
+#junior-portal-select::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 177, 123, 0.15) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#mseed-portal-select::before,
+#junior-portal-select::before {
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  animation: floatOrb 10s ease-in-out infinite alternate;
+}
+
+#mseed-portal-select::after,
+#junior-portal-select::after {
+  bottom: -150px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  animation: floatOrb 12s ease-in-out infinite alternate-reverse;
+}
+
+#mseed-portal-select h1,
+#mseed-portal-select p,
+#mseed-portal-select .tag,
+#mseed-portal-select .back-btn,
+#junior-portal-select h1,
+#junior-portal-select p,
+#junior-portal-select .tag,
+#junior-portal-select .back-btn {
+  position: relative;
+  z-index: 2;
+}
+
+#mseed-portal-select .portal-card,
+#junior-portal-select .portal-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Springy hover */
+}
+
+#mseed-portal-select .portal-card:hover,
+#junior-portal-select .portal-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #00b17b;
+  box-shadow: 0 20px 40px rgba(0, 177, 123, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#mseed-portal-select .portal-card h2,
+#junior-portal-select .portal-card h2 {
+  color: #ffffff;
+}
+
+#mseed-portal-select .portal-card p,
+#junior-portal-select .portal-card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#mseed-portal-select .back-btn,
+#junior-portal-select .back-btn {
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+#mseed-portal-select .back-btn:hover,
+#junior-portal-select .back-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) translateX(20px) scale(1.05);
+  }
+
+  100% {
+    transform: translateY(10px) translateX(-10px) scale(0.95);
   }
 }

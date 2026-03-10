@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MSEED – Empowering Futures</title>
+  <title>MSEED –Empowering Futures</title>
+  <link rel="icon" type="image/png"
+    href="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773122550/Icon_Green_ntaley.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="style.css">
   <link
@@ -49,8 +51,16 @@
       <div class="modal" onclick="event.stopPropagation()" style="max-width:550px;">
         <div class="modal-close" onclick="closeModal('modal-enroll')">✕</div>
         <div id="enroll-step-form">
-          <div class="tag" style="margin-bottom:15px">Live Class Enrolment</div>
-          <h2 style="margin-bottom:20px">Join the Program</h2>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+            <div>
+              <div class="tag" style="margin-bottom:15px">Live Class Enrolment</div>
+              <h2 style="margin-bottom: 0;">Join the Program</h2>
+            </div>
+            <video id="enrollVideo"
+              src="https://res.cloudinary.com/dn6ljz4uo/video/upload/v1773093523/click_it_xmlwh1.mp4" autoplay muted
+              playsinline
+              style="width: 160px; border-radius: 8px; pointer-events: none; flex-shrink: 0; margin-top: -10px; margin-right: 15px;"></video>
+          </div>
           <div class="form-group"><label>Name</label><input type="text" class="form-input" id="en-name"
               placeholder="Enter full name"></div>
           <div class="grid-2" style="gap:15px">
@@ -240,14 +250,18 @@
     </div>
     <div class="portal-cards">
       <div class="portal-card" onclick="navigate('mseed')">
-        <div class="portal-card-icon">🎓</div>
+        <div class="portal-card-icon"><img
+            src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-5-01_zxq3cn.png"
+            alt="MSEED Icon" class="portal-icon-img"></div>
         <div class="sub">Higher Education</div>
         <h2>MSEED</h2>
         <p>College students, institutions & industry-ready career acceleration programs with ATS-optimized tools</p>
         <button class="btn btn-primary portal-btn">Enter MSEED Portal →</button>
       </div>
       <div class="portal-card" onclick="navigate('junior')">
-        <div class="portal-card-icon">🌱</div>
+        <div class="portal-card-icon"><img
+            src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/Untitled-3-01_uin6cn.png"
+            alt="Junior Icon" class="portal-icon-img"></div>
         <div class="sub">School Education</div>
         <h2>MSEED Junior</h2>
         <p>Foundational skill-building programs, career awareness & digital curriculum for school students</p>
@@ -279,7 +293,7 @@
       </div>
       <div class="portal-cards">
         <div class="portal-card" onclick="navigate('college-student')">
-          <div class="portal-card-icon">📚</div>
+          <div class="portal-card-icon"><img src="" alt="Student Icon" class="portal-icon-img"></div>
           <div class="sub">For Students</div>
           <h2>Student Portal</h2>
           <p>Resume tools, live classes, skill games, resources and career-building programs tailored for college
@@ -287,7 +301,7 @@
           <button class="btn btn-primary portal-btn">Enter Student Portal →</button>
         </div>
         <div class="portal-card" onclick="navigate('institution')">
-          <div class="portal-card-icon">🏛️</div>
+          <div class="portal-card-icon"><img src="" alt="Institution Icon" class="portal-icon-img"></div>
           <div class="sub">For Institutions</div>
           <h2>Institution Portal</h2>
           <p>Campus connect solutions, dashboards, industry tie-ups and comprehensive placement training</p>
@@ -628,157 +642,96 @@
           <div class="partner-strip-track">
 
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ETCS%3C/text%3E%3C/svg%3E" alt="TCS"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773120421/02_uatqdk.png" alt="TCS"></div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/video/upload/v1773093523/click_it_xmlwh1.mp4" alt="Infosys">
+            </div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/Untitled-3-01_uin6cn.png"
+                alt="Wipro"></div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/7-01_it7ke9.png" alt="Cognizant">
+            </div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772364098/final_rzwbl6.png" alt="Accenture">
+            </div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EInfosys%3C/text%3E%3C/svg%3E" alt="Infosys"></div>
+                alt="Zoho"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EWipro%3C/text%3E%3C/svg%3E" alt="Wipro"></div>
+                alt="Freshworks"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ECognizant%3C/text%3E%3C/svg%3E" alt="Cognizant"></div>
+                alt="Google"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EAccenture%3C/text%3E%3C/svg%3E" alt="Accenture"></div>
+                alt="Microsoft"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EZoho%3C/text%3E%3C/svg%3E" alt="Zoho"></div>
+                alt="Amazon"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EFreshworks%3C/text%3E%3C/svg%3E" alt="Freshworks"></div>
+                alt="Meta"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EGoogle%3C/text%3E%3C/svg%3E" alt="Google"></div>
+                alt="Netflix"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EMicrosoft%3C/text%3E%3C/svg%3E" alt="Microsoft"></div>
+                alt="Apple"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EAmazon%3C/text%3E%3C/svg%3E" alt="Amazon"></div>
+                alt="IBM"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EMeta%3C/text%3E%3C/svg%3E" alt="Meta"></div>
-            <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ENetflix%3C/text%3E%3C/svg%3E" alt="Netflix"></div>
-            <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EApple%3C/text%3E%3C/svg%3E" alt="Apple"></div>
-            <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EIBM%3C/text%3E%3C/svg%3E" alt="IBM"></div>
-            <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EOracle%3C/text%3E%3C/svg%3E" alt="Oracle"></div>
+                alt="Oracle"></div>
 
 
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ETCS%3C/text%3E%3C/svg%3E" alt="TCS"></div>
+                alt="TCS"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EInfosys%3C/text%3E%3C/svg%3E" alt="Infosys"></div>
+                alt="Infosys"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EWipro%3C/text%3E%3C/svg%3E" alt="Wipro"></div>
+                alt="Wipro"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ECognizant%3C/text%3E%3C/svg%3E" alt="Cognizant"></div>
+                alt="Cognizant"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EAccenture%3C/text%3E%3C/svg%3E" alt="Accenture"></div>
+                alt="Accenture"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EZoho%3C/text%3E%3C/svg%3E" alt="Zoho"></div>
+                alt="Zoho"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EFreshworks%3C/text%3E%3C/svg%3E" alt="Freshworks"></div>
+                alt="Freshworks"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EGoogle%3C/text%3E%3C/svg%3E" alt="Google"></div>
+                alt="Google"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EMicrosoft%3C/text%3E%3C/svg%3E" alt="Microsoft"></div>
+                alt="Microsoft"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EAmazon%3C/text%3E%3C/svg%3E" alt="Amazon"></div>
+                alt="Amazon"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EMeta%3C/text%3E%3C/svg%3E" alt="Meta"></div>
+                alt="Meta"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3ENetflix%3C/text%3E%3C/svg%3E" alt="Netflix"></div>
+                alt="Netflix"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EApple%3C/text%3E%3C/svg%3E" alt="Apple"></div>
+                alt="Apple"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EIBM%3C/text%3E%3C/svg%3E" alt="IBM"></div>
+                alt="IBM"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
-                http://www.w3.org/2000/svg' width='110' height='36' %3E%3Crect width='110' height='36' rx='6'
-                fill='%23f0f0f0' /%3E%3Ctext x='55' y='24' text-anchor='middle' font-family='sans-serif' font-size='13'
-                font-weight='700' fill='%23444' %3EOracle%3C/text%3E%3C/svg%3E" alt="Oracle"></div>
+                alt="Oracle"></div>
 
           </div>
         </div>
@@ -3135,11 +3088,10 @@
   <!-- ===== MSEED JUNIOR PORTAL ===== -->
   <div id="page-junior" class="page">
     <div id="junior-portal-select">
-      <div class="portal-hero" style="background:linear-gradient(135deg,#1a2420 0%,var(--green) 100%)">
+      <div class="portal-hero">
         <div class="container">
-          <div style="margin-bottom:20px"><button class="back-btn" onclick="navigate('portal')"
-              style="border-color:rgba(255,255,255,0.3);;background:rgba(255,255,255,0.1)"><svg width="14" height="14"
-                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <div style="margin-bottom:20px"><button class="back-btn" onclick="navigate('portal')"><svg width="14"
+                height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path d="M19 12H5M12 5l-7 7 7 7" />
               </svg> Back</button></div>
           <div class="tag" style="background:rgba(255,255,255,0.2);color:#fff;margin-bottom:20px">MSEED Junior</div>
@@ -3149,14 +3101,14 @@
       </div>
       <div class="portal-cards">
         <div class="portal-card" onclick="navigate('junior-student')">
-          <div class="portal-card-icon">🎒</div>
+          <div class="portal-card-icon"><img src="" alt="Student Icon" class="portal-icon-img"></div>
           <div class="sub">For School Students</div>
           <h2>Student Portal</h2>
           <p>Fun skill-building live classes, career exploration, coding basics, and leadership programs for school
             students</p><button class="btn btn-primary portal-btn">I'm a Student →</button>
         </div>
         <div class="portal-card" onclick="navigate('school-inst')">
-          <div class="portal-card-icon">🏫</div>
+          <div class="portal-card-icon"><img src="" alt="School Icon" class="portal-icon-img"></div>
           <div class="sub">For Schools</div>
           <h2>School Portal</h2>
           <p>Digital curriculum solutions, skill development infrastructure and after-school programs for schools</p>
