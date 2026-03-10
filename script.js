@@ -126,6 +126,7 @@ function navigate(page) {
   } else if (page === 'mseed') {
     document.getElementById('page-mseed').classList.add('active');
     document.getElementById('mseed-portal-select').style.display = 'block';
+    animateMseedSelect();
   } else if (page === 'college-student') {
     document.getElementById('page-college-student').classList.add('active');
     showTab('home');
@@ -141,16 +142,120 @@ function navigate(page) {
   } else if (page === 'junior') {
     document.getElementById('page-junior').classList.add('active');
     document.getElementById('junior-portal-select').style.display = 'block';
+    animateJuniorSelect();
   } else if (page === 'junior-student') {
     document.getElementById('page-junior-student').classList.add('active');
     showJrTab('jrhome');
+    animateJuniorStudentPortal();
   } else if (page === 'school-inst') {
     document.getElementById('page-school-inst').classList.add('active');
     showSchTab('schservices');
+    animateSchoolInstPortal();
   }
   window.scrollTo(0, 0);
 }
 expose('navigate', navigate);
+
+// Sub-portal entrance animations (GSAP, runs on each navigation)
+function animateMseedSelect() {
+  if (!window.gsap) return;
+  const wrap = document.getElementById('mseed-portal-select');
+  if (!wrap) return;
+  const cards = wrap.querySelectorAll('.portal-card');
+  gsap.fromTo(wrap.querySelector('.portal-hero .container'), { opacity: 0, y: 24 }, {
+    opacity: 1,
+    y: 0,
+    duration: 0.7,
+    ease: 'power3.out'
+  });
+  if (cards.length) {
+    gsap.fromTo(cards, { opacity: 0, y: 26, scale: 0.94 }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      ease: 'back.out(1.6)',
+      stagger: 0.12,
+      delay: 0.1
+    });
+  }
+}
+
+function animateJuniorSelect() {
+  if (!window.gsap) return;
+  const wrap = document.getElementById('junior-portal-select');
+  if (!wrap) return;
+  const cards = wrap.querySelectorAll('.portal-card');
+  gsap.fromTo(wrap.querySelector('.portal-hero .container'), { opacity: 0, y: 24 }, {
+    opacity: 1,
+    y: 0,
+    duration: 0.7,
+    ease: 'power3.out'
+  });
+  if (cards.length) {
+    gsap.fromTo(cards, { opacity: 0, y: 26, scale: 0.94 }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      ease: 'back.out(1.6)',
+      stagger: 0.12,
+      delay: 0.1
+    });
+  }
+}
+
+function animateJuniorStudentPortal() {
+  if (!window.gsap) return;
+  const root = document.getElementById('page-junior-student');
+  if (!root) return;
+  const hero = root.querySelector('.ticker-wrap');
+  const cards = root.querySelectorAll('#courses .career-card');
+  if (hero) {
+    gsap.fromTo(hero, { opacity: 0, y: -16 }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    });
+  }
+  if (cards.length) {
+    gsap.fromTo(cards, { opacity: 0, y: 28 }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      stagger: 0.08,
+      delay: 0.1
+    });
+  }
+}
+
+function animateSchoolInstPortal() {
+  if (!window.gsap) return;
+  const root = document.getElementById('page-school-inst');
+  if (!root) return;
+  const hero = root.querySelector('.inst-hero');
+  const sections = root.querySelectorAll('.inst-section-card, .inst-feature-card');
+  if (hero) {
+    gsap.fromTo(hero, { opacity: 0, y: 24 }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power3.out'
+    });
+  }
+  if (sections.length) {
+    gsap.fromTo(sections, { opacity: 0, y: 30 }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.65,
+      ease: 'power2.out',
+      stagger: 0.09,
+      delay: 0.15
+    });
+  }
+}
 
 function openPartnershipsPage() { navigate('inst-partners'); }
 expose('openPartnershipsPage', openPartnershipsPage);
@@ -329,7 +434,7 @@ expose('closeJrMobileMenu', closeJrMobileMenu);
       .to(['#intro-tagline', '#intro-line', '#intro-progress-wrap', '.orbit-ring', '.corner'], { opacity: 0, duration: 0.3, stagger: 0.03 }, '<')
       .to('#intro-logo', { y: -80, scale: 0.3, opacity: 0, duration: 0.55, ease: 'power3.in' }, '+=0.05')
       .to('#intro-glow', { scale: 3, opacity: 0, duration: 0.5, ease: 'power2.in' }, '<')
-      .to('#splash', { opacity: 0, duration: 0.45, ease: 'power2.inOut', onComplete() { overlay.style.display = 'none'; navigate('portal'); } }, '-=0.2');
+      .to('#splash', { opacity: 0, duration: 0.45, ease: 'power2.inOut', onComplete() { overlay.style.display = 'none'; } }, '-=0.2');
   }
 
   if (logoEl.complete) { runIntro(); }
@@ -369,46 +474,45 @@ expose('animateStats', animateStats);
 //  COURSES DATA
 // ============================================================
 const freeCourses = [
-  { title: 'Web Dev Foundations', emoji: '🌐', desc: 'HTML, CSS & basic JavaScript — build your first webpage. Zero to deployed in 2 weeks.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true },
-  { title: 'Python Basics', emoji: '🐍', desc: 'Learn Python syntax, loops, functions, and basic projects. The best first programming language.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true },
-  { title: 'Resume Writing 101', emoji: '📄', desc: "Craft an ATS-ready resume from scratch. Understand keywords, formatting, and the do's and don'ts.", duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'ece', 'eee', 'mech'], isFree: true },
-  { title: 'Excel for Beginners', emoji: '📊', desc: 'Master Excel basics — formulas, charts, pivot tables. Essential for any career path.', duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'mech', 'eee'], isFree: true },
+  { title: 'Web Dev Foundations', desc: 'HTML, CSS & basic JavaScript — build your first webpage. Zero to deployed in 2 weeks.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/web_dev_q7k2x1.jpg' },
+  { title: 'Python Basics', desc: 'Learn Python syntax, loops, functions, and basic projects. The best first programming language.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/python_basics_a8m9p2.jpg' },
+  { title: 'Resume Writing 101', desc: "Craft an ATS-ready resume from scratch. Understand keywords, formatting, and the do's and don'ts.", duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'ece', 'eee', 'mech'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/resume_writing_b5n3k8.jpg' },
+  { title: 'Excel for Beginners', desc: 'Master Excel basics — formulas, charts, pivot tables. Essential for any career path.', duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'mech', 'eee'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/excel_basics_c2l7m9.jpg' },
 ];
-
 const mainCourses = [
-  { title: 'Web Development', depts: ['cse', 'it'], emoji: '🌐', desc: 'Full-stack mastery using modern frameworks.', duration: '12 Weeks', level: 'Intermediate' },
-  { title: 'Cyber Security', depts: ['cse', 'it'], emoji: '🛡️', desc: 'Ethical hacking and network defense strategies.', duration: '10 Weeks', level: 'Advanced' },
-  { title: 'UI & UX', depts: ['cse', 'it'], emoji: '🎨', desc: 'User-centric design and prototyping with Figma.', duration: '8 Weeks', level: 'Beginner' },
-  { title: 'Networking & CCNA', depts: ['cse', 'it', 'ece'], emoji: '🔌', desc: 'Cisco certified network associate training.', duration: '10 Weeks', level: 'Intermediate' },
-  { title: 'IoT', depts: ['cse', 'it'], emoji: '📡', desc: 'Connecting the physical world with smart devices.', duration: '12 Weeks', level: 'Intermediate' },
-  { title: 'Deep Learning & Gen AI', depts: ['cse', 'it'], emoji: '🤖', desc: 'Neural networks and Large Language Models.', duration: '14 Weeks', level: 'Advanced' },
-  { title: 'Data Analytics & Science', depts: ['cse', 'it'], emoji: '📊', desc: 'Statistical modeling and big data insights.', duration: '16 Weeks', level: 'Advanced' },
-  { title: 'Cloud Computing', depts: ['cse', 'it'], emoji: '☁️', desc: 'AWS/Azure infrastructure and deployment.', duration: '10 Weeks', level: 'Intermediate' },
-  { title: 'AI & ML', depts: ['cse', 'it'], emoji: '🧠', desc: 'Foundational machine learning algorithms.', duration: '12 Weeks', level: 'Intermediate' },
-  { title: 'Antenna Design', depts: ['ece'], emoji: '📡', desc: 'RF engineering and electromagnetic simulation.', duration: '10 Weeks', level: 'Advanced' },
-  { title: 'Embedded Systems', depts: ['ece'], emoji: '📟', desc: 'Microcontroller programming and architecture.', duration: '12 Weeks', level: 'Intermediate' },
-  { title: 'PCB Design & Fab', depts: ['ece'], emoji: '📐', desc: 'Hardware design and manufacturing processes.', duration: '8 Weeks', level: 'Beginner' },
-  { title: 'Robotics', depts: ['ece', 'mech'], emoji: '🤖', desc: 'Mechatronics and automated system design.', duration: '14 Weeks', level: 'Intermediate' },
-  { title: 'IoT & Energy Monitoring', depts: ['eee'], emoji: '🔋', desc: 'Smart metering and grid power management.', duration: '10 Weeks', level: 'Intermediate' },
-  { title: 'BMS', depts: ['eee'], emoji: '🏢', desc: 'Building Management Systems & Automation.', duration: '8 Weeks', level: 'Beginner' },
-  { title: 'Electrical Safety', depts: ['eee'], emoji: '⚠️', desc: 'Compliance and safety standards for industry.', duration: '6 Weeks', level: 'Beginner' },
-  { title: 'EV Technology', depts: ['eee', 'mech'], emoji: '⚡', desc: 'Electric vehicle powertrain and battery tech.', duration: '12 Weeks', level: 'Advanced' },
-  { title: 'Industrial Automation', depts: ['eee', 'mech'], emoji: '🏭', desc: 'PLC, SCADA, and manufacturing workflows.', duration: '10 Weeks', level: 'Advanced' },
-  { title: 'Power Electronics', depts: ['eee'], emoji: '⚡', desc: 'Power conversion and semiconductor devices.', duration: '12 Weeks', level: 'Advanced' },
-  { title: 'Smart Grid Tech', depts: ['eee'], emoji: '🌐', desc: 'Modern power distribution and networking.', duration: '10 Weeks', level: 'Intermediate' },
-  { title: '3D Printing', depts: ['mech'], emoji: '🖨️', desc: 'Additive manufacturing and rapid prototyping.', duration: '8 Weeks', level: 'Beginner' },
-  { title: 'CAD, CAM, CAE', depts: ['mech'], emoji: '📐', desc: 'Computer-aided design and engineering analysis.', duration: '16 Weeks', level: 'Intermediate' },
-  { title: 'CNC Programming', depts: ['mech'], emoji: '⚙️', desc: 'Precision manufacturing and toolpathing.', duration: '10 Weeks', level: 'Intermediate' },
-  { title: 'EV Design & Dynamics', depts: ['mech'], emoji: '🏎️', desc: 'Vehicle dynamics and structural chassis design.', duration: '14 Weeks', level: 'Advanced' },
+  { title: 'Web Development', depts: ['cse', 'it'], desc: 'Full-stack mastery using modern frameworks.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125329/web_development_hsrufw.jpg' },
+  { title: 'Cyber Security', depts: ['cse', 'it'], desc: 'Ethical hacking and network defense strategies.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125252/cyber_security_qbnna5.jpg' },
+  { title: 'UI & UX', depts: ['cse', 'it'], desc: 'User-centric design and prototyping with Figma.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125322/UI_UX_llvgvn.jpg' },
+  { title: 'Networking & CCNA', depts: ['cse', 'it', 'ece'], desc: 'Cisco certified network associate training.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125315/Networking_in_cse_okyuvk.jpg' },
+  { title: 'IoT', depts: ['cse', 'it'], desc: 'Connecting the physical world with smart devices.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125283/iot_in_cse_uxadyl.jpg' },
+  { title: 'Deep Learning & Gen AI', depts: ['cse', 'it'], desc: 'Neural networks and Large Language Models.', duration: '14 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125271/deep_learning_ropsge.jpg' },
+  { title: 'Data Analytics & Science', depts: ['cse', 'it'], desc: 'Statistical modeling and big data insights.', duration: '16 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125258/data_analysis_cycnmo.jpg' },
+  { title: 'Cloud Computing', depts: ['cse', 'it'], desc: 'AWS/Azure infrastructure and deployment.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg' },
+  { title: 'AI & ML', depts: ['cse', 'it'], desc: 'Foundational machine learning algorithms.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125236/aiml_x0faze.jpg' },
+  { title: 'Antenna Design', depts: ['ece'], desc: 'RF engineering and electromagnetic simulation.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/antenna_design_g2m5h4.jpg' },
+  { title: 'Embedded Systems', depts: ['ece'], desc: 'Microcontroller programming and architecture.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/embedded_systems_n8k3j6.jpg' },
+  { title: 'PCB Design & Fab', depts: ['ece'], desc: 'Hardware design and manufacturing processes.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/pcb_design_r1l7m2.jpg' },
+  { title: 'Robotics', depts: ['ece', 'mech'], desc: 'Mechatronics and automated system design.', duration: '14 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/robotics_s4p9m8.jpg' },
+  { title: 'IoT & Energy Monitoring', depts: ['eee'], desc: 'Smart metering and grid power management.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/iot_energy_t5k2n7.jpg' },
+  { title: 'BMS', depts: ['eee'], desc: 'Building Management Systems & Automation.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/bms_automation_u3j8l1.jpg' },
+  { title: 'Electrical Safety', depts: ['eee'], desc: 'Compliance and safety standards for industry.', duration: '6 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/electrical_safety_v7m4k5.jpg' },
+  { title: 'EV Technology', depts: ['eee', 'mech'], desc: 'Electric vehicle powertrain and battery tech.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/ev_technology_w2n6p9.jpg' },
+  { title: 'Industrial Automation', depts: ['eee', 'mech'], desc: 'PLC, SCADA, and manufacturing workflows.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/industrial_automation_x6k1m3.jpg' },
+  { title: 'Power Electronics', depts: ['eee'], desc: 'Power conversion and semiconductor devices.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/power_electronics_y8l3n4.jpg' },
+  { title: 'Smart Grid Tech', depts: ['eee'], desc: 'Modern power distribution and networking.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/smart_grid_z5p2m6.jpg' },
+  { title: '3D Printing', depts: ['mech'], desc: 'Additive manufacturing and rapid prototyping.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/3d_printing_a4m9k7.jpg' },
+  { title: 'CAD, CAM, CAE', depts: ['mech'], desc: 'Computer-aided design and engineering analysis.', duration: '16 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cad_cam_cae_b8n5j1.jpg' },
+  { title: 'CNC Programming', depts: ['mech'], desc: 'Precision manufacturing and toolpathing.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cnc_programming_c3k7m4.jpg' },
+  { title: 'EV Design & Dynamics', depts: ['mech'], desc: 'Vehicle dynamics and structural chassis design.', duration: '14 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/ev_design_dynamics_d7l2n8.jpg' },
 ];
 
 const bundleCourses = [
-  { title: 'Full Stack Developer Bundle', emoji: '🚀', courses: ['Web Development', 'Cloud Computing', 'UI & UX', 'Cyber Security'], desc: 'End-to-end web development — from design to deployment.', duration: '40 Weeks', level: 'Intermediate', originalPrice: '₹24,000', bundlePrice: '₹14,999', depts: ['bundle', 'cse', 'it'], isBundle: true },
-  { title: 'Data Analyst Pro Bundle', emoji: '📊', courses: ['Data Analytics & Science', 'AI & ML', 'Deep Learning & Gen AI'], desc: 'Complete data career path from analytics to AI.', duration: '32 Weeks', level: 'Advanced', originalPrice: '₹18,000', bundlePrice: '₹10,999', depts: ['bundle', 'cse', 'it'], isBundle: true },
-  { title: 'EV & Automation Bundle', emoji: '⚡', courses: ['EV Technology', 'Industrial Automation', 'CAD, CAM, CAE'], desc: 'Future-ready mechanical & EEE bundle.', duration: '32 Weeks', level: 'Advanced', originalPrice: '₹16,000', bundlePrice: '₹9,999', depts: ['bundle', 'mech', 'eee'], isBundle: true },
-  { title: 'Cyber & Network Security Bundle', emoji: '🛡️', courses: ['Cyber Security', 'Networking & CCNA', 'Cloud Computing', 'IoT'], desc: 'Comprehensive security and infrastructure bundle.', duration: '38 Weeks', level: 'Advanced', originalPrice: '₹20,000', bundlePrice: '₹12,999', depts: ['bundle', 'cse', 'it', 'ece'], isBundle: true },
-  { title: 'Embedded & Hardware Bundle', emoji: '📟', courses: ['Embedded Systems', 'PCB Design & Fab', 'IoT', 'Robotics'], desc: 'Complete hardware stack for ECE students.', duration: '44 Weeks', level: 'Intermediate', originalPrice: '₹22,000', bundlePrice: '₹13,999', depts: ['bundle', 'ece'], isBundle: true },
-  { title: 'Smart Power Systems Bundle', emoji: '🔋', courses: ['Power Electronics', 'Smart Grid Tech', 'IoT & Energy Monitoring', 'EV Technology'], desc: 'Future-ready EEE bundle targeting smart grid and power electronics.', duration: '40 Weeks', level: 'Advanced', originalPrice: '₹20,000', bundlePrice: '₹12,499', depts: ['bundle', 'eee'], isBundle: true },
+  { title: 'Full Stack Developer Bundle', courses: ['Web Development', 'Cloud Computing', 'UI & UX', 'Cyber Security'], desc: 'End-to-end web development — from design to deployment.', duration: '40 Weeks', level: 'Intermediate', originalPrice: '₹24,000', bundlePrice: '₹14,999', depts: ['bundle', 'cse', 'it'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/full_stack_bundle_e5n1k3.jpg' },
+  { title: 'Data Analyst Pro Bundle', courses: ['Data Analytics & Science', 'AI & ML', 'Deep Learning & Gen AI'], desc: 'Complete data career path from analytics to AI.', duration: '32 Weeks', level: 'Advanced', originalPrice: '₹18,000', bundlePrice: '₹10,999', depts: ['bundle', 'cse', 'it'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/data_analyst_bundle_f7m4j2.jpg' },
+  { title: 'EV & Automation Bundle', courses: ['EV Technology', 'Industrial Automation', 'CAD, CAM, CAE'], desc: 'Future-ready mechanical & EEE bundle.', duration: '32 Weeks', level: 'Advanced', originalPrice: '₹16,000', bundlePrice: '₹9,999', depts: ['bundle', 'mech', 'eee'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/ev_automation_bundle_g3l8m5.jpg' },
+  { title: 'Cyber & Network Security Bundle', courses: ['Cyber Security', 'Networking & CCNA', 'Cloud Computing', 'IoT'], desc: 'Comprehensive security and infrastructure bundle.', duration: '38 Weeks', level: 'Advanced', originalPrice: '₹20,000', bundlePrice: '₹12,999', depts: ['bundle', 'cse', 'it', 'ece'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cyber_network_bundle_h2p6n9.jpg' },
+  { title: 'Embedded & Hardware Bundle', courses: ['Embedded Systems', 'PCB Design & Fab', 'IoT', 'Robotics'], desc: 'Complete hardware stack for ECE students.', duration: '44 Weeks', level: 'Intermediate', originalPrice: '₹22,000', bundlePrice: '₹13,999', depts: ['bundle', 'ece'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/embedded_hardware_bundle_i4k1l6.jpg' },
+  { title: 'Smart Power Systems Bundle', courses: ['Power Electronics', 'Smart Grid Tech', 'IoT & Energy Monitoring', 'EV Technology'], desc: 'Future-ready EEE bundle targeting smart grid and power electronics.', duration: '40 Weeks', level: 'Advanced', originalPrice: '₹20,000', bundlePrice: '₹12,499', depts: ['bundle', 'eee'], isBundle: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/smart_power_bundle_j6m3k8.jpg' },
 ];
 
 const courses = [...freeCourses, ...mainCourses, ...bundleCourses];
@@ -446,7 +550,7 @@ function renderCourses() {
     return `
       <div class="course-card">
         <div class="course-card-img" style="${bgStyle}">
-          <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg" alt="Course Icon" class="course-icon-img">
+          <img src="${c.image || 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg'}" alt="${c.title}" class="course-icon-img" onerror="this.style.display='none'">
           ${badge}
         </div>
         <div class="course-card-body">
@@ -469,7 +573,7 @@ function renderHomeCourses() {
   home.innerHTML = featured.map(c => `
     <div class="course-card">
       <div class="course-card-img" style="${c.isFree ? 'background:linear-gradient(135deg,#1a2420,var(--green))' : 'background:linear-gradient(135deg,var(--green),#00c98c)'}">
-        <img src="" alt="Course Icon" class="course-icon-img">
+        <img src="${c.image || 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg'}" alt="${c.title}" class="course-icon-img" onerror="this.style.display='none'">
         ${c.isFree ? '<span class="free-badge">🆓 FREE</span>' : ''}
       </div>
       <div class="course-card-body">
@@ -584,7 +688,7 @@ function renderPreCourses() {
           </video>
           ${c.isFree ? '<div style="position:absolute;top:12px;right:12px;z-index:2;pointer-events:none;"><span class="free-badge">🆓 FREE</span></div>' : ''}
           <div style="position:absolute;top:12px;left:12px;z-index:2;font-size:24px;pointer-events:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;">
-            <img src="" alt="Course Icon" class="precourse-icon-img" style="position:absolute;width:100%;height:100%;object-fit:contain;z-index:3;">
+            <img src="${c.image || 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg'}" alt="${c.title}" class="precourse-icon-img" style="position:absolute;width:100%;height:100%;object-fit:contain;z-index:3;" onerror="this.style.display='none'">
           </div>
         </div>
         <div class="course-card-body">
@@ -1206,18 +1310,18 @@ expose('submitEnrolment', submitEnrolment);
 //  JUNIOR COURSES
 // ============================================================
 const jrCourses = [
-  { title: 'Scratch Programming', grade: 'primary', emoji: '🐱', desc: 'Visual block-based coding with Scratch.', duration: '6 weeks' },
-  { title: 'Curious Science Lab', grade: 'primary', emoji: '🔬', desc: 'Fun science experiments and STEM activities.', duration: '8 weeks' },
-  { title: 'Story Telling & Drama', grade: 'primary', emoji: '🎭', desc: 'Creative writing and dramatic expression.', duration: '4 weeks' },
-  { title: 'Python for Teens', grade: 'middle', emoji: '🐍', desc: 'Introduction to Python with fun mini-projects.', duration: '10 weeks' },
-  { title: 'Public Speaking & Debate', grade: 'middle', emoji: '🎤', desc: 'Master the art of persuasive communication.', duration: '8 weeks' },
-  { title: 'Financial Literacy Jr.', grade: 'middle', emoji: '💰', desc: 'Money, savings, budgeting concepts for teens.', duration: '6 weeks' },
-  { title: 'Web Design Basics', grade: 'secondary', emoji: '🌐', desc: 'HTML, CSS and JavaScript to create your first website.', duration: '10 weeks' },
-  { title: 'Career Discovery Program', grade: 'secondary', emoji: '🗺️', desc: 'Explore 50+ career paths with aptitude tests.', duration: '8 weeks' },
-  { title: 'Leadership & Entrepreneurship', grade: 'secondary', emoji: '🚀', desc: 'Business thinking and mini startup challenge.', duration: '10 weeks' },
-  { title: 'Advanced Python & Data', grade: 'senior', emoji: '📊', desc: 'Data analysis, visualization and intro to ML.', duration: '12 weeks' },
-  { title: 'Communication for Campus', grade: 'senior', emoji: '🎯', desc: 'Interview prep and GD skills for college readiness.', duration: '8 weeks' },
-  { title: 'Digital Marketing Basics', grade: 'senior', emoji: '📱', desc: 'Social media, content creation fundamentals.', duration: '8 weeks' },
+  { title: 'Scratch Programming', grade: 'primary', desc: 'Visual block-based coding with Scratch.', duration: '6 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/scratch_programming_a1k4m2.jpg' },
+  { title: 'Curious Science Lab', grade: 'primary', desc: 'Fun science experiments and STEM activities.', duration: '8 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/science_lab_b3p7n9.jpg' },
+  { title: 'Story Telling & Drama', grade: 'primary', desc: 'Creative writing and dramatic expression.', duration: '4 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/storytelling_drama_c5l2k6.jpg' },
+  { title: 'Python for Teens', grade: 'middle', desc: 'Introduction to Python with fun mini-projects.', duration: '10 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/python_teens_d8m5j1.jpg' },
+  { title: 'Public Speaking & Debate', grade: 'middle', desc: 'Master the art of persuasive communication.', duration: '8 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/public_speaking_e4n9l3.jpg' },
+  { title: 'Financial Literacy Jr.', grade: 'middle', desc: 'Money, savings, budgeting concepts for teens.', duration: '6 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/financial_literacy_f6k1m7.jpg' },
+  { title: 'Web Design Basics', grade: 'secondary', desc: 'HTML, CSS and JavaScript to create your first website.', duration: '10 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/web_design_basics_g2p8n4.jpg' },
+  { title: 'Career Discovery Program', grade: 'secondary', desc: 'Explore 50+ career paths with aptitude tests.', duration: '8 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/career_discovery_h5m3j2.jpg' },
+  { title: 'Leadership & Entrepreneurship', grade: 'secondary', desc: 'Business thinking and mini startup challenge.', duration: '10 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/leadership_entrepreneurship_i7l5k9.jpg' },
+  { title: 'Advanced Python & Data', grade: 'senior', desc: 'Data analysis, visualization and intro to ML.', duration: '12 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/python_data_advanced_j3n1m6.jpg' },
+  { title: 'Communication for Campus', grade: 'senior', desc: 'Interview prep and GD skills for college readiness.', duration: '8 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/communication_campus_k8p4l2.jpg' },
+  { title: 'Digital Marketing Basics', grade: 'senior', desc: 'Social media, content creation fundamentals.', duration: '8 weeks', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/digital_marketing_l1k6m8.jpg' },
 ];
 
 function renderJrCourses(filter) {
@@ -1227,7 +1331,7 @@ function renderJrCourses(filter) {
   el.innerHTML = filtered.map(c => `
     <div class="course-card">
       <div class="course-card-img" style="background:linear-gradient(135deg,var(--green),#00c98c)">
-        <span>${c.emoji}</span>
+        <img src="${c.image || 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg'}" alt="${c.title}" class="course-icon-img" onerror="this.style.display='none'">
         <span class="dept-tag">${c.grade.charAt(0).toUpperCase() + c.grade.slice(1)}</span>
       </div>
       <div class="course-card-body">
@@ -1377,6 +1481,71 @@ setTimeout(() => {
     if (tab === 'home') setTimeout(animateYTGalleryEntrance, 200);
   };
 }, 0);
+
+// ATS CTA animation + sticky illustration visibility (home tab, below stats bar)
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.gsap) return;
+  const section = document.getElementById('ats-cta-section');
+  if (!section) return;
+  const card = section.querySelector('.ats-score-card');
+  const img = section.querySelector('.ats-score-illus');
+  let atsAnimatedOnce = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const inView = entry.isIntersecting;
+
+      // Run the nice entrance animation for text + card only the first time
+      if (inView && !atsAnimatedOnce) {
+        atsAnimatedOnce = true;
+        gsap.fromTo(section.querySelector('.tag'), { opacity: 0, y: 20 }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out'
+        });
+        gsap.fromTo(section.querySelector('h2'), { opacity: 0, y: 24 }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          delay: 0.05
+        });
+        if (card) {
+          gsap.fromTo(card, { opacity: 0, y: 30, scale: 0.95 }, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.65,
+            ease: 'back.out(1.7)',
+            delay: 0.1
+          });
+        }
+      }
+
+      // Illustration: visible only while section is in view
+      if (img) {
+        if (inView) {
+          gsap.to(img, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        } else {
+          gsap.to(img, {
+            opacity: 0,
+            y: 20,
+            duration: 0.4,
+            ease: 'power1.inOut'
+          });
+        }
+      }
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(section);
+});
 
 // ============================================================
 //  INSTITUTION PORTAL

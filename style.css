@@ -1271,6 +1271,12 @@ h4 {
   color: var(--grey-light);
   margin-bottom: 8px;
   line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.partner-strip-label:hover {
+  color: var(--green);
 }
 
 .partner-strip-wrap {
@@ -1322,18 +1328,11 @@ h4 {
 
 .partner-logo-item {
   flex-shrink: 0;
-  filter: grayscale(1);
-  opacity: 0.5;
   transition: all 0.3s ease;
 }
 
-.partner-logo-item:hover {
-  filter: grayscale(0);
-  opacity: 1;
-}
-
 .partner-logo-item img {
-  height: 32px;
+  height: 60px;
   object-fit: contain;
   display: block;
 }
@@ -1374,6 +1373,30 @@ h4 {
   color: var(--grey-mid);
   font-weight: 500;
   margin-top: 4px;
+}
+
+/* ATS CTA illustration + hover motion */
+.ats-score-wrap {
+  position: relative;
+  overflow: visible;
+}
+
+.ats-score-illus {
+  position: absolute;
+  right: -80px;
+  top: -120px;
+  width: 260px;
+  max-width: 40vw;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.18));
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .ats-score-illus {
+    display: none;
+  }
 }
 
 /* ===== COURSE CARDS ===== */
@@ -10371,7 +10394,7 @@ textarea.form-input {
   }
 }
 
-/* ================= PORTAL PAGE FINAL RESPONSIVE ================= */
+/* ================= PORTAL PAGE FINAL RESPONSIVE + ANIMATIONS ================= */
 
 /* Tablet View (Horizontal Cards) */
 @media (max-width: 992px) and (min-width: 601px) {
@@ -10394,6 +10417,97 @@ textarea.form-input {
     height: auto;
   }
 
+}
+
+/* Desktop / base portal hero + cards animation */
+#page-portal .portal-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+#page-portal .portal-hero::before,
+#page-portal .portal-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 0%, rgba(0, 177, 123, 0.12), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(0, 229, 160, 0.08), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  animation: portalGlowIn 1.4s ease forwards 0.4s;
+}
+
+#page-portal .portal-cards {
+  position: relative;
+  z-index: 1;
+  animation: portalCardsRise 0.7s cubic-bezier(0.17, 0.89, 0.32, 1.28) forwards 0.6s;
+  transform: translateY(18px);
+  opacity: 0;
+}
+
+#page-portal .portal-card {
+  position: relative;
+  overflow: hidden;
+}
+
+#page-portal .portal-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-18deg) translateX(-100%);
+  opacity: 0;
+}
+
+#page-portal .portal-card:hover::after {
+  opacity: 1;
+  animation: portalShine 0.9s ease-out;
+}
+
+/* Different subtle accent for each main card */
+#page-portal .portal-card:first-child .portal-card-icon {
+  box-shadow: 0 0 0 1px rgba(0, 177, 123, 0.4), 0 16px 30px rgba(0, 177, 123, 0.25);
+}
+
+#page-portal .portal-card:nth-child(2) .portal-card-icon {
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5), 0 16px 30px rgba(59, 130, 246, 0.25);
+}
+
+@keyframes portalGlowIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes portalCardsRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes portalShine {
+  0% {
+    transform: skewX(-18deg) translateX(-120%);
+  }
+
+  100% {
+    transform: skewX(-18deg) translateX(260%);
+  }
 }
 
 /* Small Mobile (Vertical Stack) */
