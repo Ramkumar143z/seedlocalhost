@@ -1,0 +1,907 @@
+/* ================================================================
+   MSEED College Student Portal — Visual Enhancement v1.0
+   Aesthetic: Refined dark-accent editorial with emerald energy
+   Scope: #page-college-student only (all overrides are scoped)
+================================================================ */
+
+/* ── GOOGLE FONT IMPORT (Syne for headings, DM Sans already loaded) ── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap');
+
+/* ── ENHANCEMENT TOKENS ── */
+#page-college-student {
+  --e-green:       #00b17b;
+  --e-green-2:     #00d494;
+  --e-green-glow:  rgba(0,177,123,0.18);
+  --e-dark:        #0d1a14;
+  --e-card:        #ffffff;
+  --e-border:      rgba(0,177,123,0.14);
+  --e-shadow:      0 8px 40px rgba(0,177,123,0.12);
+  --e-shadow-lg:   0 20px 80px rgba(0,177,123,0.18);
+  --e-radius:      18px;
+  --e-radius-sm:   10px;
+  --e-font-display: 'Syne', 'Playfair Display', serif;
+}
+
+/* ================================================================
+   NAVBAR — glassmorphism sticky bar
+================================================================ */
+#page-college-student .navbar {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--e-border) !important;
+  box-shadow: 0 2px 24px rgba(0,177,123,0.08) !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+#page-college-student .navbar.scrolled,
+#page-college-student .navbar:has(+ * + *) {
+  background: rgba(255,255,255,0.96) !important;
+  box-shadow: 0 4px 32px rgba(0,177,123,0.12) !important;
+}
+
+/* Nav links — pill hover */
+#page-college-student .nav-link {
+  position: relative;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease !important;
+  padding: 6px 14px !important;
+  border-radius: 100px !important;
+}
+#page-college-student .nav-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--e-green-glow);
+  border-radius: 100px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+#page-college-student .nav-link:hover::after,
+#page-college-student .nav-link.active::after {
+  opacity: 1;
+}
+#page-college-student .nav-link.active {
+  color: var(--e-green) !important;
+  font-weight: 700 !important;
+}
+
+/* Enroll now CTA pill */
+#page-college-student .desktop-enroll-btn {
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  border-radius: 100px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 4px 18px rgba(0,177,123,0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  border: none !important;
+}
+#page-college-student .desktop-enroll-btn:hover {
+  transform: translateY(-2px) scale(1.04) !important;
+  box-shadow: 0 8px 28px rgba(0,177,123,0.45) !important;
+}
+
+/* ================================================================
+   PROMO STRIP — animated gradient
+================================================================ */
+#page-college-student .promo-strip {
+  background: linear-gradient(90deg, #0d1a14 0%, #00b17b 40%, #00d494 70%, #0d1a14 100%) !important;
+  background-size: 200% !important;
+  animation: promo-shift 5s linear infinite !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.4px !important;
+  font-size: 13px !important;
+  border: none !important;
+}
+@keyframes promo-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ================================================================
+   HERO CAROUSEL — cinematic depth
+================================================================ */
+#page-college-student .hero-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slide backgrounds — richer gradients */
+#page-college-student .hc-bg-1 {
+  background: radial-gradient(ellipse 80% 80% at 60% 40%, rgba(0,177,123,0.22) 0%, transparent 70%),
+              linear-gradient(135deg, #0a1f17 0%, #0d2b1e 50%, #071510 100%) !important;
+}
+#page-college-student .hc-bg-2 {
+  background: radial-gradient(ellipse 80% 80% at 30% 60%, rgba(0,212,148,0.18) 0%, transparent 70%),
+              linear-gradient(135deg, #0d1a0e 0%, #0f2d1a 50%, #081408 100%) !important;
+}
+#page-college-student .hc-bg-3 {
+  background: radial-gradient(ellipse 80% 80% at 70% 30%, rgba(0,177,123,0.20) 0%, transparent 70%),
+              linear-gradient(135deg, #111820 0%, #0e1f2d 50%, #080f14 100%) !important;
+}
+
+/* Headline — Syne display font */
+#page-college-student .hc-headline {
+  font-family: var(--e-font-display) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* Accent text — gradient */
+#page-college-student .hc-accent {
+  background: linear-gradient(90deg, var(--e-green) 0%, var(--e-green-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* Eyebrow pill */
+#page-college-student .hc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,177,123,0.15);
+  border: 1px solid rgba(0,177,123,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--e-green-2);
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+/* Trust pills */
+#page-college-student .hc-pill {
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 100px !important;
+  padding: 5px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.88) !important;
+  letter-spacing: 0.2px;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+#page-college-student .hc-pill:hover {
+  background: rgba(0,177,123,0.2) !important;
+  border-color: rgba(0,177,123,0.4) !important;
+}
+
+/* CTA buttons inside hero */
+#page-college-student .btn.hc-btn {
+  background: #fff !important;
+  color: var(--e-dark) !important;
+  border-radius: 100px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+#page-college-student .btn.hc-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28) !important;
+}
+#page-college-student .btn.hc-btn-ghost {
+  border: 1.5px solid rgba(255,255,255,0.35) !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  transition: background 0.2s ease, border-color 0.2s ease !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+#page-college-student .btn.hc-btn-ghost:hover {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.6) !important;
+  color: #fff !important;
+}
+
+/* YT Gallery cards */
+#page-college-student .yt-card {
+  border-radius: var(--e-radius) !important;
+  overflow: hidden !important;
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.3s ease !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+#page-college-student .yt-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4) !important;
+}
+#page-college-student .yt-play-btn {
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 20px rgba(0,177,123,0.5) !important;
+  transition: transform 0.2s ease !important;
+}
+#page-college-student .yt-card:hover .yt-play-btn {
+  transform: scale(1.12) !important;
+}
+#page-college-student .yt-tag {
+  background: var(--e-green-glow) !important;
+  color: var(--e-green) !important;
+  border: 1px solid rgba(0,177,123,0.2) !important;
+  border-radius: 100px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  padding: 3px 10px !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Bundle stack cards */
+#page-college-student .hc-bundle-card {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: var(--e-radius) !important;
+  backdrop-filter: blur(12px) !important;
+  transition: transform 0.25s ease, background 0.25s ease !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+}
+#page-college-student .hc-bundle-card:hover {
+  transform: translateX(6px) !important;
+  background: rgba(0,177,123,0.1) !important;
+  border-color: rgba(0,177,123,0.3) !important;
+}
+
+/* Service grid buttons */
+#page-college-student .hc-service-btn {
+  border-radius: var(--e-radius) !important;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  backdrop-filter: blur(8px) !important;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+  padding: 16px 14px !important;
+}
+#page-college-student .hc-service-btn:hover {
+  background: rgba(0,177,123,0.15) !important;
+  border-color: rgba(0,177,123,0.4) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 30px rgba(0,177,123,0.2) !important;
+}
+
+/* Progress bar */
+#page-college-student .hc-progress-track {
+  background: rgba(0,177,123,0.12) !important;
+  height: 3px !important;
+}
+#page-college-student .hc-progress-fill {
+  background: linear-gradient(90deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  box-shadow: 0 0 8px rgba(0,177,123,0.6) !important;
+}
+
+/* ================================================================
+   PARTNER LOGO STRIP
+================================================================ */
+#page-college-student .partner-strip-section {
+  background: #fff !important;
+  border-bottom: 1px solid var(--e-border) !important;
+  /* Keep original height & padding intact — don't override */
+}
+#page-college-student .partner-strip-label {
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+}
+#page-college-student .partner-logo-item img {
+  filter: grayscale(40%) opacity(0.75) !important;
+  transition: filter 0.3s ease, transform 0.3s ease !important;
+}
+#page-college-student .partner-logo-item:hover img {
+  filter: grayscale(0%) opacity(1) !important;
+  transform: scale(1.08) !important;
+}
+
+/* ================================================================
+   STATS BAR — elevated counter section
+================================================================ */
+#page-college-student .stats-bar {
+  background: linear-gradient(135deg, #0d1a14 0%, #0a2017 100%) !important;
+  border-top: 1px solid rgba(0,177,123,0.2) !important;
+  border-bottom: 1px solid rgba(0,177,123,0.2) !important;
+  position: relative;
+  overflow: hidden;
+}
+#page-college-student .stats-bar::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,177,123,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+#page-college-student .stats-bar::after {
+  content: '';
+  position: absolute;
+  bottom: -60%;
+  right: 10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(0,212,148,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+#page-college-student .stat-item {
+  position: relative;
+  z-index: 1;
+}
+#page-college-student .stat-item + .stat-item {
+  border-left: 1px solid rgba(255,255,255,0.08) !important;
+}
+#page-college-student .stat-num {
+  font-family: var(--e-font-display) !important;
+  font-weight: 800 !important;
+  font-size: clamp(28px, 4vw, 48px) !important;
+  background: linear-gradient(135deg, #fff 30%, var(--e-green-2) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  line-height: 1.1 !important;
+}
+#page-college-student .stat-label {
+  color: rgba(255,255,255,0.5) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  margin-top: 4px !important;
+  text-transform: uppercase !important;
+}
+
+/* ================================================================
+   ATS CTA SECTION
+================================================================ */
+#page-college-student #ats-cta-section {
+  background: linear-gradient(135deg,
+    rgba(0,177,123,0.06) 0%,
+    rgba(0,212,148,0.04) 50%,
+    rgba(0,177,123,0.08) 100%) !important;
+  border-top: 1px solid var(--e-border) !important;
+  border-bottom: 1px solid var(--e-border) !important;
+  position: relative;
+  overflow: hidden;
+}
+#page-college-student #ats-cta-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,177,123,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+#page-college-student .ats-score-card {
+  border: 1px solid var(--e-border) !important;
+  box-shadow: var(--e-shadow-lg) !important;
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+#page-college-student .ats-score-card .progress-bar {
+  height: 8px !important;
+  border-radius: 99px !important;
+  background: rgba(0,177,123,0.1) !important;
+  overflow: hidden;
+}
+#page-college-student .ats-score-card .progress-fill {
+  border-radius: 99px !important;
+  background: linear-gradient(90deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  box-shadow: 0 0 8px rgba(0,177,123,0.4) !important;
+  height: 100% !important;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+/* ================================================================
+   SECTION HEADINGS — all sections inside portal
+================================================================ */
+#page-college-student .section-title h2 {
+  font-family: var(--e-font-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.4px !important;
+  line-height: 1.15 !important;
+}
+#page-college-student .tag {
+  background: var(--e-green-glow) !important;
+  color: var(--e-green) !important;
+  border: 1px solid rgba(0,177,123,0.25) !important;
+  border-radius: 100px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+  padding: 5px 16px !important;
+  display: inline-block !important;
+  margin-bottom: 14px !important;
+}
+
+/* ================================================================
+   COURSE CARDS — safe hover only (no layout overrides)
+================================================================ */
+#page-college-student .course-card {
+  border: 1px solid var(--e-border) !important;
+  box-shadow: 0 4px 24px rgba(0,177,123,0.06) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+#page-college-student .course-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 16px 48px rgba(0,177,123,0.16) !important;
+  border-color: rgba(0,177,123,0.28) !important;
+}
+
+/* Free badge */
+#page-college-student .free-badge {
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  color: #fff !important;
+  border-radius: 100px !important;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  padding: 3px 10px !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 2px 10px rgba(0,177,123,0.4) !important;
+}
+
+/* Course card body */
+#page-college-student .course-card-body h3 {
+  font-family: var(--e-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 15.5px !important;
+  line-height: 1.3 !important;
+}
+#page-college-student .course-card-body .btn-primary {
+  border-radius: 100px !important;
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 700 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(0,177,123,0.3) !important;
+}
+#page-college-student .course-card-body .btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0,177,123,0.45) !important;
+}
+#page-college-student .course-card-body .btn-outline {
+  border-radius: 100px !important;
+  border-color: var(--e-green) !important;
+  color: var(--e-green) !important;
+  font-weight: 700 !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+#page-college-student .course-card-body .btn-outline:hover {
+  background: var(--e-green-glow) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ================================================================
+   DEPT FILTER BUTTONS
+================================================================ */
+#page-college-student .dept-btn {
+  border-radius: 100px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border: 1.5px solid var(--e-border) !important;
+  padding: 8px 20px !important;
+  transition: all 0.2s ease !important;
+  background: #fff !important;
+  color: var(--grey) !important;
+}
+#page-college-student .dept-btn:hover {
+  border-color: var(--e-green) !important;
+  color: var(--e-green) !important;
+  background: var(--e-green-glow) !important;
+  transform: translateY(-2px) !important;
+}
+#page-college-student .dept-btn.active {
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(0,177,123,0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ================================================================
+   WHY MSEED SECTION
+================================================================ */
+#page-college-student .section[style*="background:var(--grey)"],
+#page-college-student .section[style*="background: var(--grey)"] {
+  background: linear-gradient(135deg, #0d1a14 0%, #111f18 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+#page-college-student .section[style*="background:var(--grey)"]::before,
+#page-college-student .section[style*="background: var(--grey)"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300b17b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+/* Feature cards inside Why MSEED */
+#page-college-student .section[style*="background:var(--grey)"] .grid-4 > div,
+#page-college-student .section[style*="background: var(--grey)"] .grid-4 > div {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: var(--e-radius) !important;
+  transition: transform 0.3s ease, background 0.3s ease !important;
+  padding: 28px 20px !important;
+}
+#page-college-student .section[style*="background:var(--grey)"] .grid-4 > div:hover,
+#page-college-student .section[style*="background: var(--grey)"] .grid-4 > div:hover {
+  transform: translateY(-6px) !important;
+  background: rgba(0,177,123,0.1) !important;
+  border-color: rgba(0,177,123,0.25) !important;
+}
+#page-college-student .section[style*="background:var(--grey)"] h4,
+#page-college-student .section[style*="background: var(--grey)"] h4 {
+  font-family: var(--e-font-display) !important;
+  font-size: 15px !important;
+}
+
+/* ================================================================
+   PLACEMENT SECTION
+================================================================ */
+#page-college-student .placement-section {
+  background: linear-gradient(180deg, #f4faf7 0%, #edf7f2 100%) !important;
+  position: relative;
+}
+#page-college-student .placement-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--e-green) 0%, var(--e-green-2) 50%, var(--e-green) 100%);
+  background-size: 200%;
+  animation: promo-shift 3s linear infinite;
+}
+
+/* Placement cards */
+#page-college-student .placement-grid .placement-card,
+#page-college-student [class*="placement-card"] {
+  border-radius: var(--e-radius) !important;
+  border: 1px solid var(--e-border) !important;
+  box-shadow: var(--e-shadow) !important;
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.3s ease !important;
+  overflow: hidden !important;
+}
+#page-college-student .placement-grid .placement-card:hover,
+#page-college-student [class*="placement-card"]:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: var(--e-shadow-lg) !important;
+}
+
+/* CTA button */
+#page-college-student .placement-section .btn-primary {
+  border-radius: 100px !important;
+  background: linear-gradient(135deg, var(--e-green) 0%, var(--e-green-2) 100%) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 32px rgba(0,177,123,0.35) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  border: none !important;
+  letter-spacing: 0.3px !important;
+}
+#page-college-student .placement-section .btn-primary:hover {
+  transform: translateY(-3px) scale(1.04) !important;
+  box-shadow: 0 14px 48px rgba(0,177,123,0.5) !important;
+}
+
+/* ================================================================
+   FOOTER — dark premium
+================================================================ */
+#page-college-student .footer {
+  background: linear-gradient(135deg, #080f0b 0%, #0d1a14 100%) !important;
+  border-top: 1px solid rgba(0,177,123,0.15) !important;
+  position: relative;
+  overflow: hidden;
+}
+#page-college-student .footer::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,177,123,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+#page-college-student .footer h4 {
+  font-family: var(--e-font-display) !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 18px !important;
+  position: relative;
+}
+#page-college-student .footer h4::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--e-green), var(--e-green-2));
+  border-radius: 99px;
+}
+#page-college-student .footer-link {
+  color: rgba(255,255,255,0.45) !important;
+  font-size: 13.5px !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  display: inline-block;
+  cursor: pointer;
+}
+#page-college-student .footer-link:hover {
+  color: var(--e-green-2) !important;
+  transform: translateX(4px) !important;
+}
+#page-college-student .footer-brand p {
+  color: rgba(255,255,255,0.4) !important;
+  font-size: 13px !important;
+  line-height: 1.8 !important;
+}
+#page-college-student .social-btn {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.6) !important;
+  border-radius: 10px !important;
+  width: 38px !important;
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+  font-size: 13px !important;
+}
+#page-college-student .social-btn:hover {
+  background: var(--e-green-glow) !important;
+  border-color: rgba(0,177,123,0.4) !important;
+  color: var(--e-green-2) !important;
+  transform: translateY(-3px) !important;
+}
+#page-college-student .footer-bottom {
+  background: rgba(0,0,0,0.3) !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+  font-size: 12.5px !important;
+  color: rgba(255,255,255,0.3) !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* ================================================================
+   TAB SECTIONS (courses, resources, games, precourses)
+================================================================ */
+#page-college-student .tab-content > .container {
+  position: relative;
+}
+/* Subtle top accent line for each tab */
+#page-college-student .tab-content .section-title .tag::before {
+  content: '';
+}
+
+/* Resources list items */
+#page-college-student #resources-list > div,
+#page-college-student .resource-item {
+  border-radius: var(--e-radius) !important;
+  border: 1px solid var(--e-border) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+  background: #fff !important;
+}
+#page-college-student #resources-list > div:hover,
+#page-college-student .resource-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--e-shadow) !important;
+  border-color: rgba(0,177,123,0.3) !important;
+}
+
+/* Games grid cards */
+#page-college-student #games-list .game-card,
+#page-college-student #games-list > div {
+  border-radius: var(--e-radius) !important;
+  border: 1px solid var(--e-border) !important;
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.3s ease !important;
+  overflow: hidden !important;
+}
+#page-college-student #games-list .game-card:hover,
+#page-college-student #games-list > div:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow: var(--e-shadow-lg) !important;
+}
+
+/* Pre-course video cards */
+#page-college-student .course-card .course-card-video {
+  border-radius: var(--e-radius) var(--e-radius) 0 0 !important;
+  overflow: hidden !important;
+  position: relative;
+}
+#page-college-student .course-card .course-card-video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ================================================================
+   SCROLL-IN ANIMATION — hero elements only (NOT dynamic cards)
+================================================================ */
+/* YT cards, bundle cards, service floats — static HTML, safe to animate */
+#page-college-student .yt-card,
+#page-college-student .hc-bundle-card,
+#page-college-student .hc-svc-float {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1) !important;
+}
+#page-college-student .yt-card.in-view,
+#page-college-student .hc-bundle-card.in-view,
+#page-college-student .hc-svc-float.in-view {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+/* course-card & stat-item are JS-rendered — always keep visible */
+#page-college-student .course-card,
+#page-college-student .stat-item {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ================================================================
+   MODALS — inside portal context
+================================================================ */
+
+/* Modal container - proper scroll, no overflow clip */
+#modal-enroll .modal {
+  border-radius: 20px !important;
+  border: 1px solid var(--e-border) !important;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.22) !important;
+  padding: 36px 36px 32px !important;
+  max-height: 88vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Video inside modal - prevent overflow */
+#modal-enroll video,
+#modal-enroll #enrollVideo {
+  width: 110px !important;
+  max-width: 110px !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 10px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Modal header row */
+#modal-enroll #enroll-step-form > div:first-child {
+  align-items: center !important;
+  margin-bottom: 20px !important;
+  gap: 12px !important;
+}
+
+/* Title */
+#modal-enroll h2 {
+  font-family: var(--e-font-display) !important;
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  color: #1a1a1a !important;
+}
+
+/* Tag inside modal */
+#modal-enroll .tag {
+  font-size: 10px !important;
+  padding: 4px 12px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Form labels */
+#modal-enroll label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #444 !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+}
+
+/* Form inputs */
+#modal-enroll .form-input {
+  border-radius: 10px !important;
+  border: 1.5px solid #e0e0e0 !important;
+  padding: 11px 14px !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  background: #fafafa !important;
+  color: #222 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  font-family: 'DM Sans', sans-serif !important;
+  display: block !important;
+}
+#modal-enroll .form-input:focus {
+  border-color: var(--e-green) !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(0,177,123,0.10) !important;
+  outline: none !important;
+}
+
+/* Form groups */
+#modal-enroll .form-group {
+  margin-bottom: 14px !important;
+}
+
+/* THE FIX: Next → button — visible green, proper color */
+#modal-enroll .btn.btn-primary,
+#modal-enroll button.btn-primary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  padding: 14px 28px !important;
+  border-radius: 100px !important;
+  background: linear-gradient(135deg, #00b17b 0%, #00d494 100%) !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(0,177,123,0.4) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  margin-top: 8px !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+#modal-enroll .btn.btn-primary:hover,
+#modal-enroll button.btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 32px rgba(0,177,123,0.55) !important;
+}
+
+/* Success step outline button */
+#modal-enroll .btn.btn-outline,
+#modal-enroll button.btn-outline {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  padding: 14px 28px !important;
+  border-radius: 100px !important;
+  background: transparent !important;
+  color: var(--e-green) !important;
+  border: 2px solid var(--e-green) !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease !important;
+}
+#modal-enroll .btn.btn-outline:hover,
+#modal-enroll button.btn-outline:hover {
+  background: var(--e-green-glow) !important;
+}
+
+/* ================================================================
+   GLOBAL SCROLLBAR — inside portal
+================================================================ */
+#page-college-student ::-webkit-scrollbar { width: 6px; }
+#page-college-student ::-webkit-scrollbar-track { background: transparent; }
+#page-college-student ::-webkit-scrollbar-thumb {
+  background: rgba(0,177,123,0.3);
+  border-radius: 99px;
+}
+#page-college-student ::-webkit-scrollbar-thumb:hover {
+  background: var(--e-green);
+}
+
+/* ================================================================
+   MOBILE RESPONSIVE
+================================================================ */
+@media (max-width: 768px) {
+  #page-college-student .stat-num { font-size: 28px !important; }
+  #page-college-student .hc-headline { font-size: clamp(28px, 7vw, 56px) !important; }
+  #page-college-student .section-title h2 { font-size: clamp(24px, 6vw, 40px) !important; }
+  #page-college-student .dept-btn { padding: 7px 14px !important; font-size: 12px !important; }
+}

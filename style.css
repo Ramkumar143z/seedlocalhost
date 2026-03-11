@@ -11055,3 +11055,175 @@ textarea.form-input {
     transform: translateY(10px) translateX(-10px) scale(0.95);
   }
 }
+
+/* ===== RESOURCES MOBILE FIX ===== */
+
+@media (max-width: 500px) {
+
+  #resources-list {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #resources-list .resource-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  #resources-list .resource-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  #resources-list .resource-info {
+    width: 100%;
+  }
+
+  #resources-list .resource-info h4 {
+    font-size: 14px;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  #resources-list .resource-info p {
+    font-size: 12px;
+  }
+
+  #resources-list .resource-meta {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #resources-list .download-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+/* ===== ATS UPLOAD SECTION MOBILE FIX ===== */
+
+@media (max-width: 768px) {
+
+  #tab-ats .upload-section #dropWrap {
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  #tab-ats #dropWrap .formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #tab-ats #dropWrap .btn.btn-grey {
+    width: 100%;
+    max-width: 250px;
+    display: block;
+    margin: 10px auto 0;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  #tab-ats .upload-section #dropWrap {
+    padding: 14px;
+  }
+
+  #tab-ats #dropWrap .btn.btn-grey {
+    width: 100%;
+    max-width: 100%;
+  }
+
+}
+
+/* ===== Institution Services Cards Fix ===== */
+
+/* Mobile */
+@media (max-width: 576px) {
+
+  #page-institution #inst-tab-home #inst-services .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #page-institution #inst-tab-home #inst-services .col-md-6.col-lg-4 {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 991px) {
+
+  #page-institution #inst-tab-home #inst-services .col-md-6.col-lg-4 {
+    width: 50%;
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+
+  #page-institution #inst-tab-home #inst-services .col-md-6.col-lg-4 {
+    width: 33.333%;
+    max-width: 33.333%;
+    flex: 0 0 33.333%;
+  }
+
+}
+
+/* ================= ABOUT SECTION RESPONSIVE ================= */
+.about-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Mobile first: single column */
+}
+
+@media (min-width: 768px) {
+  .about-grid-2col {
+    grid-template-columns: 1fr 1fr;
+    /* Desktop: two columns */
+  }
+}
+
+@media (max-width: 991px) {
+  .desktop-only-stats {
+    display: none !important;
+  }
+}
+
+/* ===================================================== */
+/* INSTITUTION PORTAL LOGO OVERRIDE */
+/* ===================================================== */
+#page-institution .logo {
+  display: flex !important;
+  align-items: center !important;
+  background: none !important;
+}
+
+#page-institution .logo img {
+  content: url('https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772577611/Seed_Joined_White_o9i2rr.png') !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-height: 30px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}

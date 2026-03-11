@@ -9,6 +9,7 @@
     href="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773122550/Icon_Green_ntaley.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhance.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
     rel="stylesheet">
@@ -174,14 +175,10 @@
   <!-- ===== SPLASH SCREEN ===== -->
   <!-- ===== SPLASH SCREEN (GSAP INTRO) ===== -->
   <div id="splash"
-    style="position:fixed;inset:0;z-index:9999;background:#040d08;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;">
+    style="position:fixed;inset:0;z-index:9999;background:#000000;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;">
 
-    <div id="intro-glow"
-      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,177,123,0.18) 0%,transparent 70%);opacity:0;transform:scale(0.3);pointer-events:none;">
-    </div>
-    <div id="intro-scan"
-      style="position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,177,123,0.07),transparent);opacity:0;pointer-events:none;">
-    </div>
+
+    <div id="intro-scan" style="display:none;"></div>
 
     <div class="corner corner-tl"
       style="position:absolute;top:32px;left:32px;width:40px;height:40px;border-top:2px solid #00b17b;border-left:2px solid #00b17b;opacity:0;">
@@ -197,28 +194,31 @@
     </div>
 
     <div id="intro-logo-wrap" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:28px;">
+
+      <!-- Orbits -->
       <div id="orbit-1"
-        style="position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(0,177,123,0.2);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;">
+        style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(0,177,123,0.15);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;z-index:2;">
         <div
           style="position:absolute;width:6px;height:6px;border-radius:50%;background:#00b17b;box-shadow:0 0 10px rgba(0,177,123,0.6);top:-3px;left:50%;transform:translateX(-50%);opacity:0;"
           class="orbit-dot"></div>
       </div>
       <div id="orbit-2"
-        style="position:absolute;width:260px;height:260px;border-radius:50%;border:1px solid rgba(0,177,123,0.2);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;">
+        style="position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(0,177,123,0.12);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;z-index:2;">
         <div
           style="position:absolute;width:6px;height:6px;border-radius:50%;background:#00b17b;box-shadow:0 0 10px rgba(0,177,123,0.6);top:-3px;left:50%;transform:translateX(-50%);opacity:0;"
           class="orbit-dot"></div>
       </div>
       <div id="orbit-3"
-        style="position:absolute;width:340px;height:340px;border-radius:50%;border:1px solid rgba(0,177,123,0.2);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;">
+        style="position:absolute;width:540px;height:540px;border-radius:50%;border:1px solid rgba(0,177,123,0.08);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;z-index:2;">
         <div
           style="position:absolute;width:6px;height:6px;border-radius:50%;background:#00b17b;box-shadow:0 0 10px rgba(0,177,123,0.6);top:-3px;left:50%;transform:translateX(-50%);opacity:0;"
           class="orbit-dot"></div>
       </div>
 
+      <!-- Logo: highest z-index, no filters, pure transparent PNG on dark bg = white text -->
       <img id="intro-logo"
         src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772577611/Seed_Joined_White_o9i2rr.png" alt="MSEED"
-        style="width:300px;height:300px;object-fit:contain;opacity:0;transform:scale(0.6);position:relative;z-index:2;">
+        style="width:480px;max-width:75vw;height:auto;object-fit:contain;opacity:1;transform:scale(0.6);position:relative;z-index:20;isolation:isolate;">
 
       <div id="intro-line"
         style="width:0px;height:1px;background:linear-gradient(90deg,transparent,#00b17b,transparent);opacity:0;"></div>
@@ -358,7 +358,8 @@
           <span class="mascot-peek-wrap" style="display:inline-block;overflow:visible">
             <button class="btn btn-primary desktop-enroll-btn" style="padding:10px 20px;font-size:13px"
               onclick="openEnrollModal('General')">Enroll Now</button>
-            <img class="mascot-peek-char" src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-9-01_cjtsa7.png" alt="" />
+            <img class="mascot-peek-char"
+              src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-9-01_cjtsa7.png" alt="" />
           </span>
         </div>
       </div>
@@ -647,7 +648,8 @@
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773146145/paavai_hos7lh.png" alt="TCS"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145888/study_world_e0u17h.png" alt="Infosys">
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145888/study_world_e0u17h.png"
+                alt="Infosys">
             </div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145481/tn_college_engineering_xdyxzf.png"
@@ -659,32 +661,29 @@
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145293/ftc_t5o5dt.png" alt="Accenture">
             </div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141156/1_o6xjmp.png"
-                alt="Zoho"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141156/1_o6xjmp.png" alt="Zoho"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141144/8_dprmdk.png"
-                alt="Freshworks"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141144/8_dprmdk.png" alt="Freshworks"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png"
-                alt="Google"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png" alt="Google"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141122/2_v74tcl.png"
-                alt="Microsoft"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141122/2_v74tcl.png" alt="Microsoft"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141096/kit-coimbatore-logo-png_seeklogo-479727_wtvdgb.png"
                 alt="Amazon"></div>
-                 <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/images__1_-removebg-preview_k1vxdj.png" alt="TCS"></div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/images__1_-removebg-preview_k1vxdj.png"
+                alt="TCS"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/cict_mcroml.png" alt="Infosys">
             </div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png"
-                alt="Wipro"></div>
-                <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png" alt="Wipro"></div>
+            <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773146145/paavai_hos7lh.png" alt="TCS"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145888/study_world_e0u17h.png" alt="Infosys">
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145888/study_world_e0u17h.png"
+                alt="Infosys">
             </div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145481/tn_college_engineering_xdyxzf.png"
@@ -696,28 +695,24 @@
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773145293/ftc_t5o5dt.png" alt="Accenture">
             </div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141156/1_o6xjmp.png"
-                alt="Zoho"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141156/1_o6xjmp.png" alt="Zoho"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141144/8_dprmdk.png"
-                alt="Freshworks"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141144/8_dprmdk.png" alt="Freshworks"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png"
-                alt="Google"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png" alt="Google"></div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141122/2_v74tcl.png"
-                alt="Microsoft"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141122/2_v74tcl.png" alt="Microsoft"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141096/kit-coimbatore-logo-png_seeklogo-479727_wtvdgb.png"
                 alt="Amazon"></div>
-                 <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/images__1_-removebg-preview_k1vxdj.png" alt="TCS"></div>
+            <div class="partner-logo-item"><img
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/images__1_-removebg-preview_k1vxdj.png"
+                alt="TCS"></div>
             <div class="partner-logo-item"><img
                 src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141095/cict_mcroml.png" alt="Infosys">
             </div>
             <div class="partner-logo-item"><img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png"
-                alt="Wipro"></div>
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773141089/5_ytpkzp.png" alt="Wipro"></div>
 
           </div>
         </div>
@@ -769,35 +764,38 @@
             </div>
             <div class="ats-score-wrap" style="position:relative;">
               <img class="ats-score-illus"
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/2-01_jho0gj.png" alt="ATS Illustration"
+                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/2-01_jho0gj.png"
+                alt="ATS Illustration"
                 style="position:absolute;right:-40px;bottom:-40px;width:220px;max-width:40vw;z-index:0;pointer-events:none;filter:drop-shadow(0 10px 25px rgba(0,0,0,0.18));">
-              <div class="ats-score-card" style="background:#fff;border-radius:20px;padding:28px;box-shadow:var(--shadow);position:relative;z-index:1">
-              <div style="display:flex;flex-direction:column;gap:16px">
-                <div style="display:flex;align-items:center;justify-content:space-between"><span
-                    style="font-size:14px;font-weight:600">Keyword Match</span><span
-                    style="color:var(--green);font-weight:700">72%</span></div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width:72%"></div>
+              <div class="ats-score-card"
+                style="background:#fff;border-radius:20px;padding:28px;box-shadow:var(--shadow);position:relative;z-index:1">
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <div style="display:flex;align-items:center;justify-content:space-between"><span
+                      style="font-size:14px;font-weight:600">Keyword Match</span><span
+                      style="color:var(--green);font-weight:700">72%</span></div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:72%"></div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between"><span
+                      style="font-size:14px;font-weight:600">Format Score</span><span
+                      style="color:var(--green);font-weight:700">88%</span></div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:88%"></div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between"><span
+                      style="font-size:14px;font-weight:600">Skill Alignment</span><span
+                      style="color:#F57F17;font-weight:700">54%</span></div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width:54%;background:linear-gradient(90deg,#F57F17,#FFB74D)">
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between"><span
+                      style="font-size:14px;font-weight:600">Overall ATS Score</span><span
+                      style="color:var(--green);font-weight:900;font-size:18px">71/100</span></div>
                 </div>
-                <div style="display:flex;align-items:center;justify-content:space-between"><span
-                    style="font-size:14px;font-weight:600">Format Score</span><span
-                    style="color:var(--green);font-weight:700">88%</span></div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width:88%"></div>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between"><span
-                    style="font-size:14px;font-weight:600">Skill Alignment</span><span
-                    style="color:#F57F17;font-weight:700">54%</span></div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width:54%;background:linear-gradient(90deg,#F57F17,#FFB74D)"></div>
-                </div>
-                <div style="display:flex;align-items:center;justify-content:space-between"><span
-                    style="font-size:14px;font-weight:600">Overall ATS Score</span><span
-                    style="color:var(--green);font-weight:900;font-size:18px">71/100</span></div>
               </div>
-              </div>
+            </div>
           </div>
-        </div>
       </section>
 
       <!-- FEATURED COURSES -->
@@ -872,8 +870,7 @@
         <div class="container">
           <div class="footer-grid">
             <div class="footer-brand">
-              <img
-                src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
+              <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772577611/Seed_Joined_White_o9i2rr.png"
                 alt="MSEED" style="height:120px;width:auto;object-fit:contain;display:block;">
               <p>Empowering students with industry-relevant skills, ATS-ready tools, and real career outcomes since
                 2018.</p>
@@ -972,631 +969,627 @@
       <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Georgia:wght@700&display=swap"
         rel="stylesheet">
-      </head>
 
-      <body>
+      <!-- PDF LOADING OVERLAY -->
+      <div id="pdfLoadingOverlay">
+        <div class="pdf-spinner"></div>
+        <div class="pdf-loading-txt">Generating PDF... Please wait</div>
+      </div>
 
-        <!-- PDF LOADING OVERLAY -->
-        <div id="pdfLoadingOverlay">
-          <div class="pdf-spinner"></div>
-          <div class="pdf-loading-txt">Generating PDF... Please wait</div>
-        </div>
-
-        <!-- HERO -->
-        <div class="hero">
-          <div class="container">
-            <div class="hero-inner">
-              <div class="hero-left">
-                <h1>Free ATS Resume Checker</h1>
-                <p>Our free ATS Resume Checker scans for 30+ criteria and delivers instant suggestions to boost your
-                  resume score.</p>
-                <div class="upload-box" id="heroUploadBox">
-                  <input type="file" id="heroFile" accept=".doc,.docx,.pdf,.txt,.rtf,.html">
-                  <div class="upload-box-inner">
-                    <div class="upload-left">
-                      <button class="btn btn-primary" style="pointer-events:none">Check Your Score</button>
-                      <p>We can read: DOC, DOCX, PDF, HTML, RTF, TXT</p>
-                      <div class="file-chosen-txt" id="heroFileTxt"></div>
-                    </div>
-                    <div class="upload-right">
-                      <p>Drop to upload or choose a file.<br>Max 5MB.</p>
-                    </div>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="container">
+          <div class="hero-inner">
+            <div class="hero-left">
+              <h1>Free ATS Resume Checker</h1>
+              <p>Our free ATS Resume Checker scans for 30+ criteria and delivers instant suggestions to boost your
+                resume score.</p>
+              <div class="upload-box" id="heroUploadBox">
+                <input type="file" id="heroFile" accept=".doc,.docx,.pdf,.txt,.rtf,.html">
+                <div class="upload-box-inner">
+                  <div class="upload-left">
+                    <button class="btn btn-primary" style="pointer-events:none">Check Your Score</button>
+                    <p>We can read: DOC, DOCX, PDF, HTML, RTF, TXT</p>
+                    <div class="file-chosen-txt" id="heroFileTxt"></div>
+                  </div>
+                  <div class="upload-right">
+                    <p>Drop to upload or choose a file.<br>Max 5MB.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- UPLOAD SECTION -->
-        <section class="upload-section" id="uploadSection">
-          <div class="container" style="max-width:700px">
-            <h2>Scan Your Resume for ATS</h2>
-            <ol class="steps-bar" id="stepsBar">
-              <li class="active" id="step0">Upload resume</li>
-              <li id="step1">ATS scan</li>
-              <li id="step2">View results</li>
-            </ol>
+      <!-- UPLOAD SECTION -->
+      <section class="upload-section" id="uploadSection">
+        <div class="container" style="max-width:700px">
+          <h2>Scan Your Resume for ATS</h2>
+          <ol class="steps-bar" id="stepsBar">
+            <li class="active" id="step0">Upload resume</li>
+            <li id="step1">ATS scan</li>
+            <li id="step2">View results</li>
+          </ol>
 
-            <div id="dropWrap">
-              <div class="drop-form" id="mainDropZone">
-                <input type="file" id="mainFile" accept=".doc,.docx,.pdf,.txt,.rtf,.html">
-                <h3>Drag and drop a file here</h3>
-                <div class="file-badge" id="mainFileBadge"></div>
-                <p class="formats">Files we can read: DOC, DOCX, PDF, HTML, RTF, TXT</p>
-                <div style="margin-top:6px">
-                  <button class="btn btn-grey"
-                    style="pointer-events:none;font-size:1.4rem;min-height:38px;padding:8px 28px">Upload Your
-                    Resume</button>
-                </div>
-              </div>
-
-              <div style="text-align:center;margin-top:10px">
-                <button class="btn btn-primary btn-block" id="startScanBtn" disabled onclick="startScan()"
-                  style="max-width:280px;margin:0 auto">
-                  Start scanning
-                </button>
+          <div id="dropWrap">
+            <div class="drop-form" id="mainDropZone">
+              <input type="file" id="mainFile" accept=".doc,.docx,.pdf,.txt,.rtf,.html">
+              <h3>Drag and drop a file here</h3>
+              <div class="file-badge" id="mainFileBadge"></div>
+              <p class="formats">Files we can read: DOC, DOCX, PDF, HTML, RTF, TXT</p>
+              <div style="margin-top:6px">
+                <button class="btn btn-grey"
+                  style="pointer-events:none;font-size:1.4rem;min-height:38px;padding:7px 28px">Upload Resume</button>
               </div>
             </div>
 
-            <!-- SCANNING UI -->
-            <div class="scanning-wrap" id="scanningWrap">
-              <h2 class="scan-title">Scanning Your Resume</h2>
-              <p class="scan-sub">Checking 30+ ATS criteria — takes a few seconds</p>
-              <ul class="criteria-list" id="criteriaList">
-                <li class="criteria-item" id="ci0">
-                  <div class="step-icon ci-icon" id="cii0">📂</div><span>Reading & parsing your file</span>
-                </li>
-                <li class="criteria-item" id="ci1">
-                  <div class="ci-icon" id="cii1">📋</div><span>Checking section structure</span>
-                </li>
-                <li class="criteria-item" id="ci2">
-                  <div class="ci-icon" id="cii2">📞</div><span>Verifying contact information</span>
-                </li>
-                <li class="criteria-item" id="ci3">
-                  <div class="ci-icon" id="cii3">📝</div><span>Detecting professional summary</span>
-                </li>
-                <li class="criteria-item" id="ci4">
-                  <div class="ci-icon" id="cii4">🛠</div><span>Matching skills & keywords</span>
-                </li>
-                <li class="criteria-item" id="ci5">
-                  <div class="ci-icon" id="cii5">💬</div><span>Checking action verbs & word choice</span>
-                </li>
-                <li class="criteria-item" id="ci6">
-                  <div class="ci-icon" id="cii6">📊</div><span>Scanning measurable achievements</span>
-                </li>
-                <li class="criteria-item" id="ci7">
-                  <div class="ci-icon" id="cii7">📏</div><span>Checking length & formatting</span>
-                </li>
-                <li class="criteria-item" id="ci8">
-                  <div class="ci-icon" id="cii8">🔤</div><span>Detecting spelling & grammar issues</span>
-                </li>
-                <li class="criteria-item" id="ci9">
-                  <div class="ci-icon" id="cii9">⚡</div><span>Calculating final ATS score</span>
-                </li>
-              </ul>
-              <div class="scan-progress">
-                <div class="scan-bar" id="scanBar"></div>
-              </div>
-              <div class="scan-pct" id="scanPct">0%</div>
+            <div style="text-align:center;margin-top:10px">
+              <button class="btn btn-primary btn-block" id="startScanBtn" disabled onclick="startScan()"
+                style="max-width:280px;margin:0 auto">
+                Start scanning
+              </button>
             </div>
           </div>
-        </section>
 
-        <!-- RESULTS -->
-        <div class="results-wrap" id="resultsWrap">
-          <div class="container">
-
-            <!-- SCORE + BREAKDOWN -->
-            <div class="score-section">
-              <div class="score-ring-wrap">
-                <div id="originalBadge" class="original-score-badge">Original: <span id="originalScoreVal">0</span>
-                </div>
-                <svg width="200" height="200" viewBox="0 0 200 200">
-                  <circle class="ring-track" cx="100" cy="100" r="80" />
-                  <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="80" />
-                </svg>
-                <div class="ring-center">
-                  <div class="ring-score" id="ringScore">0</div>
-                  <div class="ring-label">out of 100</div>
-                  <div class="ring-grade" id="ringGrade"></div>
-                </div>
-              </div>
-
-              <div class="breakdown" id="breakdownBars"></div>
+          <!-- SCANNING UI -->
+          <div class="scanning-wrap" id="scanningWrap">
+            <h2 class="scan-title">Scanning Your Resume</h2>
+            <p class="scan-sub">Checking 30+ ATS criteria — takes a few seconds</p>
+            <ul class="criteria-list" id="criteriaList">
+              <li class="criteria-item" id="ci0">
+                <div class="step-icon ci-icon" id="cii0">📂</div><span>Reading & parsing your file</span>
+              </li>
+              <li class="criteria-item" id="ci1">
+                <div class="ci-icon" id="cii1">📋</div><span>Checking section structure</span>
+              </li>
+              <li class="criteria-item" id="ci2">
+                <div class="ci-icon" id="cii2">📞</div><span>Verifying contact information</span>
+              </li>
+              <li class="criteria-item" id="ci3">
+                <div class="ci-icon" id="cii3">📝</div><span>Detecting professional summary</span>
+              </li>
+              <li class="criteria-item" id="ci4">
+                <div class="ci-icon" id="cii4">🛠</div><span>Matching skills & keywords</span>
+              </li>
+              <li class="criteria-item" id="ci5">
+                <div class="ci-icon" id="cii5">💬</div><span>Checking action verbs & word choice</span>
+              </li>
+              <li class="criteria-item" id="ci6">
+                <div class="ci-icon" id="cii6">📊</div><span>Scanning measurable achievements</span>
+              </li>
+              <li class="criteria-item" id="ci7">
+                <div class="ci-icon" id="cii7">📏</div><span>Checking length & formatting</span>
+              </li>
+              <li class="criteria-item" id="ci8">
+                <div class="ci-icon" id="cii8">🔤</div><span>Detecting spelling & grammar issues</span>
+              </li>
+              <li class="criteria-item" id="ci9">
+                <div class="ci-icon" id="cii9">⚡</div><span>Calculating final ATS score</span>
+              </li>
+            </ul>
+            <div class="scan-progress">
+              <div class="scan-bar" id="scanBar"></div>
             </div>
-
-            <!-- VERDICT -->
-            <div class="verdict" id="verdictBox"></div>
-
-            <!-- 30 CRITERIA GRID -->
-            <div class="criteria-results">
-              <h2>Detailed ATS Report (30 Checks)</h2>
-              <div class="cr-grid" id="crGrid"></div>
-            </div>
-
-            <!-- TIPS -->
-            <div class="tips-section" id="tipsBox">
-              <h2>How to Improve Your Score</h2>
-              <ul class="tip-list" id="tipsList"></ul>
-            </div>
-
-            <!-- GET TEMPLATE -->
-            <div class="tpl-banner" id="tplBanner" style="display:none">
-              <div>
-                <h3>Get Your Free ATS-Optimized Template</h3>
-                <p>Fully editable · Auto-filled with your details · Download as PDF</p>
-              </div>
-              <button class="btn btn-yellow" onclick="openResumeModal()">📋 Get Free Template</button>
-            </div>
-
+            <div class="scan-pct" id="scanPct">0%</div>
           </div>
         </div>
+      </section>
 
-        <!-- TEMPLATE SECTION -->
-        <div id="tplSection">
-          <div class="container">
-            <div class="edit-hint">✏️ Click any text to edit it directly · All fields are fully customizable</div>
-            <div class="resume-paper" id="resumePaper"></div>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:20px">
-              <button class="btn btn-primary" onclick="downloadPDF()">⬇️ Download as PDF</button>
-              <button class="btn btn-yellow" onclick="recheckScore()" style="border-radius:8px">⚡ Check Current
-                Score</button>
-              <button class="btn btn-grey" onclick="resetAll()">🔄 Check Another Resume</button>
-            </div>
-          </div>
-        </div>
+      <!-- RESULTS -->
+      <div class="results-wrap" id="resultsWrap">
+        <div class="container">
 
-        <!-- ATS TEMPLATE MODAL -->
-        <div class="overlay" id="resumeModalOverlay">
-          <div class="modal">
-            <h2>Get Your Template</h2>
-            <p class="sub">Enter your details — they'll be auto-filled into the ATS resume template</p>
-            <div class="fld"><label>Full Name</label><input id="uName" placeholder="e.g. Priya Sharma" type="text">
-            </div>
-            <div class="fld"><label>Mobile Number</label><input id="uPhone" placeholder="e.g. +91 9876543210"
-                type="tel"></div>
-            <div class="fld"><label>Email Address</label><input id="uEmail" placeholder="e.g. priya@gmail.com"
-                type="email"></div>
-            <div class="fld">
-              <label>Experience Level</label>
-              <div class="radio-row">
-                <label class="r-opt sel" id="rFresh" onclick="setXp('fresher')">
-                  <input type="radio" name="xp" checked>
-                  <div class="ic">🎓</div>
-                  <div class="lbl">Fresher</div>
-                  <div class="sub2">0–1 yr</div>
-                </label>
-                <label class="r-opt" id="rExp" onclick="setXp('experienced')">
-                  <input type="radio" name="xp">
-                  <div class="ic">💼</div>
-                  <div class="lbl">Experienced</div>
-                  <div class="sub2">1+ yrs</div>
-                </label>
+          <!-- SCORE + BREAKDOWN -->
+          <div class="score-section">
+            <div class="score-ring-wrap">
+              <div id="originalBadge" class="original-score-badge">Original: <span id="originalScoreVal">0</span>
+              </div>
+              <svg width="200" height="200" viewBox="0 0 200 200">
+                <circle class="ring-track" cx="100" cy="100" r="80" />
+                <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="80" />
+              </svg>
+              <div class="ring-center">
+                <div class="ring-score" id="ringScore">0</div>
+                <div class="ring-label">out of 100</div>
+                <div class="ring-grade" id="ringGrade"></div>
               </div>
             </div>
-            <button class="btn btn-primary btn-block" style="margin-top:8px" onclick="buildTemplate()">Generate My
-              Template →</button>
-            <button class="btn"
-              style="background:transparent;color:var(--muted);width:100%;margin-top:8px;font-size:1.4rem"
-              onclick="closeModal()">Cancel</button>
+
+            <div class="breakdown" id="breakdownBars"></div>
+          </div>
+
+          <!-- VERDICT -->
+          <div class="verdict" id="verdictBox"></div>
+
+          <!-- 30 CRITERIA GRID -->
+          <div class="criteria-results">
+            <h2>Detailed ATS Report (30 Checks)</h2>
+            <div class="cr-grid" id="crGrid"></div>
+          </div>
+
+          <!-- TIPS -->
+          <div class="tips-section" id="tipsBox">
+            <h2>How to Improve Your Score</h2>
+            <ul class="tip-list" id="tipsList"></ul>
+          </div>
+
+          <!-- GET TEMPLATE -->
+          <div class="tpl-banner" id="tplBanner" style="display:none">
+            <div>
+              <h3>Get Your Free ATS-Optimized Template</h3>
+              <p>Fully editable · Auto-filled with your details · Download as PDF</p>
+            </div>
+            <button class="btn btn-yellow" onclick="openResumeModal()">📋 Get Free Template</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TEMPLATE SECTION -->
+      <div id="tplSection">
+        <div class="container">
+          <div class="edit-hint">✏️ Click any text to edit it directly · All fields are fully customizable</div>
+          <div class="resume-paper" id="resumePaper"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:20px">
+            <button class="btn btn-primary" onclick="downloadPDF()">⬇️ Download as PDF</button>
+            <button class="btn btn-yellow" onclick="recheckScore()" style="border-radius:8px">⚡ Check Current
+              Score</button>
+            <button class="btn btn-grey" onclick="resetAll()">🔄 Check Another Resume</button>
           </div>
         </div>
+      </div>
 
-        <script>
-          /* ══════════════════════════════════════════════════
-             STATE
-          ══════════════════════════════════════════════════ */
-          let xpType = 'fresher';
-          let fileText = '';
-          let lastResult = null;
-          let originalScore = null;
+      <!-- ATS TEMPLATE MODAL -->
+      <div class="overlay" id="resumeModalOverlay">
+        <div class="modal">
+          <h2>Get Your Template</h2>
+          <p class="sub">Enter your details — they'll be auto-filled into the ATS resume template</p>
+          <div class="fld"><label>Full Name</label><input id="uName" placeholder="e.g. Priya Sharma" type="text">
+          </div>
+          <div class="fld"><label>Mobile Number</label><input id="uPhone" placeholder="e.g. +91 9876543210" type="tel">
+          </div>
+          <div class="fld"><label>Email Address</label><input id="uEmail" placeholder="e.g. priya@gmail.com"
+              type="email"></div>
+          <div class="fld">
+            <label>Experience Level</label>
+            <div class="radio-row">
+              <label class="r-opt sel" id="rFresh" onclick="setXp('fresher')">
+                <input type="radio" name="xp" checked>
+                <div class="ic">🎓</div>
+                <div class="lbl">Fresher</div>
+                <div class="sub2">0–1 yr</div>
+              </label>
+              <label class="r-opt" id="rExp" onclick="setXp('experienced')">
+                <input type="radio" name="xp">
+                <div class="ic">💼</div>
+                <div class="lbl">Experienced</div>
+                <div class="sub2">1+ yrs</div>
+              </label>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" style="margin-top:8px" onclick="buildTemplate()">Generate My
+            Template →</button>
+          <button class="btn"
+            style="background:transparent;color:var(--muted);width:100%;margin-top:8px;font-size:1.4rem"
+            onclick="closeModal()">Cancel</button>
+        </div>
+      </div>
 
-          /* ══════════════════════════════════════════════════
-             FILE EVENTS
-          ══════════════════════════════════════════════════ */
-          document.getElementById('heroFile').addEventListener('change', function () {
-            if (this.files[0]) {
-              document.getElementById('heroFileTxt').textContent = '✅ ' + this.files[0].name;
-              document.getElementById('heroFileTxt').style.display = 'block';
-              syncFile(this.files[0]);
-            }
+      <script>
+        /* ══════════════════════════════════════════════════
+           STATE
+        ══════════════════════════════════════════════════ */
+        let xpType = 'fresher';
+        let fileText = '';
+        let lastResult = null;
+        let originalScore = null;
+
+        /* ══════════════════════════════════════════════════
+           FILE EVENTS
+        ══════════════════════════════════════════════════ */
+        document.getElementById('heroFile').addEventListener('change', function () {
+          if (this.files[0]) {
+            document.getElementById('heroFileTxt').textContent = '✅ ' + this.files[0].name;
+            document.getElementById('heroFileTxt').style.display = 'block';
+            syncFile(this.files[0]);
+          }
+        });
+
+        document.getElementById('mainFile').addEventListener('change', function () {
+          if (this.files[0]) syncFile(this.files[0]);
+        });
+
+        function syncFile(f) {
+          document.getElementById('mainFileBadge').textContent = f.name;
+          document.getElementById('mainFileBadge').style.display = 'block';
+          document.getElementById('startScanBtn').disabled = false;
+          window._pendingFile = f;
+          document.getElementById('uploadSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const dz = document.getElementById('mainDropZone');
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.background = 'rgba(2,129,140,0.07)'; });
+        dz.addEventListener('dragleave', () => dz.style.background = '');
+        dz.addEventListener('drop', e => {
+          e.preventDefault(); dz.style.background = '';
+          const f = e.dataTransfer.files[0];
+          if (f) syncFile(f);
+        });
+
+        /* ══════════════════════════════════════════════════
+           FILE READERS
+        ══════════════════════════════════════════════════ */
+        async function readPDF(file) {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+          const ab = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument(ab).promise;
+          let t = '';
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const pg = await pdf.getPage(i);
+            const c = await pg.getTextContent();
+            c.items.forEach(it => t += it.str + ' ');
+          }
+          return t;
+        }
+
+        async function readDOCX(file) {
+          const ab = await file.arrayBuffer();
+          const r = await mammoth.extractRawText({ arrayBuffer: ab });
+          return r.value;
+        }
+
+        async function readText(file) {
+          return new Promise((res, rej) => {
+            const fr = new FileReader();
+            fr.onload = e => res(e.target.result);
+            fr.onerror = rej;
+            fr.readAsText(file);
+          });
+        }
+
+        /* ══════════════════════════════════════════════════
+           START SCAN
+        ══════════════════════════════════════════════════ */
+        async function startScan() {
+          const file = window._pendingFile;
+          if (!file) return;
+
+          setStep(1);
+          document.getElementById('dropWrap').style.display = 'none';
+          document.getElementById('scanningWrap').style.display = 'block';
+          document.getElementById('resultsWrap').style.display = 'none';
+          document.getElementById('tplSection').style.display = 'none';
+
+          resetCriteria();
+          setProgress(0);
+
+          ciScan(0);
+          try {
+            const n = file.name.toLowerCase();
+            if (n.endsWith('.pdf')) fileText = await readPDF(file);
+            else if (n.endsWith('.docx') || n.endsWith('.doc')) fileText = await readDOCX(file);
+            else fileText = await readText(file);
+          } catch (e) {
+            alert('Error reading file. Please try another.');
+            resetUI(); return;
+          }
+          ciDone(0); setProgress(10); await wait(350);
+
+          ciScan(1); await wait(550); ciDone(1); setProgress(20);
+          ciScan(2); await wait(450); ciDone(2); setProgress(30);
+          ciScan(3); await wait(500); ciDone(3); setProgress(40);
+          ciScan(4); await wait(700); ciDone(4); setProgress(52);
+          ciScan(5); await wait(550); ciDone(5); setProgress(64);
+          ciScan(6); await wait(600); ciDone(6); setProgress(74);
+          ciScan(7); await wait(450); ciDone(7); setProgress(84);
+          ciScan(8); await wait(500); ciDone(8); setProgress(92);
+          ciScan(9);
+          const result = computeATS(fileText);
+          await wait(700);
+          ciDone(9); setProgress(100);
+          await wait(500);
+
+          lastResult = result;
+          if (originalScore === null) {
+            originalScore = result.score;
+            document.getElementById('originalScoreVal').textContent = originalScore;
+            document.getElementById('originalBadge').style.display = 'block';
+          }
+          document.getElementById('scanningWrap').style.display = 'none';
+          setStep(2);
+          renderResults(result);
+          document.getElementById('resultsWrap').style.display = 'block';
+          document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function recheckScore() {
+          const editorText = document.getElementById('resumePaper').innerText;
+          const result = computeATS(editorText);
+          lastResult = result;
+          renderResults(result);
+          document.getElementById('resultsWrap').style.display = 'block';
+          document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth' });
+
+          // Show feedback that score updated
+          const btn = event.target;
+          const oldTxt = btn.textContent;
+          btn.textContent = '✅ Score Updated!';
+          setTimeout(() => btn.textContent = oldTxt, 2000);
+        }
+
+        /* ══════════════════════════════════════════════════
+           30-CRITERIA ATS ENGINE
+        ══════════════════════════════════════════════════ */
+        const SKILLS_DB = [
+          'javascript', 'typescript', 'python', 'java', 'c++', 'c#', 'ruby', 'php', 'swift', 'kotlin', 'go', 'rust', 'scala', 'r',
+          'react', 'angular', 'vue', 'nextjs', 'svelte', 'redux', 'jquery', 'html5', 'css3', 'sass', 'tailwind', 'bootstrap', 'webpack', 'vite',
+          'nodejs', 'node.js', 'express', 'django', 'flask', 'fastapi', 'spring', 'laravel',
+          'mongodb', 'mysql', 'postgresql', 'sqlite', 'redis', 'cassandra', 'dynamodb', 'oracle', 'sql', 'nosql',
+          'git', 'github', 'gitlab', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'linux', 'bash',
+          'aws', 'azure', 'gcp', 'cloud', 'devops', 'ci/cd', 'microservices', 'rest api', 'graphql', 'agile', 'scrum', 'jira',
+          'machine learning', 'deep learning', 'tensorflow', 'pytorch', 'pandas', 'numpy', 'scikit', 'data analysis', 'tableau', 'power bi',
+          'figma', 'photoshop', 'illustrator', 'ux', 'ui design', 'excel', 'project management',
+          'communication', 'teamwork', 'leadership', 'problem solving', 'critical thinking', 'time management'
+        ];
+
+        const ACTION_VERBS = [
+          'achieved', 'accelerated', 'accomplished', 'architected', 'analyzed', 'automated', 'built', 'collaborated', 'coordinated',
+          'created', 'delivered', 'deployed', 'designed', 'developed', 'directed', 'drove', 'engineered', 'established',
+          'executed', 'generated', 'implemented', 'improved', 'increased', 'integrated', 'launched', 'led', 'maintained',
+          'managed', 'mentored', 'negotiated', 'optimized', 'orchestrated', 'oversaw', 'presented', 'reduced', 'resolved',
+          'scaled', 'spearheaded', 'streamlined', 'transformed', 'upgraded', 'utilized'
+        ];
+
+        const FILLER_WORDS = ['responsible for', 'duties include', 'helped', 'assisted with', 'worked on', 'various', 'etc', 'very', 'really'];
+        const PRONOUNS = [/\bi\b/g, /\bme\b/g, /\bmy\b/g, /\bwe\b/g, /\bour\b/g];
+
+        const SECTION_CHECKS = [
+          { id: 'experience', labels: ['experience', 'work experience', 'employment history', 'career history', 'professional experience', 'work history'], pts: 10 },
+          { id: 'education', labels: ['education', 'academic background', 'qualification', 'academic qualifications'], pts: 8 },
+          { id: 'skills', labels: ['skills', 'technical skills', 'core competencies', 'key skills', 'areas of expertise'], pts: 7 },
+          { id: 'summary', labels: ['summary', 'professional summary', 'career objective', 'objective', 'about me', 'profile', 'career summary'], pts: 6 },
+          { id: 'projects', labels: ['projects', 'project', 'portfolio', 'key projects'], pts: 5 },
+          { id: 'certifications', labels: ['certification', 'certifications', 'certificate', 'licens'], pts: 4 },
+          { id: 'achievements', labels: ['achievement', 'awards', 'honors', 'recognition', 'accomplishments'], pts: 3 },
+          { id: 'contact', labels: ['contact', 'address', 'location'], pts: 2 },
+        ];
+
+        const CONTACT_RE = [
+          { re: /[\w.+%-]+@[\w.-]+\.[a-z]{2,}/i, label: 'Email address' },
+          { re: /(\+?\d[\d\s\-().]{6,})/, label: 'Phone number' },
+          { re: /linkedin\.com\//i, label: 'LinkedIn profile' },
+          { re: /github\.com\//i, label: 'GitHub profile' },
+        ];
+
+        function computeATS(raw) {
+          const lo = raw.toLowerCase();
+          const lines = raw.split(/\n/).map(l => l.trim()).filter(Boolean);
+          const words = lo.split(/\s+/).filter(Boolean);
+          const wc = words.length;
+          const checks = [];
+
+          let sectionPts = 0;
+          SECTION_CHECKS.forEach(sec => {
+            const found = sec.labels.some(l => lo.includes(l));
+            sectionPts += found ? sec.pts : 0;
+            checks.push({ cat: 'Comprehensiveness', label: sec.id.charAt(0).toUpperCase() + sec.id.slice(1) + ' section', status: found ? 'pass' : 'fail', detail: found ? `"${sec.id}" section detected` : `Add a "${sec.id}" section — ATS looks for it`, pts: sec.pts, earned: found ? sec.pts : 0 });
           });
 
-          document.getElementById('mainFile').addEventListener('change', function () {
-            if (this.files[0]) syncFile(this.files[0]);
+          CONTACT_RE.forEach(c => {
+            const found = c.re.test(raw);
+            checks.push({ cat: 'Contact Information', label: c.label, status: found ? 'pass' : 'fail', detail: found ? c.label + ' found in resume' : 'Add your ' + c.label.toLowerCase(), pts: 2.5, earned: found ? 2.5 : 0 });
           });
 
-          function syncFile(f) {
-            document.getElementById('mainFileBadge').textContent = f.name;
-            document.getElementById('mainFileBadge').style.display = 'block';
-            document.getElementById('startScanBtn').disabled = false;
-            window._pendingFile = f;
-            document.getElementById('uploadSection').scrollIntoView({ behavior: 'smooth' });
-          }
+          const hasSum = /\b(summary|objective|profile|about me|career summary|professional summary)\b/i.test(raw);
+          const sumGood = hasSum && wc > 30;
+          checks.push({ cat: 'Professional Summary', label: 'Summary/Objective present', status: hasSum ? 'pass' : 'fail', detail: hasSum ? 'Professional summary detected' : 'Add a 3–4 line professional summary at the top', pts: 5, earned: hasSum ? 5 : 0 });
+          checks.push({ cat: 'Professional Summary', label: 'Summary is descriptive', status: sumGood ? 'pass' : (hasSum ? 'warn' : 'fail'), detail: sumGood ? 'Summary has adequate content' : 'Expand your summary — aim for 3–5 impactful sentences', pts: 3, earned: sumGood ? 3 : 0 });
 
-          const dz = document.getElementById('mainDropZone');
-          dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.background = 'rgba(2,129,140,0.07)'; });
-          dz.addEventListener('dragleave', () => dz.style.background = '');
-          dz.addEventListener('drop', e => {
-            e.preventDefault(); dz.style.background = '';
-            const f = e.dataTransfer.files[0];
-            if (f) syncFile(f);
+          const foundSkills = [], missSkills = [];
+          SKILLS_DB.forEach(sk => {
+            const re = new RegExp('\\b' + sk.replace(/[+#.]/g, '\\$&') + '\\b', 'i');
+            if (re.test(raw)) foundSkills.push(sk); else missSkills.push(sk);
+          });
+          const skillRatio = foundSkills.length / SKILLS_DB.length;
+          let skillPts, skillStatus;
+          if (skillRatio >= 0.5) { skillPts = 12; skillStatus = 'pass'; }
+          else if (skillRatio >= 0.3) { skillPts = 8; skillStatus = 'warn'; }
+          else if (skillRatio >= 0.15) { skillPts = 5; skillStatus = 'warn'; }
+          else { skillPts = 2; skillStatus = 'fail'; }
+          checks.push({ cat: 'Customization', label: 'Industry keywords matched', status: skillStatus, detail: `${foundSkills.length} of ${SKILLS_DB.length} tracked keywords found`, pts: 12, earned: skillPts });
+          const hasJobTitle = /\b(developer|engineer|analyst|manager|designer|consultant|specialist|coordinator|director|architect|scientist|administrator)\b/i.test(raw);
+          checks.push({ cat: 'Customization', label: 'Job titles & roles mentioned', status: hasJobTitle ? 'pass' : 'warn', detail: hasJobTitle ? 'Professional job titles found' : 'Include specific job titles relevant to your target role', pts: 3, earned: hasJobTitle ? 3 : 0 });
+
+          const foundVerbs = ACTION_VERBS.filter(v => new RegExp('\\b' + v + '\\b', 'i').test(raw));
+          const verbRatio = foundVerbs.length / ACTION_VERBS.length;
+          let verbPts, verbStatus;
+          if (verbRatio >= 0.4) { verbPts = 8; verbStatus = 'pass'; }
+          else if (verbRatio >= 0.2) { verbPts = 5; verbStatus = 'warn'; }
+          else { verbPts = 2; verbStatus = 'fail'; }
+          checks.push({ cat: 'Word Choice', label: 'Action verbs used', status: verbStatus, detail: `${foundVerbs.length} action verbs detected (e.g. ${foundVerbs.slice(0, 3).join(', ') || 'none'})`, pts: 8, earned: verbPts });
+          const fillerFound = FILLER_WORDS.filter(f => lo.includes(f));
+          checks.push({ cat: 'Word Choice', label: 'No filler/weak phrases', status: fillerFound.length === 0 ? 'pass' : 'warn', detail: fillerFound.length === 0 ? 'No weak phrases detected' : `Weak phrases found: "${fillerFound.slice(0, 2).join('", "')}"`, pts: 3, earned: fillerFound.length === 0 ? 3 : 1 });
+          const pronounsFound = PRONOUNS.some(re => re.test(lo));
+          checks.push({ cat: 'Word Choice', label: 'No personal pronouns (I, me, my)', status: pronounsFound ? 'fail' : 'pass', detail: pronounsFound ? 'Pronouns like "I", "me", "my" found — remove them' : 'No personal pronouns detected', pts: 2, earned: pronounsFound ? 0 : 2 });
+
+          const metricLines = lines.filter(l => /\d+\s*%|\$[\d,]+|\d+\s*(times|x\b)|\d+\s*\+|increased|reduced|improved|grew|saved|delivered|generated|managed \d+|team of \d+/i.test(l));
+          let metricPts, metricStatus;
+          if (metricLines.length >= 5) { metricPts = 10; metricStatus = 'pass'; }
+          else if (metricLines.length >= 2) { metricPts = 6; metricStatus = 'warn'; }
+          else if (metricLines.length === 1) { metricPts = 3; metricStatus = 'warn'; }
+          else { metricPts = 0; metricStatus = 'fail'; }
+          checks.push({ cat: 'Measurable Results', label: 'Quantified achievements', status: metricStatus, detail: metricLines.length > 0 ? `${metricLines.length} bullet(s) with numbers/metrics found` : 'Add numbers: "Reduced costs by 30%", "Managed team of 5"', pts: 10, earned: metricPts });
+          const hasImpactWords = /\b(impact|result|outcome|achieve|deliver|accomplish)\b/i.test(raw);
+          checks.push({ cat: 'Measurable Results', label: 'Results-oriented language', status: hasImpactWords ? 'pass' : 'warn', detail: hasImpactWords ? 'Results-oriented language detected' : 'Use words like "achieved", "delivered", "accomplished"', pts: 2, earned: hasImpactWords ? 2 : 0 });
+
+          const hasDates = /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|august|september|october|november|december|\d{4})\b/i.test(raw);
+          checks.push({ cat: 'Formatting', label: 'Dates present in work/education', status: hasDates ? 'pass' : 'warn', detail: hasDates ? 'Date patterns found (month/year)' : 'Add month & year to all positions and education', pts: 4, earned: hasDates ? 4 : 0 });
+          const bullets = (raw.match(/^[\s]*[•\-\*▪▸◦]\s/gm) || []).length;
+          checks.push({ cat: 'Formatting', label: 'Bullet points used', status: bullets >= 4 ? 'pass' : bullets >= 1 ? 'warn' : 'fail', detail: bullets >= 4 ? `${bullets} bullet points detected — good structure` : bullets > 0 ? 'Add more bullet points for better ATS parsing' : 'Use bullet points (•) for experience entries', pts: 4, earned: bullets >= 4 ? 4 : bullets >= 1 ? 2 : 0 });
+          const capRatio = (raw.match(/[A-Z]/g) || []).length / (raw.length || 1);
+          const notAllCaps = capRatio < 0.2;
+          checks.push({ cat: 'Formatting', label: 'Not excessive capitalization', status: notAllCaps ? 'pass' : 'warn', detail: notAllCaps ? 'Normal capitalization detected' : 'Too much all-caps text — ATS may not parse correctly', pts: 2, earned: notAllCaps ? 2 : 0 });
+          const noTables = !/<table|colspan|rowspan/i.test(raw);
+          checks.push({ cat: 'Formatting', label: 'No tables or complex layouts', status: noTables ? 'pass' : 'fail', detail: noTables ? 'No problematic tables detected' : 'Remove tables — ATS often cannot parse them correctly', pts: 3, earned: noTables ? 3 : 0 });
+
+          let lengthPts, lengthStatus, lengthMsg;
+          if (wc >= 300 && wc <= 700) { lengthPts = 8; lengthStatus = 'pass'; lengthMsg = `${wc} words — ideal one-page length`; }
+          else if (wc >= 200 && wc < 300) { lengthPts = 5; lengthStatus = 'warn'; lengthMsg = `${wc} words — slightly short, add more content`; }
+          else if (wc > 700 && wc <= 1100) { lengthPts = 5; lengthStatus = 'warn'; lengthMsg = `${wc} words — slightly long, consider trimming to 1–2 pages`; }
+          else if (wc > 1100) { lengthPts = 2; lengthStatus = 'fail'; lengthMsg = `${wc} words — too long, reduce to 1–2 pages max`; }
+          else { lengthPts = 2; lengthStatus = 'fail'; lengthMsg = `${wc} words — too short, add more relevant content`; }
+          checks.push({ cat: 'Optimal Length', label: 'Resume word count', status: lengthStatus, detail: lengthMsg, pts: 8, earned: lengthPts });
+
+          const doubleSpaces = (raw.match(/  +/g) || []).length;
+          checks.push({ cat: 'Spelling & Grammar', label: 'No double spaces', status: doubleSpaces === 0 ? 'pass' : 'warn', detail: doubleSpaces === 0 ? 'Spacing looks clean' : `${doubleSpaces} double-space instances found — clean up`, pts: 2, earned: doubleSpaces === 0 ? 2 : 0 });
+          const hasConsistentCase = lines.filter(l => l.length > 5 && l === l.toUpperCase()).length < 5;
+          checks.push({ cat: 'Spelling & Grammar', label: 'Consistent text casing', status: hasConsistentCase ? 'pass' : 'warn', detail: hasConsistentCase ? 'Text casing appears consistent' : 'Too many ALL-CAPS lines — use normal title case', pts: 2, earned: hasConsistentCase ? 2 : 0 });
+          const noSpecialJunk = !/(â€|Ã©|Ã¢|\\u00|â|ï¿½)/.test(raw);
+          checks.push({ cat: 'Spelling & Grammar', label: 'No encoding/character errors', status: noSpecialJunk ? 'pass' : 'fail', detail: noSpecialJunk ? 'No character encoding issues found' : 'Encoding errors detected — re-save your file as clean UTF-8', pts: 3, earned: noSpecialJunk ? 3 : 0 });
+
+          const totalMax = checks.reduce((a, c) => a + c.pts, 0);
+          const totalEarned = checks.reduce((a, c) => a + c.earned, 0);
+          const score = Math.min(Math.round((totalEarned / totalMax) * 100), 100);
+
+          const cats = {};
+          checks.forEach(c => {
+            if (!cats[c.cat]) cats[c.cat] = { earned: 0, max: 0 };
+            cats[c.cat].earned += c.earned;
+            cats[c.cat].max += c.pts;
           });
 
-          /* ══════════════════════════════════════════════════
-             FILE READERS
-          ══════════════════════════════════════════════════ */
-          async function readPDF(file) {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-            const ab = await file.arrayBuffer();
-            const pdf = await pdfjsLib.getDocument(ab).promise;
-            let t = '';
-            for (let i = 1; i <= pdf.numPages; i++) {
-              const pg = await pdf.getPage(i);
-              const c = await pg.getTextContent();
-              c.items.forEach(it => t += it.str + ' ');
-            }
-            return t;
+          const tips = checks.filter(c => c.status !== 'pass').map(c => c.detail);
+          return { score, checks, cats, foundSkills, missSkills: missSkills.slice(0, 16), metricCount: metricLines.length, verbCount: foundVerbs.length, tips };
+        }
+
+        /* ══════════════════════════════════════════════════
+           RENDER RESULTS
+        ══════════════════════════════════════════════════ */
+        function renderResults(r) {
+          const sc = r.score;
+          document.getElementById('tplBanner').style.display = 'flex';
+
+          const ring = document.getElementById('ringFill');
+          const circ = 2 * Math.PI * 80;
+          const offset = circ - (sc / 100) * circ;
+          let color = '#bf2f26', grade = 'POOR';
+          if (sc >= 80) { color = '#00856c'; grade = 'EXCELLENT'; }
+          else if (sc >= 65) { color = '#d4a00a'; grade = 'GOOD'; }
+          else if (sc >= 50) { color = '#e08c00'; grade = 'AVERAGE'; }
+          ring.style.stroke = color;
+          setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+          const scoreEl = document.getElementById('ringScore');
+          scoreEl.style.color = color;
+          let cur = 0;
+          const ti = setInterval(() => { cur = Math.min(cur + 1, sc); scoreEl.textContent = cur; if (cur >= sc) clearInterval(ti); }, 20);
+          const gradeEl = document.getElementById('ringGrade');
+          gradeEl.textContent = grade;
+          gradeEl.style.background = color + '18'; gradeEl.style.color = color;
+          gradeEl.style.border = `1px solid ${color}44`;
+
+          const catColors = { 'Comprehensiveness': '#02818c', 'Contact Information': '#4f9ef8', 'Professional Summary': '#a78bfa', 'Customization': '#f5a623', 'Word Choice': '#ff8873', 'Measurable Results': '#00856c', 'Formatting': '#efc778', 'Optimal Length': '#68778b', 'Spelling & Grammar': '#e08c00' };
+          const barsHTML = Object.entries(r.cats).map(([cat, v]) => {
+            const pct = Math.round((v.earned / v.max) * 100);
+            const c = catColors[cat] || '#02818c';
+            return `<div class="b-item"><div class="b-hd"><span class="b-name">${cat}</span><span class="b-val" style="color:${c}">${Math.round(v.earned)}/${Math.round(v.max)}</span></div><div class="b-track"><div class="b-fill" data-w="${pct}" style="background:${c}"></div></div></div>`;
+          }).join('');
+          document.getElementById('breakdownBars').innerHTML = barsHTML;
+          setTimeout(() => { document.querySelectorAll('.b-fill').forEach(el => { el.style.width = el.dataset.w + '%'; }); }, 300);
+
+          const vb = document.getElementById('verdictBox');
+          if (sc >= 80) {
+            vb.className = 'verdict pass';
+            vb.innerHTML = `<div class="verdict-ico">✅</div><div><h3 style="color:#00856c">ATS Ready!</h3><p>Your resume is well-optimized and should pass most ATS filters. Keep tailoring it for each job posting by adding job-specific keywords.</p></div>`;
+          } else if (sc >= 65) {
+            vb.className = 'verdict warn';
+            vb.innerHTML = `<div class="verdict-ico">⚠️</div><div><h3 style="color:#b87a00">Good — Needs Improvement</h3><p>Your resume will pass some ATS systems but may be filtered out by stricter ones. Implement the suggestions below to boost your score above 80%.</p></div>`;
+          } else if (sc >= 50) {
+            vb.className = 'verdict warn';
+            vb.innerHTML = `<div class="verdict-ico">🔧</div><div><h3 style="color:#e08c00">Average — Significant Gaps</h3><p>Your resume has structural and keyword issues that may cause ATS rejection. Focus on adding key sections, action verbs, and measurable results.</p></div>`;
+          } else {
+            vb.className = 'verdict fail';
+            vb.innerHTML = `<div class="verdict-ico">❌</div><div><h3 style="color:var(--red)">High Risk of Rejection</h3><p>Your resume is very likely to be filtered out automatically. Use our free ATS template below to rebuild it with the correct structure.</p></div>`;
           }
 
-          async function readDOCX(file) {
-            const ab = await file.arrayBuffer();
-            const r = await mammoth.extractRawText({ arrayBuffer: ab });
-            return r.value;
+          const statusIcon = { pass: '✓', fail: '✗', warn: '!' };
+          const statusClass = { pass: 'pass-card', fail: 'fail-card', warn: 'warn-card' };
+          const badgeClass = { pass: 'badge-pass', fail: 'badge-fail', warn: 'badge-warn' };
+          document.getElementById('crGrid').innerHTML = r.checks.map(c => `<div class="cr-card ${statusClass[c.status]}"><div class="cr-badge ${badgeClass[c.status]}">${statusIcon[c.status]}</div><div class="cr-text"><h4>${c.label}</h4><p>${c.detail}</p></div></div>`).join('');
+
+          const tips = r.tips.filter(Boolean).slice(0, 15);
+          if (tips.length) {
+            document.getElementById('tipsList').innerHTML = tips.map(t => `<li class="tip-item"><span class="tip-bullet">→</span>${t}</li>`).join('');
+            document.getElementById('tipsBox').style.display = 'block';
+          } else {
+            document.getElementById('tipsBox').style.display = 'none';
           }
+        }
 
-          async function readText(file) {
-            return new Promise((res, rej) => {
-              const fr = new FileReader();
-              fr.onload = e => res(e.target.result);
-              fr.onerror = rej;
-              fr.readAsText(file);
-            });
+        /* ══════════════════════════════════════════════════
+           UI HELPERS
+        ══════════════════════════════════════════════════ */
+        function setStep(n) {
+          ['step0', 'step1', 'step2'].forEach((id, i) => {
+            const el = document.getElementById(id);
+            el.classList.remove('active', 'done');
+            if (i < n) el.classList.add('done');
+            else if (i === n) el.classList.add('active');
+          });
+        }
+        function ciScan(i) {
+          const el = document.getElementById('cii' + i);
+          el.className = 'ci-icon scanning'; el.textContent = '';
+          document.getElementById('ci' + i).className = 'criteria-item active';
+        }
+        function ciDone(i) {
+          const el = document.getElementById('cii' + i);
+          el.className = 'ci-icon done'; el.textContent = '';
+          document.getElementById('ci' + i).className = 'criteria-item done-item';
+        }
+        function resetCriteria() {
+          for (let i = 0; i < 10; i++) {
+            document.getElementById('cii' + i).className = 'ci-icon';
+            document.getElementById('cii' + i).textContent = ['📂', '📋', '📞', '📝', '🛠', '💬', '📊', '📏', '🔤', '⚡'][i];
+            document.getElementById('ci' + i).className = 'criteria-item';
           }
+        }
+        function setProgress(p) {
+          document.getElementById('scanBar').style.width = p + '%';
+          document.getElementById('scanPct').textContent = p + '%';
+        }
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        function resetUI() {
+          document.getElementById('dropWrap').style.display = 'block';
+          document.getElementById('scanningWrap').style.display = 'none';
+        }
 
-          /* ══════════════════════════════════════════════════
-             START SCAN
-          ══════════════════════════════════════════════════ */
-          async function startScan() {
-            const file = window._pendingFile;
-            if (!file) return;
+        /* ══════════════════════════════════════════════════
+           ATS TEMPLATE MODAL
+        ══════════════════════════════════════════════════ */
+        function openResumeModal() { document.getElementById('resumeModalOverlay').classList.add('on'); }
+        function closeResumeModal() { document.getElementById('resumeModalOverlay').classList.remove('on'); }
+        function setXp(t) {
+          xpType = t;
+          document.getElementById('rFresh').classList.toggle('sel', t === 'fresher');
+          document.getElementById('rExp').classList.toggle('sel', t === 'experienced');
+        }
 
-            setStep(1);
-            document.getElementById('dropWrap').style.display = 'none';
-            document.getElementById('scanningWrap').style.display = 'block';
-            document.getElementById('resultsWrap').style.display = 'none';
-            document.getElementById('tplSection').style.display = 'none';
+        /* ══════════════════════════════════════════════════
+           BUILD TEMPLATE
+        ══════════════════════════════════════════════════ */
+        function buildTemplate() {
+          const name = document.getElementById('uName').value.trim() || 'Your Name';
+          const phone = document.getElementById('uPhone').value.trim() || '+91 XXXXXXXXXX';
+          const email = document.getElementById('uEmail').value.trim() || 'your@email.com';
+          closeResumeModal();
+          document.getElementById('resumePaper').innerHTML = xpType === 'fresher' ? fresherTpl(name, phone, email) : expTpl(name, phone, email);
+          document.getElementById('tplSection').style.display = 'block';
+          setTimeout(() => document.getElementById('tplSection').scrollIntoView({ behavior: 'smooth' }), 150);
+        }
 
-            resetCriteria();
-            setProgress(0);
-
-            ciScan(0);
-            try {
-              const n = file.name.toLowerCase();
-              if (n.endsWith('.pdf')) fileText = await readPDF(file);
-              else if (n.endsWith('.docx') || n.endsWith('.doc')) fileText = await readDOCX(file);
-              else fileText = await readText(file);
-            } catch (e) {
-              alert('Error reading file. Please try another.');
-              resetUI(); return;
-            }
-            ciDone(0); setProgress(10); await wait(350);
-
-            ciScan(1); await wait(550); ciDone(1); setProgress(20);
-            ciScan(2); await wait(450); ciDone(2); setProgress(30);
-            ciScan(3); await wait(500); ciDone(3); setProgress(40);
-            ciScan(4); await wait(700); ciDone(4); setProgress(52);
-            ciScan(5); await wait(550); ciDone(5); setProgress(64);
-            ciScan(6); await wait(600); ciDone(6); setProgress(74);
-            ciScan(7); await wait(450); ciDone(7); setProgress(84);
-            ciScan(8); await wait(500); ciDone(8); setProgress(92);
-            ciScan(9);
-            const result = computeATS(fileText);
-            await wait(700);
-            ciDone(9); setProgress(100);
-            await wait(500);
-
-            lastResult = result;
-            if (originalScore === null) {
-              originalScore = result.score;
-              document.getElementById('originalScoreVal').textContent = originalScore;
-              document.getElementById('originalBadge').style.display = 'block';
-            }
-            document.getElementById('scanningWrap').style.display = 'none';
-            setStep(2);
-            renderResults(result);
-            document.getElementById('resultsWrap').style.display = 'block';
-            document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth' });
-          }
-
-          async function recheckScore() {
-            const editorText = document.getElementById('resumePaper').innerText;
-            const result = computeATS(editorText);
-            lastResult = result;
-            renderResults(result);
-            document.getElementById('resultsWrap').style.display = 'block';
-            document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth' });
-
-            // Show feedback that score updated
-            const btn = event.target;
-            const oldTxt = btn.textContent;
-            btn.textContent = '✅ Score Updated!';
-            setTimeout(() => btn.textContent = oldTxt, 2000);
-          }
-
-          /* ══════════════════════════════════════════════════
-             30-CRITERIA ATS ENGINE
-          ══════════════════════════════════════════════════ */
-          const SKILLS_DB = [
-            'javascript', 'typescript', 'python', 'java', 'c++', 'c#', 'ruby', 'php', 'swift', 'kotlin', 'go', 'rust', 'scala', 'r',
-            'react', 'angular', 'vue', 'nextjs', 'svelte', 'redux', 'jquery', 'html5', 'css3', 'sass', 'tailwind', 'bootstrap', 'webpack', 'vite',
-            'nodejs', 'node.js', 'express', 'django', 'flask', 'fastapi', 'spring', 'laravel',
-            'mongodb', 'mysql', 'postgresql', 'sqlite', 'redis', 'cassandra', 'dynamodb', 'oracle', 'sql', 'nosql',
-            'git', 'github', 'gitlab', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'linux', 'bash',
-            'aws', 'azure', 'gcp', 'cloud', 'devops', 'ci/cd', 'microservices', 'rest api', 'graphql', 'agile', 'scrum', 'jira',
-            'machine learning', 'deep learning', 'tensorflow', 'pytorch', 'pandas', 'numpy', 'scikit', 'data analysis', 'tableau', 'power bi',
-            'figma', 'photoshop', 'illustrator', 'ux', 'ui design', 'excel', 'project management',
-            'communication', 'teamwork', 'leadership', 'problem solving', 'critical thinking', 'time management'
-          ];
-
-          const ACTION_VERBS = [
-            'achieved', 'accelerated', 'accomplished', 'architected', 'analyzed', 'automated', 'built', 'collaborated', 'coordinated',
-            'created', 'delivered', 'deployed', 'designed', 'developed', 'directed', 'drove', 'engineered', 'established',
-            'executed', 'generated', 'implemented', 'improved', 'increased', 'integrated', 'launched', 'led', 'maintained',
-            'managed', 'mentored', 'negotiated', 'optimized', 'orchestrated', 'oversaw', 'presented', 'reduced', 'resolved',
-            'scaled', 'spearheaded', 'streamlined', 'transformed', 'upgraded', 'utilized'
-          ];
-
-          const FILLER_WORDS = ['responsible for', 'duties include', 'helped', 'assisted with', 'worked on', 'various', 'etc', 'very', 'really'];
-          const PRONOUNS = [/\bi\b/g, /\bme\b/g, /\bmy\b/g, /\bwe\b/g, /\bour\b/g];
-
-          const SECTION_CHECKS = [
-            { id: 'experience', labels: ['experience', 'work experience', 'employment history', 'career history', 'professional experience', 'work history'], pts: 10 },
-            { id: 'education', labels: ['education', 'academic background', 'qualification', 'academic qualifications'], pts: 8 },
-            { id: 'skills', labels: ['skills', 'technical skills', 'core competencies', 'key skills', 'areas of expertise'], pts: 7 },
-            { id: 'summary', labels: ['summary', 'professional summary', 'career objective', 'objective', 'about me', 'profile', 'career summary'], pts: 6 },
-            { id: 'projects', labels: ['projects', 'project', 'portfolio', 'key projects'], pts: 5 },
-            { id: 'certifications', labels: ['certification', 'certifications', 'certificate', 'licens'], pts: 4 },
-            { id: 'achievements', labels: ['achievement', 'awards', 'honors', 'recognition', 'accomplishments'], pts: 3 },
-            { id: 'contact', labels: ['contact', 'address', 'location'], pts: 2 },
-          ];
-
-          const CONTACT_RE = [
-            { re: /[\w.+%-]+@[\w.-]+\.[a-z]{2,}/i, label: 'Email address' },
-            { re: /(\+?\d[\d\s\-().]{6,})/, label: 'Phone number' },
-            { re: /linkedin\.com\//i, label: 'LinkedIn profile' },
-            { re: /github\.com\//i, label: 'GitHub profile' },
-          ];
-
-          function computeATS(raw) {
-            const lo = raw.toLowerCase();
-            const lines = raw.split(/\n/).map(l => l.trim()).filter(Boolean);
-            const words = lo.split(/\s+/).filter(Boolean);
-            const wc = words.length;
-            const checks = [];
-
-            let sectionPts = 0;
-            SECTION_CHECKS.forEach(sec => {
-              const found = sec.labels.some(l => lo.includes(l));
-              sectionPts += found ? sec.pts : 0;
-              checks.push({ cat: 'Comprehensiveness', label: sec.id.charAt(0).toUpperCase() + sec.id.slice(1) + ' section', status: found ? 'pass' : 'fail', detail: found ? `"${sec.id}" section detected` : `Add a "${sec.id}" section — ATS looks for it`, pts: sec.pts, earned: found ? sec.pts : 0 });
-            });
-
-            CONTACT_RE.forEach(c => {
-              const found = c.re.test(raw);
-              checks.push({ cat: 'Contact Information', label: c.label, status: found ? 'pass' : 'fail', detail: found ? c.label + ' found in resume' : 'Add your ' + c.label.toLowerCase(), pts: 2.5, earned: found ? 2.5 : 0 });
-            });
-
-            const hasSum = /\b(summary|objective|profile|about me|career summary|professional summary)\b/i.test(raw);
-            const sumGood = hasSum && wc > 30;
-            checks.push({ cat: 'Professional Summary', label: 'Summary/Objective present', status: hasSum ? 'pass' : 'fail', detail: hasSum ? 'Professional summary detected' : 'Add a 3–4 line professional summary at the top', pts: 5, earned: hasSum ? 5 : 0 });
-            checks.push({ cat: 'Professional Summary', label: 'Summary is descriptive', status: sumGood ? 'pass' : (hasSum ? 'warn' : 'fail'), detail: sumGood ? 'Summary has adequate content' : 'Expand your summary — aim for 3–5 impactful sentences', pts: 3, earned: sumGood ? 3 : 0 });
-
-            const foundSkills = [], missSkills = [];
-            SKILLS_DB.forEach(sk => {
-              const re = new RegExp('\\b' + sk.replace(/[+#.]/g, '\\$&') + '\\b', 'i');
-              if (re.test(raw)) foundSkills.push(sk); else missSkills.push(sk);
-            });
-            const skillRatio = foundSkills.length / SKILLS_DB.length;
-            let skillPts, skillStatus;
-            if (skillRatio >= 0.5) { skillPts = 12; skillStatus = 'pass'; }
-            else if (skillRatio >= 0.3) { skillPts = 8; skillStatus = 'warn'; }
-            else if (skillRatio >= 0.15) { skillPts = 5; skillStatus = 'warn'; }
-            else { skillPts = 2; skillStatus = 'fail'; }
-            checks.push({ cat: 'Customization', label: 'Industry keywords matched', status: skillStatus, detail: `${foundSkills.length} of ${SKILLS_DB.length} tracked keywords found`, pts: 12, earned: skillPts });
-            const hasJobTitle = /\b(developer|engineer|analyst|manager|designer|consultant|specialist|coordinator|director|architect|scientist|administrator)\b/i.test(raw);
-            checks.push({ cat: 'Customization', label: 'Job titles & roles mentioned', status: hasJobTitle ? 'pass' : 'warn', detail: hasJobTitle ? 'Professional job titles found' : 'Include specific job titles relevant to your target role', pts: 3, earned: hasJobTitle ? 3 : 0 });
-
-            const foundVerbs = ACTION_VERBS.filter(v => new RegExp('\\b' + v + '\\b', 'i').test(raw));
-            const verbRatio = foundVerbs.length / ACTION_VERBS.length;
-            let verbPts, verbStatus;
-            if (verbRatio >= 0.4) { verbPts = 8; verbStatus = 'pass'; }
-            else if (verbRatio >= 0.2) { verbPts = 5; verbStatus = 'warn'; }
-            else { verbPts = 2; verbStatus = 'fail'; }
-            checks.push({ cat: 'Word Choice', label: 'Action verbs used', status: verbStatus, detail: `${foundVerbs.length} action verbs detected (e.g. ${foundVerbs.slice(0, 3).join(', ') || 'none'})`, pts: 8, earned: verbPts });
-            const fillerFound = FILLER_WORDS.filter(f => lo.includes(f));
-            checks.push({ cat: 'Word Choice', label: 'No filler/weak phrases', status: fillerFound.length === 0 ? 'pass' : 'warn', detail: fillerFound.length === 0 ? 'No weak phrases detected' : `Weak phrases found: "${fillerFound.slice(0, 2).join('", "')}"`, pts: 3, earned: fillerFound.length === 0 ? 3 : 1 });
-            const pronounsFound = PRONOUNS.some(re => re.test(lo));
-            checks.push({ cat: 'Word Choice', label: 'No personal pronouns (I, me, my)', status: pronounsFound ? 'fail' : 'pass', detail: pronounsFound ? 'Pronouns like "I", "me", "my" found — remove them' : 'No personal pronouns detected', pts: 2, earned: pronounsFound ? 0 : 2 });
-
-            const metricLines = lines.filter(l => /\d+\s*%|\$[\d,]+|\d+\s*(times|x\b)|\d+\s*\+|increased|reduced|improved|grew|saved|delivered|generated|managed \d+|team of \d+/i.test(l));
-            let metricPts, metricStatus;
-            if (metricLines.length >= 5) { metricPts = 10; metricStatus = 'pass'; }
-            else if (metricLines.length >= 2) { metricPts = 6; metricStatus = 'warn'; }
-            else if (metricLines.length === 1) { metricPts = 3; metricStatus = 'warn'; }
-            else { metricPts = 0; metricStatus = 'fail'; }
-            checks.push({ cat: 'Measurable Results', label: 'Quantified achievements', status: metricStatus, detail: metricLines.length > 0 ? `${metricLines.length} bullet(s) with numbers/metrics found` : 'Add numbers: "Reduced costs by 30%", "Managed team of 5"', pts: 10, earned: metricPts });
-            const hasImpactWords = /\b(impact|result|outcome|achieve|deliver|accomplish)\b/i.test(raw);
-            checks.push({ cat: 'Measurable Results', label: 'Results-oriented language', status: hasImpactWords ? 'pass' : 'warn', detail: hasImpactWords ? 'Results-oriented language detected' : 'Use words like "achieved", "delivered", "accomplished"', pts: 2, earned: hasImpactWords ? 2 : 0 });
-
-            const hasDates = /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|august|september|october|november|december|\d{4})\b/i.test(raw);
-            checks.push({ cat: 'Formatting', label: 'Dates present in work/education', status: hasDates ? 'pass' : 'warn', detail: hasDates ? 'Date patterns found (month/year)' : 'Add month & year to all positions and education', pts: 4, earned: hasDates ? 4 : 0 });
-            const bullets = (raw.match(/^[\s]*[•\-\*▪▸◦]\s/gm) || []).length;
-            checks.push({ cat: 'Formatting', label: 'Bullet points used', status: bullets >= 4 ? 'pass' : bullets >= 1 ? 'warn' : 'fail', detail: bullets >= 4 ? `${bullets} bullet points detected — good structure` : bullets > 0 ? 'Add more bullet points for better ATS parsing' : 'Use bullet points (•) for experience entries', pts: 4, earned: bullets >= 4 ? 4 : bullets >= 1 ? 2 : 0 });
-            const capRatio = (raw.match(/[A-Z]/g) || []).length / (raw.length || 1);
-            const notAllCaps = capRatio < 0.2;
-            checks.push({ cat: 'Formatting', label: 'Not excessive capitalization', status: notAllCaps ? 'pass' : 'warn', detail: notAllCaps ? 'Normal capitalization detected' : 'Too much all-caps text — ATS may not parse correctly', pts: 2, earned: notAllCaps ? 2 : 0 });
-            const noTables = !/<table|colspan|rowspan/i.test(raw);
-            checks.push({ cat: 'Formatting', label: 'No tables or complex layouts', status: noTables ? 'pass' : 'fail', detail: noTables ? 'No problematic tables detected' : 'Remove tables — ATS often cannot parse them correctly', pts: 3, earned: noTables ? 3 : 0 });
-
-            let lengthPts, lengthStatus, lengthMsg;
-            if (wc >= 300 && wc <= 700) { lengthPts = 8; lengthStatus = 'pass'; lengthMsg = `${wc} words — ideal one-page length`; }
-            else if (wc >= 200 && wc < 300) { lengthPts = 5; lengthStatus = 'warn'; lengthMsg = `${wc} words — slightly short, add more content`; }
-            else if (wc > 700 && wc <= 1100) { lengthPts = 5; lengthStatus = 'warn'; lengthMsg = `${wc} words — slightly long, consider trimming to 1–2 pages`; }
-            else if (wc > 1100) { lengthPts = 2; lengthStatus = 'fail'; lengthMsg = `${wc} words — too long, reduce to 1–2 pages max`; }
-            else { lengthPts = 2; lengthStatus = 'fail'; lengthMsg = `${wc} words — too short, add more relevant content`; }
-            checks.push({ cat: 'Optimal Length', label: 'Resume word count', status: lengthStatus, detail: lengthMsg, pts: 8, earned: lengthPts });
-
-            const doubleSpaces = (raw.match(/  +/g) || []).length;
-            checks.push({ cat: 'Spelling & Grammar', label: 'No double spaces', status: doubleSpaces === 0 ? 'pass' : 'warn', detail: doubleSpaces === 0 ? 'Spacing looks clean' : `${doubleSpaces} double-space instances found — clean up`, pts: 2, earned: doubleSpaces === 0 ? 2 : 0 });
-            const hasConsistentCase = lines.filter(l => l.length > 5 && l === l.toUpperCase()).length < 5;
-            checks.push({ cat: 'Spelling & Grammar', label: 'Consistent text casing', status: hasConsistentCase ? 'pass' : 'warn', detail: hasConsistentCase ? 'Text casing appears consistent' : 'Too many ALL-CAPS lines — use normal title case', pts: 2, earned: hasConsistentCase ? 2 : 0 });
-            const noSpecialJunk = !/(â€|Ã©|Ã¢|\\u00|â|ï¿½)/.test(raw);
-            checks.push({ cat: 'Spelling & Grammar', label: 'No encoding/character errors', status: noSpecialJunk ? 'pass' : 'fail', detail: noSpecialJunk ? 'No character encoding issues found' : 'Encoding errors detected — re-save your file as clean UTF-8', pts: 3, earned: noSpecialJunk ? 3 : 0 });
-
-            const totalMax = checks.reduce((a, c) => a + c.pts, 0);
-            const totalEarned = checks.reduce((a, c) => a + c.earned, 0);
-            const score = Math.min(Math.round((totalEarned / totalMax) * 100), 100);
-
-            const cats = {};
-            checks.forEach(c => {
-              if (!cats[c.cat]) cats[c.cat] = { earned: 0, max: 0 };
-              cats[c.cat].earned += c.earned;
-              cats[c.cat].max += c.pts;
-            });
-
-            const tips = checks.filter(c => c.status !== 'pass').map(c => c.detail);
-            return { score, checks, cats, foundSkills, missSkills: missSkills.slice(0, 16), metricCount: metricLines.length, verbCount: foundVerbs.length, tips };
-          }
-
-          /* ══════════════════════════════════════════════════
-             RENDER RESULTS
-          ══════════════════════════════════════════════════ */
-          function renderResults(r) {
-            const sc = r.score;
-            document.getElementById('tplBanner').style.display = 'flex';
-
-            const ring = document.getElementById('ringFill');
-            const circ = 2 * Math.PI * 80;
-            const offset = circ - (sc / 100) * circ;
-            let color = '#bf2f26', grade = 'POOR';
-            if (sc >= 80) { color = '#00856c'; grade = 'EXCELLENT'; }
-            else if (sc >= 65) { color = '#d4a00a'; grade = 'GOOD'; }
-            else if (sc >= 50) { color = '#e08c00'; grade = 'AVERAGE'; }
-            ring.style.stroke = color;
-            setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
-            const scoreEl = document.getElementById('ringScore');
-            scoreEl.style.color = color;
-            let cur = 0;
-            const ti = setInterval(() => { cur = Math.min(cur + 1, sc); scoreEl.textContent = cur; if (cur >= sc) clearInterval(ti); }, 20);
-            const gradeEl = document.getElementById('ringGrade');
-            gradeEl.textContent = grade;
-            gradeEl.style.background = color + '18'; gradeEl.style.color = color;
-            gradeEl.style.border = `1px solid ${color}44`;
-
-            const catColors = { 'Comprehensiveness': '#02818c', 'Contact Information': '#4f9ef8', 'Professional Summary': '#a78bfa', 'Customization': '#f5a623', 'Word Choice': '#ff8873', 'Measurable Results': '#00856c', 'Formatting': '#efc778', 'Optimal Length': '#68778b', 'Spelling & Grammar': '#e08c00' };
-            const barsHTML = Object.entries(r.cats).map(([cat, v]) => {
-              const pct = Math.round((v.earned / v.max) * 100);
-              const c = catColors[cat] || '#02818c';
-              return `<div class="b-item"><div class="b-hd"><span class="b-name">${cat}</span><span class="b-val" style="color:${c}">${Math.round(v.earned)}/${Math.round(v.max)}</span></div><div class="b-track"><div class="b-fill" data-w="${pct}" style="background:${c}"></div></div></div>`;
-            }).join('');
-            document.getElementById('breakdownBars').innerHTML = barsHTML;
-            setTimeout(() => { document.querySelectorAll('.b-fill').forEach(el => { el.style.width = el.dataset.w + '%'; }); }, 300);
-
-            const vb = document.getElementById('verdictBox');
-            if (sc >= 80) {
-              vb.className = 'verdict pass';
-              vb.innerHTML = `<div class="verdict-ico">✅</div><div><h3 style="color:#00856c">ATS Ready!</h3><p>Your resume is well-optimized and should pass most ATS filters. Keep tailoring it for each job posting by adding job-specific keywords.</p></div>`;
-            } else if (sc >= 65) {
-              vb.className = 'verdict warn';
-              vb.innerHTML = `<div class="verdict-ico">⚠️</div><div><h3 style="color:#b87a00">Good — Needs Improvement</h3><p>Your resume will pass some ATS systems but may be filtered out by stricter ones. Implement the suggestions below to boost your score above 80%.</p></div>`;
-            } else if (sc >= 50) {
-              vb.className = 'verdict warn';
-              vb.innerHTML = `<div class="verdict-ico">🔧</div><div><h3 style="color:#e08c00">Average — Significant Gaps</h3><p>Your resume has structural and keyword issues that may cause ATS rejection. Focus on adding key sections, action verbs, and measurable results.</p></div>`;
-            } else {
-              vb.className = 'verdict fail';
-              vb.innerHTML = `<div class="verdict-ico">❌</div><div><h3 style="color:var(--red)">High Risk of Rejection</h3><p>Your resume is very likely to be filtered out automatically. Use our free ATS template below to rebuild it with the correct structure.</p></div>`;
-            }
-
-            const statusIcon = { pass: '✓', fail: '✗', warn: '!' };
-            const statusClass = { pass: 'pass-card', fail: 'fail-card', warn: 'warn-card' };
-            const badgeClass = { pass: 'badge-pass', fail: 'badge-fail', warn: 'badge-warn' };
-            document.getElementById('crGrid').innerHTML = r.checks.map(c => `<div class="cr-card ${statusClass[c.status]}"><div class="cr-badge ${badgeClass[c.status]}">${statusIcon[c.status]}</div><div class="cr-text"><h4>${c.label}</h4><p>${c.detail}</p></div></div>`).join('');
-
-            const tips = r.tips.filter(Boolean).slice(0, 15);
-            if (tips.length) {
-              document.getElementById('tipsList').innerHTML = tips.map(t => `<li class="tip-item"><span class="tip-bullet">→</span>${t}</li>`).join('');
-              document.getElementById('tipsBox').style.display = 'block';
-            } else {
-              document.getElementById('tipsBox').style.display = 'none';
-            }
-          }
-
-          /* ══════════════════════════════════════════════════
-             UI HELPERS
-          ══════════════════════════════════════════════════ */
-          function setStep(n) {
-            ['step0', 'step1', 'step2'].forEach((id, i) => {
-              const el = document.getElementById(id);
-              el.classList.remove('active', 'done');
-              if (i < n) el.classList.add('done');
-              else if (i === n) el.classList.add('active');
-            });
-          }
-          function ciScan(i) {
-            const el = document.getElementById('cii' + i);
-            el.className = 'ci-icon scanning'; el.textContent = '';
-            document.getElementById('ci' + i).className = 'criteria-item active';
-          }
-          function ciDone(i) {
-            const el = document.getElementById('cii' + i);
-            el.className = 'ci-icon done'; el.textContent = '';
-            document.getElementById('ci' + i).className = 'criteria-item done-item';
-          }
-          function resetCriteria() {
-            for (let i = 0; i < 10; i++) {
-              document.getElementById('cii' + i).className = 'ci-icon';
-              document.getElementById('cii' + i).textContent = ['📂', '📋', '📞', '📝', '🛠', '💬', '📊', '📏', '🔤', '⚡'][i];
-              document.getElementById('ci' + i).className = 'criteria-item';
-            }
-          }
-          function setProgress(p) {
-            document.getElementById('scanBar').style.width = p + '%';
-            document.getElementById('scanPct').textContent = p + '%';
-          }
-          function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
-          function resetUI() {
-            document.getElementById('dropWrap').style.display = 'block';
-            document.getElementById('scanningWrap').style.display = 'none';
-          }
-
-          /* ══════════════════════════════════════════════════
-             ATS TEMPLATE MODAL
-          ══════════════════════════════════════════════════ */
-          function openResumeModal() { document.getElementById('resumeModalOverlay').classList.add('on'); }
-          function closeResumeModal() { document.getElementById('resumeModalOverlay').classList.remove('on'); }
-          function setXp(t) {
-            xpType = t;
-            document.getElementById('rFresh').classList.toggle('sel', t === 'fresher');
-            document.getElementById('rExp').classList.toggle('sel', t === 'experienced');
-          }
-
-          /* ══════════════════════════════════════════════════
-             BUILD TEMPLATE
-          ══════════════════════════════════════════════════ */
-          function buildTemplate() {
-            const name = document.getElementById('uName').value.trim() || 'Your Name';
-            const phone = document.getElementById('uPhone').value.trim() || '+91 XXXXXXXXXX';
-            const email = document.getElementById('uEmail').value.trim() || 'your@email.com';
-            closeResumeModal();
-            document.getElementById('resumePaper').innerHTML = xpType === 'fresher' ? fresherTpl(name, phone, email) : expTpl(name, phone, email);
-            document.getElementById('tplSection').style.display = 'block';
-            setTimeout(() => document.getElementById('tplSection').scrollIntoView({ behavior: 'smooth' }), 150);
-          }
-
-          function fresherTpl(name, phone, email) {
-            return `
+        function fresherTpl(name, phone, email) {
+          return `
 <div class="rn" contenteditable="true">${name}</div>
 <div class="rc">
   <span contenteditable="true">${phone}</span> &nbsp;|&nbsp;
@@ -1646,10 +1639,10 @@
 <div class="rb" contenteditable="true">Published research paper in IEEE Conference 2024</div>
 <div class="rb" contenteditable="true">Ranked Top 5% in LeetCode monthly contest among 12,000+ participants</div>
 `;
-          }
+        }
 
-          function expTpl(name, phone, email) {
-            return `
+        function expTpl(name, phone, email) {
+          return `
 <div class="rn" contenteditable="true">${name}</div>
 <div class="rc">
   <span contenteditable="true">${phone}</span> &nbsp;|&nbsp;
@@ -1691,58 +1684,58 @@
 <div class="rb" contenteditable="true">Published "Scaling Node.js Microservices" on Medium – 3,200+ reads</div>
 <div class="rb" contenteditable="true">Open-source React library with 340+ GitHub stars</div>
 `;
+        }
+
+        /* ══════════════════════════════════════════════════
+           PDF DOWNLOAD — html2canvas + jsPDF (FIXED)
+        ══════════════════════════════════════════════════ */
+        async function downloadPDF() {
+          const { jsPDF } = window.jspdf;
+          const element = document.getElementById("resumePaper");
+
+          // Capture with reduced scale for compression
+          const canvas = await html2canvas(element, {
+            scale: 1.5, // reduce from 2 or 3
+            useCORS: true
+          });
+
+          let imgData = canvas.toDataURL("image/jpeg", 0.8); // 0.8 quality
+
+          const pdf = new jsPDF("p", "mm", "a4");
+          const imgWidth = 210;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
+
+          // Convert PDF to Blob
+          let pdfBlob = pdf.output("blob");
+
+          // If file size > 2MB, reduce quality more
+          if (pdfBlob.size > 2 * 1024 * 1024) {
+            imgData = canvas.toDataURL("image/jpeg", 0.6); // reduce quality
+            const pdfSmall = new jsPDF("p", "mm", "a4");
+            pdfSmall.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
+            pdfSmall.save("resume.pdf");
+          } else {
+            pdf.save("resume.pdf");
           }
-
-          /* ══════════════════════════════════════════════════
-             PDF DOWNLOAD — html2canvas + jsPDF (FIXED)
-          ══════════════════════════════════════════════════ */
-          async function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const element = document.getElementById("resumePaper");
-
-            // Capture with reduced scale for compression
-            const canvas = await html2canvas(element, {
-              scale: 1.5, // reduce from 2 or 3
-              useCORS: true
-            });
-
-            let imgData = canvas.toDataURL("image/jpeg", 0.8); // 0.8 quality
-
-            const pdf = new jsPDF("p", "mm", "a4");
-            const imgWidth = 210;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-            pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
-
-            // Convert PDF to Blob
-            let pdfBlob = pdf.output("blob");
-
-            // If file size > 2MB, reduce quality more
-            if (pdfBlob.size > 2 * 1024 * 1024) {
-              imgData = canvas.toDataURL("image/jpeg", 0.6); // reduce quality
-              const pdfSmall = new jsPDF("p", "mm", "a4");
-              pdfSmall.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
-              pdfSmall.save("resume.pdf");
-            } else {
-              pdf.save("resume.pdf");
-            }
-          }
-          /* ══════════════════════════════════════════════════
-             RESET
-          ══════════════════════════════════════════════════ */
-          function resetAll() {
-            document.getElementById('resultsWrap').style.display = 'none';
-            document.getElementById('tplSection').style.display = 'none';
-            document.getElementById('dropWrap').style.display = 'block';
-            document.getElementById('startScanBtn').disabled = true;
-            document.getElementById('mainFileBadge').style.display = 'none';
-            window._pendingFile = null;
-            originalScore = null;
-            document.getElementById('originalBadge').style.display = 'none';
-            setStep(0);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        </script>
+        }
+        /* ══════════════════════════════════════════════════
+           RESET
+        ══════════════════════════════════════════════════ */
+        function resetAll() {
+          document.getElementById('resultsWrap').style.display = 'none';
+          document.getElementById('tplSection').style.display = 'none';
+          document.getElementById('dropWrap').style.display = 'block';
+          document.getElementById('startScanBtn').disabled = true;
+          document.getElementById('mainFileBadge').style.display = 'none';
+          window._pendingFile = null;
+          originalScore = null;
+          document.getElementById('originalBadge').style.display = 'none';
+          setStep(0);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      </script>
     </div>
 
     <!-- TAB: ABOUT US -->
@@ -1813,8 +1806,7 @@
 
         <!-- Logo -->
         <div class="logo">
-          <img
-            src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
+          <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772577611/Seed_Joined_White_o9i2rr.png"
             alt="MSEED" style="height:120px;width:auto;object-fit:contain;display:block;">
         </div>
         <!-- Desktop Links -->
@@ -1828,13 +1820,13 @@
             <a class="inst-mob-link"
               onclick="renderAboutSection();showInstTab('inst-tab-about');closeInstMobileMenu()">About</a>
           </li>
-          <li><a href="#inst-services" class="inst-nav-link" onclick="instNavScroll(event,'inst-services')">Services</a>
+          <li><a href="#inst-services" class="inst-nav-link" onclick="instNavScroll(null,'inst-services')">Services</a>
           </li>
           <li><a href="ev-project.html" class="inst-nav-link">EV Projects</a></li>
-          <li><a href="#inst-articles" class="inst-nav-link" onclick="instNavScroll(event,'inst-articles')">Articles</a>
+          <li><a href="#inst-articles" class="inst-nav-link" onclick="instNavScroll(null,'inst-articles')">Articles</a>
           </li>
           <span class="inst-nav-link" style="cursor:pointer;" onclick="navigate('inst-partners')">Partnership</span>
-          <li><a href="#inst-contact" class="inst-nav-link" onclick="instNavScroll(event,'inst-contact')">Contact</a>
+          <li><a href="#inst-contact" class="inst-nav-link" onclick="instNavScroll(null,'inst-contact')">Contact</a>
           </li>
         </ul>
 
@@ -1848,7 +1840,7 @@
             </svg>
             Back
           </button>
-          <button class="inst-nav-cta desktop-only" onclick="instNavScroll(event,'inst-contact')">
+          <button class="inst-nav-cta desktop-only" onclick="instNavScroll(null,'inst-contact')">
             Partner With Us →
           </button>
           <button class="inst-hamburger" id="inst-hamburger" onclick="toggleInstMobileMenu()" aria-label="Menu">
@@ -1863,12 +1855,12 @@
         <a class="inst-mob-link" onclick="showInstTab('inst-tab-home');closeInstMobileMenu()">Home</a>
         <a class="inst-mob-link"
           onclick="renderAboutSection();showInstTab('inst-tab-about');closeInstMobileMenu()">About</a>
-        <a class="inst-mob-link" onclick="instNavScroll(event,'inst-services');closeInstMobileMenu()">Services</a>
+        <a class="inst-mob-link" onclick="instNavScroll(null,'inst-services');closeInstMobileMenu()">Services</a>
         <a class="inst-mob-link" href="ev-project.html">EV
           Projects</a>
-        <a class="inst-mob-link" onclick="instNavScroll(event,'inst-articles');closeInstMobileMenu()">Articles</a>
+        <a class="inst-mob-link" onclick="instNavScroll(null,'inst-articles');closeInstMobileMenu()">Articles</a>
         <a class="inst-mob-link" onclick="navigate('inst-partners');closeInstMobileMenu()">Partnerships</a>
-        <a class="inst-mob-link" onclick="instNavScroll(event,'inst-contact');closeInstMobileMenu()">Contact</a>
+        <a class="inst-mob-link" onclick="instNavScroll(null,'inst-contact');closeInstMobileMenu()">Contact</a>
         <button class="partners-cta-btn" onclick="openPartnershipModal()">
           <span>Start the Conversation</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1941,7 +1933,7 @@
                 </svg>
                 </button>
 
-                <button class="inst-btn-ghost" onclick="instNavScroll(event,'inst-services')">
+                <button class="inst-btn-ghost" onclick="instNavScroll(null,'inst-services')">
                   Explore Services
                 </button>
               </div>
@@ -2423,13 +2415,13 @@
               <div class="col-lg-3 col-md-6">
                 <h4 class="inst-footer-title">Quick Links</h4>
                 <ul class="inst-footer-links">
-                  <li><a href="#inst-hero" onclick="instNavScroll(event,'inst-hero')">Home</a></li>
-                  <li><a href="#inst-services" onclick="instNavScroll(event,'inst-services')">Our Services</a></li>
+                  <li><a href="#inst-hero" onclick="instNavScroll(null,'inst-hero')">Home</a></li>
+                  <li><a href="#inst-services" onclick="instNavScroll(null,'inst-services')">Our Services</a></li>
                   <li><a href="#inst-ev"
                       onclick="if(event)event.preventDefault();navigate('inst-ev');window.scrollTo(0,0);">EV Innovation
                       Hub</a></li>
-                  <li><a href="#inst-articles" onclick="instNavScroll(event,'inst-articles')">Student Research</a></li>
-                  <li><a href="#inst-tieups" onclick="instNavScroll(event,'inst-tieups')">Partnerships</a></li>
+                  <li><a href="#inst-articles" onclick="instNavScroll(null,'inst-articles')">Student Research</a></li>
+                  <li><a href="#inst-tieups" onclick="instNavScroll(null,'inst-tieups')">Partnerships</a></li>
                 </ul>
               </div>
 
@@ -2437,7 +2429,8 @@
               <div class="col-lg-3 col-md-6">
                 <h4 class="inst-footer-title">Contact Us</h4>
                 <ul class="inst-footer-links">
-                  <li><span style="color: var(--inst-green);">Email:</span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50393e363f103d233535347e393e">[email&#160;protected]</a></li>
+                  <li><span style="color: var(--inst-green);">Email:</span> <a href="/cdn-cgi/l/email-protection"
+                      class="__cf_email__" data-cfemail="50393e363f103d233535347e393e">[email&#160;protected]</a></li>
                   <li><span style="color: var(--inst-green);">Phone:</span> +91 90000 00000</li>
                   <li><span style="color: var(--inst-green);">HQ:</span> Tech Park, Innovation Valley, India 600001</li>
                 </ul>
@@ -3421,7 +3414,8 @@
     <div id="jrtab-jrabout" class="jrtab-content hidden">
       <div class="about-seed-container" style="color:var(--text)"></div>
     </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
       (function () {
         // Scoping data to Junior Portal to avoid conflicts
         const jrCourseData = [
@@ -3849,8 +3843,6 @@
   </div><!-- /page-junior-student -->
 
   <!-- ===== SCHOOL INSTITUTION PORTAL ===== -->
-  <!DOCTYPE html>
-  <html lang="en">
 
   <head>
     <meta charset="UTF-8">
@@ -3859,9 +3851,6 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet">
-  </head>
-
-  <body>
 
     <div id="page-school-inst" class="page">
 
@@ -4206,301 +4195,301 @@
       });
     </script>
 
-  <!-- ===== MSEED MASCOT BUDDY SYSTEM ===== -->
-  <script src="mascot.js"></script>
+    <!-- ===== MSEED MASCOT BUDDY SYSTEM ===== -->
+    <script src="mascot.js"></script>
+    <script src="enhance.js"></script>
 
-  </body>
 
-  </html>
-  <!-- GAME MODALS -->
-  <!-- Career Quiz Blitz Modal -->
-  <div id="modal-quiz" class="hidden">
-    <div class="modal-overlay" onclick="closeModal('modal-quiz')">
-      <div class="modal game-modal" onclick="event.stopPropagation()"
-        style="max-width:600px; padding:0; overflow:hidden;">
-        <div class="modal-close" onclick="closeModal('modal-quiz')" style="z-index: 10;">✕</div>
+    <!-- GAME MODALS -->
+    <!-- Career Quiz Blitz Modal -->
+    <div id="modal-quiz" class="hidden">
+      <div class="modal-overlay" onclick="closeModal('modal-quiz')">
+        <div class="modal game-modal" onclick="event.stopPropagation()"
+          style="max-width:600px; padding:0; overflow:hidden;">
+          <div class="modal-close" onclick="closeModal('modal-quiz')" style="z-index: 10;">✕</div>
 
-        <!-- Step 1: Department Selection -->
-        <div id="quiz-step-dept" style="padding:40px 32px; text-align:center;">
-          <div class="badge"
-            style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale);">
-            🎯 Career Quiz Blitz</div>
-          <h2 style="font-family:'Playfair Display',serif; font-size:28px; margin-bottom:12px;">Choose Your Department
-          </h2>
-          <p style="color:var(--grey-mid); font-size:14px; margin-bottom:24px;">Select your field to get targeted
-            questions.</p>
-          <div class="dept-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
-            <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('cse')">💻 CSE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('it')">💻 IT</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('ece')">📡 ECE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('eee')">⚡ EEE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('mech')">⚙️ Mechanical</button>
+          <!-- Step 1: Department Selection -->
+          <div id="quiz-step-dept" style="padding:40px 32px; text-align:center;">
+            <div class="badge"
+              style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale);">
+              🎯 Career Quiz Blitz</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:28px; margin-bottom:12px;">Choose Your Department
+            </h2>
+            <p style="color:var(--grey-mid); font-size:14px; margin-bottom:24px;">Select your field to get targeted
+              questions.</p>
+            <div class="dept-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
+              <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('cse')">💻 CSE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('it')">💻 IT</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('ece')">📡 ECE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('eee')">⚡ EEE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startQuizForDept('mech')">⚙️ Mechanical</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Step 2: Quiz Questions -->
-        <div id="quiz-step-questions" class="hidden" style="padding:40px 32px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-            <div class="badge" style="background:rgba(0,177,123,0.1); color:var(--green);">⏱️ Time: <span
-                id="quiz-timer">10</span>s</div>
-            <div style="font-size:13px; color:var(--grey-mid); font-weight:600;">Q <span id="q-current">1</span>/<span
-                id="q-total">25</span></div>
+          <!-- Step 2: Quiz Questions -->
+          <div id="quiz-step-questions" class="hidden" style="padding:40px 32px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+              <div class="badge" style="background:rgba(0,177,123,0.1); color:var(--green);">⏱️ Time: <span
+                  id="quiz-timer">10</span>s</div>
+              <div style="font-size:13px; color:var(--grey-mid); font-weight:600;">Q <span id="q-current">1</span>/<span
+                  id="q-total">25</span></div>
+            </div>
+            <div class="progress-bar" style="margin-bottom:24px; height:6px;">
+              <div class="progress-fill" id="quiz-progress-bar" style="width:0%;"></div>
+            </div>
+            <p class="quiz-q" id="quiz-question"
+              style="font-size:18px; font-weight:600; line-height:1.5; margin-bottom:24px; min-height:80px;"></p>
+            <div class="quiz-options" id="quiz-options" style="display:flex; flex-direction:column; gap:12px;"></div>
           </div>
-          <div class="progress-bar" style="margin-bottom:24px; height:6px;">
-            <div class="progress-fill" id="quiz-progress-bar" style="width:0%;"></div>
-          </div>
-          <p class="quiz-q" id="quiz-question"
-            style="font-size:18px; font-weight:600; line-height:1.5; margin-bottom:24px; min-height:80px;"></p>
-          <div class="quiz-options" id="quiz-options" style="display:flex; flex-direction:column; gap:12px;"></div>
-        </div>
 
-        <!-- Step 3: Result -->
-        <div id="quiz-step-result" class="hidden"
-          style="padding:48px 32px; text-align:center; background:linear-gradient(180deg, rgba(0,177,123,0.05) 0%, #fff 100%);">
-          <div style="font-size:64px; margin-bottom:16px; animation:splashPop 0.8s ease;">🎉</div>
-          <h3 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:12px;">Quiz Complete!</h3>
-          <p style="color:var(--grey-mid); font-size:15px; margin-bottom:24px;">You scored <strong
-              style="color:var(--dark); font-size:24px;" id="quiz-final-score">0</strong> out of 25.</p>
+          <!-- Step 3: Result -->
+          <div id="quiz-step-result" class="hidden"
+            style="padding:48px 32px; text-align:center; background:linear-gradient(180deg, rgba(0,177,123,0.05) 0%, #fff 100%);">
+            <div style="font-size:64px; margin-bottom:16px; animation:splashPop 0.8s ease;">🎉</div>
+            <h3 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:12px;">Quiz Complete!</h3>
+            <p style="color:var(--grey-mid); font-size:15px; margin-bottom:24px;">You scored <strong
+                style="color:var(--dark); font-size:24px;" id="quiz-final-score">0</strong> out of 25.</p>
 
-          <div
-            style="background:#fff; border:1px solid var(--grey-pale); border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-            <h4 style="font-size:16px; margin-bottom:8px;">Ready to master these skills?</h4>
-            <p style="font-size:13px; color:var(--grey-mid); margin-bottom:16px;">Get personalized training tailored
-              to
-              your department's specific technical requirements.</p>
-            <button class="btn btn-primary"
-              style="width:100%; justify-content:center; box-shadow:0 8px 20px rgba(0,177,123,0.25);"
-              onclick="redirectQuizToCourses()">Grow More 🚀</button>
+            <div
+              style="background:#fff; border:1px solid var(--grey-pale); border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+              <h4 style="font-size:16px; margin-bottom:8px;">Ready to master these skills?</h4>
+              <p style="font-size:13px; color:var(--grey-mid); margin-bottom:16px;">Get personalized training tailored
+                to
+                your department's specific technical requirements.</p>
+              <button class="btn btn-primary"
+                style="width:100%; justify-content:center; box-shadow:0 8px 20px rgba(0,177,123,0.25);"
+                onclick="redirectQuizToCourses()">Grow More 🚀</button>
+            </div>
+            <button class="btn btn-outline" style="border:none; background:transparent; font-size:13px;"
+              onclick="closeModal('modal-quiz')">Close</button>
           </div>
-          <button class="btn btn-outline" style="border:none; background:transparent; font-size:13px;"
-            onclick="closeModal('modal-quiz')">Close</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Mock Interview Modal -->
-  <div id="modal-interview" class="hidden">
-    <div class="modal-overlay" onclick="closeModal('modal-interview')">
-      <div class="modal game-modal" onclick="event.stopPropagation()"
-        style="max-width:600px; padding:0; overflow:hidden; display:flex; flex-direction:column; height:80vh; max-height:700px;">
-        <div class="modal-close" onclick="closeModal('modal-interview')" style="z-index: 10;">✕</div>
+    <!-- Mock Interview Modal -->
+    <div id="modal-interview" class="hidden">
+      <div class="modal-overlay" onclick="closeModal('modal-interview')">
+        <div class="modal game-modal" onclick="event.stopPropagation()"
+          style="max-width:600px; padding:0; overflow:hidden; display:flex; flex-direction:column; height:80vh; max-height:700px;">
+          <div class="modal-close" onclick="closeModal('modal-interview')" style="z-index: 10;">✕</div>
 
-        <!-- Step 1: Department Selection -->
-        <div id="interview-step-dept"
-          style="padding:40px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center;">
-          <div class="badge"
-            style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale); align-self:center;">
-            🏆 Mock Interview</div>
-          <h2 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:8px;">Kick Out the Fear.</h2>
-          <p style="color:var(--grey-mid); font-size:15px; margin-bottom:32px;">Select your department and practice
-            answering tough interview questions with our chat simulator.</p>
-          <div class="dept-grid"
-            style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:400px; margin:0 auto;">
-            <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('cse')">💻 CSE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('it')">💻 IT</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('ece')">📡 ECE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('eee')">⚡ EEE</button>
-            <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('mech')">⚙️
-              Mechanical</button>
+          <!-- Step 1: Department Selection -->
+          <div id="interview-step-dept"
+            style="padding:40px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center;">
+            <div class="badge"
+              style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale); align-self:center;">
+              🏆 Mock Interview</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:8px;">Kick Out the Fear.</h2>
+            <p style="color:var(--grey-mid); font-size:15px; margin-bottom:32px;">Select your department and practice
+              answering tough interview questions with our chat simulator.</p>
+            <div class="dept-grid"
+              style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:400px; margin:0 auto;">
+              <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('cse')">💻 CSE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('it')">💻 IT</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('ece')">📡 ECE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('eee')">⚡ EEE</button>
+              <button class="btn btn-outline dept-select-btn" onclick="startInterviewForDept('mech')">⚙️
+                Mechanical</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Step 2: Chat Interface -->
-        <div id="interview-step-chat" class="hidden" style="display:flex; flex-direction:column; height:100%;">
-          <!-- Header -->
-          <div
-            style="padding:16px 24px; border-bottom:1px solid var(--grey-pale); display:flex; align-items:center; justify-content:space-between; background:#fff; flex-shrink:0;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div
-                style="width:40px; height:40px; border-radius:50%; background:var(--milk-dark); display:flex; align-items:center; justify-content:center; font-size:20px;">
-                🤖</div>
-              <div>
-                <div style="font-weight:700; font-size:15px;">Interviewer Bot</div>
-                <div style="font-size:11px; color:var(--green); font-weight:600;">● Online</div>
+          <!-- Step 2: Chat Interface -->
+          <div id="interview-step-chat" class="hidden" style="display:flex; flex-direction:column; height:100%;">
+            <!-- Header -->
+            <div
+              style="padding:16px 24px; border-bottom:1px solid var(--grey-pale); display:flex; align-items:center; justify-content:space-between; background:#fff; flex-shrink:0;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div
+                  style="width:40px; height:40px; border-radius:50%; background:var(--milk-dark); display:flex; align-items:center; justify-content:center; font-size:20px;">
+                  🤖</div>
+                <div>
+                  <div style="font-weight:700; font-size:15px;">Interviewer Bot</div>
+                  <div style="font-size:11px; color:var(--green); font-weight:600;">● Online</div>
+                </div>
+              </div>
+              <div class="badge" style="background:rgba(255,59,48,0.1); color:#FF3B30;">⏱️ <span
+                  id="interview-timer">05:00</span></div>
+            </div>
+
+            <!-- Chat Area -->
+            <div id="interview-chat-area"
+              style="flex-grow:1; padding:24px; overflow-y:auto; background:var(--milk); display:flex; flex-direction:column; gap:16px;">
+              <!-- Messages injected here -->
+            </div>
+
+            <!-- Input Area -->
+            <div style="padding:16px 24px; background:#fff; border-top:1px solid var(--grey-pale); flex-shrink:0;">
+              <div style="display:flex; gap:12px;">
+                <input type="text" id="interview-input" class="form-input" style="flex-grow:1; margin-bottom:0;"
+                  placeholder="Type your answer here..." onkeypress="handleInterviewKeyPress(event)">
+                <button class="btn btn-primary" style="padding:0 24px;" onclick="sendInterviewMessage()">Send</button>
               </div>
             </div>
-            <div class="badge" style="background:rgba(255,59,48,0.1); color:#FF3B30;">⏱️ <span
-                id="interview-timer">05:00</span></div>
           </div>
 
-          <!-- Chat Area -->
-          <div id="interview-chat-area"
-            style="flex-grow:1; padding:24px; overflow-y:auto; background:var(--milk); display:flex; flex-direction:column; gap:16px;">
-            <!-- Messages injected here -->
-          </div>
+          <!-- Step 3: Result -->
+          <div id="interview-step-result" class="hidden"
+            style="padding:48px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(180deg, rgba(0,177,123,0.05) 0%, #fff 100%);">
+            <div style="font-size:64px; margin-bottom:16px; animation:splashPop 0.8s ease;">👏</div>
+            <h3 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:12px;">Interview Finished
+            </h3>
+            <p style="color:var(--grey-mid); font-size:15px; margin-bottom:24px;">Great job taking the initiative to
+              practice! Your confidence is key.</p>
 
-          <!-- Input Area -->
-          <div style="padding:16px 24px; background:#fff; border-top:1px solid var(--grey-pale); flex-shrink:0;">
-            <div style="display:flex; gap:12px;">
-              <input type="text" id="interview-input" class="form-input" style="flex-grow:1; margin-bottom:0;"
-                placeholder="Type your answer here..." onkeypress="handleInterviewKeyPress(event)">
-              <button class="btn btn-primary" style="padding:0 24px;" onclick="sendInterviewMessage()">Send</button>
+            <div
+              style="background:#fff; border:1px solid var(--grey-pale); border-radius:12px; padding:24px; margin-bottom:32px; text-align:left; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+              <h4
+                style="font-size:15px; margin-bottom:12px; border-bottom:1px solid var(--grey-pale); padding-bottom:8px;">
+                Feedback Snapshot</h4>
+              <ul style="font-size:13px; color:var(--grey-mid); line-height:1.6; padding-left:16px; margin-bottom:0;">
+                <li>Covered essential points well.</li>
+                <li>Consider providing more specific examples in technical scenarios.</li>
+                <li>Maintain this structured approach to answering.</li>
+              </ul>
             </div>
-          </div>
-        </div>
 
-        <!-- Step 3: Result -->
-        <div id="interview-step-result" class="hidden"
-          style="padding:48px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(180deg, rgba(0,177,123,0.05) 0%, #fff 100%);">
-          <div style="font-size:64px; margin-bottom:16px; animation:splashPop 0.8s ease;">👏</div>
-          <h3 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:12px;">Interview Finished
-          </h3>
-          <p style="color:var(--grey-mid); font-size:15px; margin-bottom:24px;">Great job taking the initiative to
-            practice! Your confidence is key.</p>
-
-          <div
-            style="background:#fff; border:1px solid var(--grey-pale); border-radius:12px; padding:24px; margin-bottom:32px; text-align:left; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-            <h4
-              style="font-size:15px; margin-bottom:12px; border-bottom:1px solid var(--grey-pale); padding-bottom:8px;">
-              Feedback Snapshot</h4>
-            <ul style="font-size:13px; color:var(--grey-mid); line-height:1.6; padding-left:16px; margin-bottom:0;">
-              <li>Covered essential points well.</li>
-              <li>Consider providing more specific examples in technical scenarios.</li>
-              <li>Maintain this structured approach to answering.</li>
-            </ul>
+            <button class="btn btn-primary"
+              style="width:100%; justify-content:center; box-shadow:0 8px 20px rgba(0,177,123,0.25); margin-bottom:12px;"
+              onclick="redirectInterviewToCourses()">Access Full Interview Guides 📚</button>
+            <p style="font-size:11px; color:var(--grey-mid);">Redirecting to Tutorial Courses automatically...</p>
           </div>
 
-          <button class="btn btn-primary"
-            style="width:100%; justify-content:center; box-shadow:0 8px 20px rgba(0,177,123,0.25); margin-bottom:12px;"
-            onclick="redirectInterviewToCourses()">Access Full Interview Guides 📚</button>
-          <p style="font-size:11px; color:var(--grey-mid);">Redirecting to Tutorial Courses automatically...</p>
         </div>
-
       </div>
     </div>
-  </div>
 
-  <!-- Aptitude Speed Challenge Modal -->
-  <div id="modal-aptitude" class="hidden">
-    <div class="modal-overlay" onclick="closeModal('modal-aptitude')">
-      <div class="modal game-modal" onclick="event.stopPropagation()"
-        style="max-width:600px; padding:0; overflow:hidden; display:flex; flex-direction:column; height:85vh; max-height:800px;">
-        <div class="modal-close" onclick="closeModal('modal-aptitude')" style="z-index: 10;">✕</div>
+    <!-- Aptitude Speed Challenge Modal -->
+    <div id="modal-aptitude" class="hidden">
+      <div class="modal-overlay" onclick="closeModal('modal-aptitude')">
+        <div class="modal game-modal" onclick="event.stopPropagation()"
+          style="max-width:600px; padding:0; overflow:hidden; display:flex; flex-direction:column; height:85vh; max-height:800px;">
+          <div class="modal-close" onclick="closeModal('modal-aptitude')" style="z-index: 10;">✕</div>
 
-        <!-- Step 1: Intro -->
-        <div id="aptitude-step-intro"
-          style="padding:56px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center;">
-          <div class="badge"
-            style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale); align-self:center;">
-            ⚡ Aptitude Speed Challenge</div>
-          <h2 style="font-family:'Playfair Display',serif; font-size:36px; margin-bottom:16px; line-height:1.2;">Think
-            Fast.<br>Solve Faster.</h2>
-          <p
-            style="color:var(--grey-mid); font-size:15px; margin-bottom:32px; max-width:400px; margin-left:auto; margin-right:auto;">
-            Test your quantitative and logical reasoning in a fast-paced environment. Scroll through questions and
-            challenge yourself.</p>
-          <button class="btn btn-primary"
-            style="align-self:center; padding:16px 40px; font-size:16px; box-shadow:0 8px 24px rgba(0,177,123,0.3);"
-            onclick="startAptitudeChallenge()">Start Challenge ⏳</button>
-        </div>
-
-        <!-- Step 2: Challenge Area -->
-        <div id="aptitude-step-challenge" class="hidden" style="display:flex; flex-direction:column; height:100%;">
-          <!-- Header -->
-          <div
-            style="padding:20px 24px; border-bottom:1px solid var(--grey-pale); display:flex; align-items:center; justify-content:space-between; background:#fff; flex-shrink:0;">
-            <div>
-              <h3 style="font-size:18px; margin:0;">Aptitude Challenge</h3>
-              <div style="font-size:12px; color:var(--grey-mid);">Scroll to solve</div>
-            </div>
+          <!-- Step 1: Intro -->
+          <div id="aptitude-step-intro"
+            style="padding:56px 32px; text-align:center; flex-grow:1; display:flex; flex-direction:column; justify-content:center;">
             <div class="badge"
-              style="background:var(--dark); color:#fff; font-family:'DM Mono', monospace; font-size:16px; padding:6px 12px;">
-              ⏳ <span id="aptitude-timer">10:00</span></div>
+              style="margin-bottom:16px; background:var(--milk-dark); color:var(--dark); border-color:var(--grey-pale); align-self:center;">
+              ⚡ Aptitude Speed Challenge</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:36px; margin-bottom:16px; line-height:1.2;">Think
+              Fast.<br>Solve Faster.</h2>
+            <p
+              style="color:var(--grey-mid); font-size:15px; margin-bottom:32px; max-width:400px; margin-left:auto; margin-right:auto;">
+              Test your quantitative and logical reasoning in a fast-paced environment. Scroll through questions and
+              challenge yourself.</p>
+            <button class="btn btn-primary"
+              style="align-self:center; padding:16px 40px; font-size:16px; box-shadow:0 8px 24px rgba(0,177,123,0.3);"
+              onclick="startAptitudeChallenge()">Start Challenge ⏳</button>
           </div>
 
-          <!-- Scrollable Q&A Area -->
-          <div id="aptitude-q-area"
-            style="flex-grow:1; padding:24px; overflow-y:auto; background:var(--milk); display:flex; flex-direction:column; gap:24px;">
-            <!-- Questions injected here -->
-          </div>
+          <!-- Step 2: Challenge Area -->
+          <div id="aptitude-step-challenge" class="hidden" style="display:flex; flex-direction:column; height:100%;">
+            <!-- Header -->
+            <div
+              style="padding:20px 24px; border-bottom:1px solid var(--grey-pale); display:flex; align-items:center; justify-content:space-between; background:#fff; flex-shrink:0;">
+              <div>
+                <h3 style="font-size:18px; margin:0;">Aptitude Challenge</h3>
+                <div style="font-size:12px; color:var(--grey-mid);">Scroll to solve</div>
+              </div>
+              <div class="badge"
+                style="background:var(--dark); color:#fff; font-family:'DM Mono', monospace; font-size:16px; padding:6px 12px;">
+                ⏳ <span id="aptitude-timer">10:00</span></div>
+            </div>
 
-          <!-- Bottom Summary / CTA -->
-          <div id="aptitude-footer" class="hidden"
-            style="padding:24px; background:#fff; border-top:1px solid var(--grey-pale); flex-shrink:0; text-align:center;">
-            <h4 style="font-size:18px; margin-bottom:8px;">Challenge Completed</h4>
-            <p style="font-size:13px; color:var(--grey-mid); margin-bottom:16px;">See detailed explanations above.
-              Keep
-              practicing to improve your speed!</p>
-            <button class="btn btn-primary" style="width:100%; justify-content:center;"
-              onclick="closeModal('modal-aptitude');showTab('resources')">Unlock 50+ Aptitude Resources 📘</button>
+            <!-- Scrollable Q&A Area -->
+            <div id="aptitude-q-area"
+              style="flex-grow:1; padding:24px; overflow-y:auto; background:var(--milk); display:flex; flex-direction:column; gap:24px;">
+              <!-- Questions injected here -->
+            </div>
+
+            <!-- Bottom Summary / CTA -->
+            <div id="aptitude-footer" class="hidden"
+              style="padding:24px; background:#fff; border-top:1px solid var(--grey-pale); flex-shrink:0; text-align:center;">
+              <h4 style="font-size:18px; margin-bottom:8px;">Challenge Completed</h4>
+              <p style="font-size:13px; color:var(--grey-mid); margin-bottom:16px;">See detailed explanations above.
+                Keep
+                practicing to improve your speed!</p>
+              <button class="btn btn-primary" style="width:100%; justify-content:center;"
+                onclick="closeModal('modal-aptitude');showTab('resources')">Unlock 50+ Aptitude Resources 📘</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast hidden"></div>
+    <!-- Toast -->
+    <div id="toast" class="toast hidden"></div>
 
-  <script type="module" src="script.js" defer></script>
-  <div id="yt-modal" class="yt-modal-overlay hidden" onclick="closeYTModal(event)">
-    <div class="yt-modal-box">
-      <button class="yt-modal-close" onclick="closeYTModal(null, true)">✕</button>
-      <div class="yt-modal-title-bar">
-        <span id="yt-modal-tag" class="yt-tag"></span>
-        <span id="yt-modal-title" class="yt-modal-title-text"></span>
-      </div>
-      <div class="yt-iframe-wrap">
-        <iframe id="yt-iframe" src="" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <div class="yt-modal-footer">
-        <span style="font-size:13px; color:var(--grey-mid);">▶ Playing on MSEED — powered by YouTube</span>
-        <button class="btn btn-outline" style="font-size:12px; padding:6px 16px;" onclick="openYTDirect()">Open in
-          YouTube ↗</button>
+    <script type="module" src="script.js" defer></script>
+    <div id="yt-modal" class="yt-modal-overlay hidden" onclick="closeYTModal(event)">
+      <div class="yt-modal-box">
+        <button class="yt-modal-close" onclick="closeYTModal(null, true)">✕</button>
+        <div class="yt-modal-title-bar">
+          <span id="yt-modal-tag" class="yt-tag"></span>
+          <span id="yt-modal-title" class="yt-modal-title-text"></span>
+        </div>
+        <div class="yt-iframe-wrap">
+          <iframe id="yt-iframe" src="" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="yt-modal-footer">
+          <span style="font-size:13px; color:var(--grey-mid);">▶ Playing on MSEED — powered by YouTube</span>
+          <button class="btn btn-outline" style="font-size:12px; padding:6px 16px;" onclick="openYTDirect()">Open in
+            YouTube ↗</button>
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    function submitEnrolment() {
+    <script>
+      function submitEnrolment() {
 
-      const name = document.getElementById("en-name").value.trim();
-      const dept = document.getElementById("en-dept").value.trim();
-      const domainCourse = document.getElementById("en-course").value.trim();
-      const phone = document.getElementById("en-phone").value.trim();
-      const email = document.getElementById("en-email").value.trim();
+        const name = document.getElementById("en-name").value.trim();
+        const dept = document.getElementById("en-dept").value.trim();
+        const domainCourse = document.getElementById("en-course").value.trim();
+        const phone = document.getElementById("en-phone").value.trim();
+        const email = document.getElementById("en-email").value.trim();
 
-      if (!name || !phone || !email) {
-        alert("Name, Phone, Email required!");
-        return;
+        if (!name || !phone || !email) {
+          alert("Name, Phone, Email required!");
+          return;
+        }
+
+        fetch("http://127.0.0.1:5000/api/enrol", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            studentName: name,
+            mobileNumber: phone,
+            emailId: email,
+            department: dept,
+            domainCourse: domainCourse   // ⚡ correct field name
+          })
+        })
+          .then(res => res.json())
+          .then(data => {
+
+            console.log("Server Response:", data);
+
+            if (data.success) {
+
+              document.getElementById("enroll-step-form").classList.add("hidden");
+              document.getElementById("enroll-step-success").classList.remove("hidden");
+
+            } else {
+              alert(data.message);
+            }
+
+          })
+          .catch(err => {
+            console.error("Fetch Error:", err);
+            alert("Failed to submit enrolment. Please try again later.");
+          });
       }
-
-      fetch("http://127.0.0.1:5000/api/enrol", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          studentName: name,
-          mobileNumber: phone,
-          emailId: email,
-          department: dept,
-          domainCourse: domainCourse   // ⚡ correct field name
-        })
-      })
-        .then(res => res.json())
-        .then(data => {
-
-          console.log("Server Response:", data);
-
-          if (data.success) {
-
-            document.getElementById("enroll-step-form").classList.add("hidden");
-            document.getElementById("enroll-step-success").classList.remove("hidden");
-
-          } else {
-            alert(data.message);
-          }
-
-        })
-        .catch(err => {
-          console.error("Fetch Error:", err);
-          alert("Failed to submit enrolment. Please try again later.");
-        });
-    }
-  </script>
+    </script>
 </body>
+
 </html>

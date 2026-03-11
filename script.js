@@ -45,6 +45,7 @@ var LOGO_SRC = "https://res.cloudinary.com/drlg1t6pk/image/upload/v1771854440/1_
 
 function setLogos() {
   document.querySelectorAll('img[alt="MSEED"]').forEach(function (img) {
+    if (img.id === 'intro-logo' || img.closest('#page-institution')) return;
     img.src = LOGO_SRC;
     img.style.display = 'block';
   });
@@ -410,11 +411,10 @@ expose('closeJrMobileMenu', closeJrMobileMenu);
       .to('#orbit-2 .orbit-dot', { opacity: 1, duration: 0.3 }, 0.80)
       .to('#orbit-3 .orbit-dot', { opacity: 1, duration: 0.3 }, 0.90)
       .to('#intro-progress-wrap', { opacity: 1, duration: 0.4 }, 0.60)
-      .to('#intro-logo', { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.8)', onStart: spawnParticles }, 0.75)
+      .to('#intro-logo', { scale: 1, duration: 0.5, ease: 'back.out(1.8)', onStart: spawnParticles }, 0)
       .to('#intro-logo', { filter: 'drop-shadow(0 0 28px rgba(0,177,123,0.7)) drop-shadow(0 0 60px rgba(0,177,123,0.35))', duration: 0.4, ease: 'power2.out' }, 1.30)
       .to('#intro-line', { width: 160, opacity: 1, duration: 0.6, ease: 'power3.inOut' }, 1.50)
       .to('#intro-tagline', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 1.80)
-      .to('#intro-scan', { opacity: 1, x: '220%', duration: 1.2, ease: 'power2.inOut' }, 1.60)
       .to('#intro-progress-fill', {
         width: '100%', duration: 1.8, ease: 'power1.inOut',
         onUpdate: function () {
@@ -1767,23 +1767,23 @@ function renderAboutSection() {
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,177,123,0.1);color:#00b17b;border:1px solid rgba(0,177,123,0.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">🌱 About MSEED</div>
       <h1 style="font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:900;line-height:1.1;margin-bottom:24px;color:#1a1a1a;">Empowering Every Student<br><span style="color:#00b17b;">To Build a Better Future</span></h1>
       <p style="font-size:17px;line-height:1.8;color:#555;max-width:720px;margin-bottom:64px;">MSEED is India's leading career readiness platform — bridging the gap between academic learning and industry expectations through live classes, ATS-optimized tools, EV research labs, and real placement support.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:24px;margin-bottom:72px;">
+      <div class="desktop-only-stats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:24px;margin-bottom:72px;">
         ${[{ num: '50,000+', label: 'Students Trained', icon: '🎓' }, { num: '500+', label: 'Partner Companies', icon: '🤝' }, { num: '85%', label: 'Placement Rate', icon: '🏆' }, { num: '120+', label: 'Colleges Partnered', icon: '🏛️' }, { num: '2018', label: 'Founded', icon: '📅' }].map(s => `<div style="background:#fff;border:1px solid #eee;border-radius:20px;padding:28px 20px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.05);"><div style="font-size:36px;margin-bottom:10px;">${s.icon}</div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#00b17b;margin-bottom:6px;">${s.num}</div><div style="font-size:13px;color:#888;font-weight:500;">${s.label}</div></div>`).join('')}
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:72px;">
+      <div class="about-grid-2col" style="gap:32px;margin-bottom:72px;">
         <div style="background:linear-gradient(135deg,#00b17b,#009267);border-radius:24px;padding:40px;color:#fff;"><div style="font-size:40px;margin-bottom:16px;">🎯</div><h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px;">Our Mission</h3><p style="font-size:15px;line-height:1.8;opacity:0.9;">To democratize career readiness for every Indian student — regardless of college tier or background — by providing world-class, industry-aligned skill training and ATS-ready tools that actually get them hired.</p></div>
         <div style="background:#1a1a1a;border-radius:24px;padding:40px;color:#fff;"><div style="font-size:40px;margin-bottom:16px;">🔭</div><h3 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:16px;">Our Vision</h3><p style="font-size:15px;line-height:1.8;opacity:0.75;">To become the #1 career infrastructure platform across South Asia — powering 1 million placements annually by 2030 through technology, mentorship, and direct industry partnerships.</p></div>
       </div>
       <div style="margin-bottom:72px;">
         <h2 style="font-family:'Playfair Display',serif;font-size:36px;font-weight:800;margin-bottom:40px;text-align:center;">What We Offer</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;">
-          ${[{ icon: '🎓', title: 'Live Classes', desc: 'Department-wise, expert-led live sessions for engineering, management, arts & science students.' }, { icon: '📄', title: 'ATS Resume Tools', desc: 'AI-powered resume checker and builder that beats Applicant Tracking Systems every time.' }, { icon: '🎮', title: 'Skill Games', desc: 'Gamified career quizzes, mock interviews and aptitude challenges to sharpen your edge.' }, { icon: '⚡', title: 'EV Research Labs', desc: 'Hands-on Electric Vehicle labs for institutions — from chassis design to BMS integration.' }, { icon: '🤝', title: 'Placement Support', desc: 'Dedicated placement cell connecting students directly to 500+ hiring partner companies.' }, { icon: '📚', title: 'Free Resources', desc: '50+ curated PDFs, resume templates and study guides — completely free for all students.' }].map(o => `<div style="background:#fff;border:1px solid #eee;border-radius:20px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.05);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(0,177,123,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.05)'"><div style="font-size:36px;margin-bottom:14px;">${o.icon}</div><h4 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:10px;">${o.title}</h4><p style="font-size:13px;color:#777;line-height:1.7;">${o.desc}</p></div>`).join('')}
+        <div class="about-offer-grid" style="gap:24px;">
+           ${[{ icon: '🎓', title: 'Live Classes', desc: 'Department-wise, expert-led live sessions for engineering, management, arts & science students.' }, { icon: '📄', title: 'ATS Resume Tools', desc: 'AI-powered resume checker and builder that beats Applicant Tracking Systems every time.' }, { icon: '🎮', title: 'Skill Games', desc: 'Gamified career quizzes, mock interviews and aptitude challenges to sharpen your edge.' }, { icon: '⚡', title: 'EV Research Labs', desc: 'Hands-on Electric Vehicle labs for institutions — from chassis design to BMS integration.' }, { icon: '🤝', title: 'Placement Support', desc: 'Dedicated placement cell connecting students directly to 500+ hiring partner companies.' }, { icon: '📚', title: 'Free Resources', desc: '50+ curated PDFs, resume templates and study guides — completely free for all students.' }].map(o => `<div style="background:#fff;border:1px solid #eee;border-radius:20px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.05);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 32px rgba(0,177,123,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.05)'"><div style="font-size:36px;margin-bottom:14px;">${o.icon}</div><h4 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:10px;">${o.title}</h4><p style="font-size:13px;color:#777;line-height:1.7;">${o.desc}</p></div>`).join('')}
         </div>
       </div>
       <div style="background:linear-gradient(135deg,#f8fffe,#e8fdf5);border:1px solid rgba(0,177,123,0.2);border-radius:24px;padding:48px;margin-bottom:72px;text-align:center;">
         <h2 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:800;margin-bottom:12px;">Our Portals</h2>
         <p style="color:#777;margin-bottom:40px;">Separate learning journeys, one powerful ecosystem</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:700px;margin:0 auto;">
+        <div class="about-grid-2col" style="gap:24px;max-width:700px;margin:0 auto;">
           <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.06);"><div style="font-size:40px;margin-bottom:12px;">🎓</div><h4 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;">MSEED</h4><p style="font-size:13px;color:#888;">Higher Education platform for college students and institutions</p></div>
           <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,0.06);"><div style="font-size:40px;margin-bottom:12px;">🌱</div><h4 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;">MSEED Junior</h4><p style="font-size:13px;color:#888;">School education platform for students aged 8–18</p></div>
         </div>
