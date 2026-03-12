@@ -301,6 +301,17 @@ function showTab(tab) {
     renderPlacementSection();
     setTimeout(initHeroCarousel, 80);
     animateStats();
+    
+    // Auto-maximize the camera floating layer
+    if (window.maximizeFV && window.minimizeFV) {
+      setTimeout(() => {
+        window.maximizeFV();
+        // Auto-minimize after 2 seconds
+        setTimeout(() => {
+          window.minimizeFV();
+        }, 2000);
+      }, 500); // Small delay to let page load first
+    }
   }
   if (tab === 'courses') { currentCourseFilter = 'all'; renderCourses(); }
   if (tab === 'resources') renderResources();
@@ -633,14 +644,10 @@ expose('triggerSyllabusEnroll', triggerSyllabusEnroll);
 //  RESOURCES
 // ============================================================
 const resources = [
-  { icon: '📄', title: 'Ultimate Resume Templates Pack', desc: '12 ATS-optimized resume templates for different industries', type: 'PDF', size: '2.4 MB' },
-  { icon: '💡', title: 'Interview Questions Bank – 2024', desc: '500+ interview questions with model answers', type: 'PDF', size: '4.1 MB' },
-  { icon: '🔢', title: 'Aptitude Mastery Workbook', desc: 'Quantitative, logical reasoning and verbal ability practice', type: 'PDF', size: '3.8 MB' },
-  { icon: '💼', title: 'LinkedIn Profile Optimization', desc: 'Step-by-step guide to create a recruiter-magnetic LinkedIn', type: 'PDF', size: '1.2 MB' },
-  { icon: '🗣️', title: 'GD Topics with Analysis – 2024', desc: '100 current affairs GD topics with structuring framework', type: 'PDF', size: '2.1 MB' },
-  { icon: '📊', title: 'Excel for Working Professionals', desc: '100 formulas, pivot tables, dashboards with practice files', type: 'PDF', size: '5.3 MB' },
-  { icon: '🤖', title: 'AI Tools for Career Growth', desc: 'ChatGPT, Canva AI, Copilot and more for job search', type: 'PDF', size: '1.8 MB' },
-  { icon: '📧', title: 'Professional Email Templates', desc: '50 ready-to-use email templates for job applications', type: 'PDF', size: '0.8 MB' },
+  { icon: '📄', title: 'Ultimate Resume Templates Pack', desc: '12 ATS-optimized resume templates for different industries', type: 'PDF', size: '2.4 MB', url: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773300768/resume_builder_uvx8xv.pdf' },
+  { icon: '💡', title: 'Interview Questions Bank – 2024', desc: '500+ interview questions with model answers', type: 'PDF', size: '4.1 MB', url: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773296598/Mock_Interview_Q_ed2j2i.pdf' },
+  { icon: '🔢', title: 'Aptitude Mastery Workbook', desc: 'Quantitative, logical reasoning and verbal ability practice', type: 'PDF', size: '3.8 MB', url: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773315269/aptitude_seed_zptgx7.pdf' },
+  { icon: '💼', title: 'LinkedIn Profile Optimization', desc: 'Step-by-step guide to create a recruiter-magnetic LinkedIn', type: 'PDF', size: '1.2 MB', url: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773301033/linkdin_nnqxb6.pdf' },
 ];
 
 function renderResources() {
@@ -652,7 +659,7 @@ function renderResources() {
       <div class="resource-info"><h4>${r.title}</h4><p>${r.desc}</p></div>
       <div class="resource-meta">
         <span class="pdf-badge">${r.type} · ${r.size}</span>
-        <button class="btn btn-outline" style="padding:8px 16px;font-size:13px" onclick="showToast('📥 Downloading: ${r.title.split(' ').slice(0, 3).join(' ')}...','success')">Download</button>
+        <button class="btn btn-outline" style="padding:8px 16px;font-size:13px" onclick="${r.url && r.url !== '#' ? `openEnrollModal('${r.title.replace(/'/g, "\\'")}', '${r.url}')` : `showToast('📥 Downloading: ${r.title.split(' ').slice(0, 3).join(' ')}...','success')`}">Download</button>
       </div>
     </div>`).join('');
 }
@@ -914,26 +921,111 @@ const deptQuestions = {
     { q: "What does API stand for?", opts: ["Application Programming Interface", "Advanced Program Integration", "Applied Process Integration", "Automated Programming Interface"], ans: 0 },
     { q: "Which data structure uses LIFO?", opts: ["Queue", "Stack", "Tree", "Graph"], ans: 1 },
     { q: "Time complexity of binary search?", opts: ["O(n)", "O(n log n)", "O(log n)", "O(1)"], ans: 2 },
+    { q: "Which of the following is a NoSQL database?", opts: ["MySQL", "PostgreSQL", "MongoDB", "Oracle"], ans: 2 },
+    { q: "What does HTML stand for?", opts: ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Tabular Markup Language", "None of these"], ans: 0 },
+    { q: "Which language is primarily used for web styling?", opts: ["HTML", "CSS", "Python", "C++"], ans: 1 },
+    { q: "What is the primary function of an OS?", opts: ["Code compilation", "Resource management", "Web browsing", "Database processing"], ans: 1 },
+    { q: "Which of the following is an IP address?", opts: ["192.168.1.1", "AA:BB:CC", "00-1B", "User@domain"], ans: 0 },
+    { q: "What does a compiler do?", opts: ["Executes code line by line", "Translates high-level code to machine code", "Fixes bugs", "Designs UI"], ans: 1 },
+    { q: "Which sorting algorithm is generally considered fastest for large datasets?", opts: ["Bubble Sort", "Insertion Sort", "Quick Sort", "Selection Sort"], ans: 2 },
+    { q: "What does SQL stand for?", opts: ["Structured Query Language", "Sequential Query Language", "Standard Query Language", "System Query Language"], ans: 0 },
+    { q: "Which layer is responsible for routing in OSI model?", opts: ["Data Link Layer", "Network Layer", "Transport Layer", "Application Layer"], ans: 1 },
+    { q: "What is a pointer?", opts: ["A variable that stores a memory address", "A keyword", "A data type", "An operator"], ans: 0 },
+    { q: "Which topology requires a central hub?", opts: ["Ring", "Bus", "Star", "Mesh"], ans: 2 },
+    { q: "What is the output of 2 + '2' in JavaScript?", opts: ["4", "22", "NaN", "Error"], ans: 1 },
+    { q: "What does HTTP stand for?", opts: ["HyperText Transfer Protocol", "HyperText Transmission Protocol", "HyperText Test Protocol", "Hyper Transfer Text Protocol"], ans: 0 },
+    { q: "What is the full form of RAM?", opts: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], ans: 1 },
+    { q: "Which of the following is not an OOP concept?", opts: ["Encapsulation", "Polymorphism", "Compilation", "Inheritance"], ans: 2 },
+    { q: "Which command is used to record changes to the repository in Git?", opts: ["git push", "git commit", "git add", "git save"], ans: 1 },
+    { q: "What is JSON?", opts: ["JavaScript Object Notation", "Java Syntax Object Notation", "JavaScript Oriented Notation", "Java Standard Output Network"], ans: 0 }
   ],
   it: [
     { q: "What is a primary key?", opts: ["A unique identifier for a record", "A key used for encryption", "A foreign key reference", "A table index"], ans: 0 },
     { q: "Protocol for secure web traffic?", opts: ["HTTP", "FTP", "HTTPS", "SMTP"], ans: 2 },
     { q: "What does DNS do?", opts: ["Resolves IP to names", "Resolves domain names to IPs", "Secures traffic", "Encrypts databases"], ans: 1 },
+    { q: "Which of the following is a cloud computing service model?", opts: ["IaaS", "SaaS", "PaaS", "All of the above"], ans: 3 },
+    { q: "What does LAN stand for?", opts: ["Local Area Network", "Large Area Network", "Light Area Network", "Logical Area Network"], ans: 0 },
+    { q: "What is the purpose of a firewall?", opts: ["To speed up internet", "To block unauthorized access", "To store data", "To cool down servers"], ans: 1 },
+    { q: "Which protocol is used to send emails?", opts: ["SMTP", "POP3", "HTTP", "FTP"], ans: 0 },
+    { q: "What does GUI stand for?", opts: ["Graphical User Interface", "Global User Interface", "Graphical Usage Interface", "General User Interface"], ans: 0 },
+    { q: "What is the main function of a router?", opts: ["To connect multiple networks", "To store files", "To display images", "To scan for viruses"], ans: 0 },
+    { q: "Which of these is a Linux-based operating system?", opts: ["Windows 10", "macOS", "Ubuntu", "iOS"], ans: 2 },
+    { q: "What does VPN stand for?", opts: ["Virtual Private Network", "Visual Private Network", "Virtual Public Network", "Valid Private Network"], ans: 0 },
+    { q: "What is phishing?", opts: ["A type of fishing", "Fraudulent attempt to obtain sensitive information", "A network protocol", "A database query"], ans: 1 },
+    { q: "Which command is typically used to list files in Linux?", opts: ["list", "ls", "dir", "cd"], ans: 1 },
+    { q: "What is an SSD?", opts: ["Solid State Drive", "Super Speed Drive", "Solid Storage Disk", "Secure State Drive"], ans: 0 },
+    { q: "What does URL stand for?", opts: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Reference Locator", "Universal Reference Link"], ans: 0 },
+    { q: "Which term describes malicious software?", opts: ["Badware", "Malware", "Spyware", "Adware"], ans: 1 },
+    { q: "What is a server?", opts: ["A computer that provides data to other computers", "A web browser", "A programming language", "A type of cable"], ans: 0 },
+    { q: "Which command shows the manual of a command in Unix?", opts: ["help", "info", "man", "doc"], ans: 2 },
+    { q: "What is a Database Management System?", opts: ["Software for managing databases", "Hardware for storing data", "A programming language", "An operating system"], ans: 0 },
+    { q: "Which of the following is an agile methodology framework?", opts: ["Waterfall", "Scrum", "V-Model", "Spiral"], ans: 1 }
   ],
   ece: [
     { q: "What is an operational amplifier?", opts: ["A logic gate", "A voltage amplifier", "A digital counter", "A memory cell"], ans: 1 },
     { q: "VLSI stands for?", opts: ["Very Low Scale Integration", "Very Large Scale Integration", "Voltage Logic Signal Interface", "Variable Length Signal Input"], ans: 1 },
     { q: "Which is a microcontroller?", opts: ["Pentium 4", "Intel Core i7", "8051", "ARM Cortex-A78"], ans: 2 },
+    { q: "What does an ADC do?", opts: ["Analog to Digital Conversion", "Amplitude to Digital Conversion", "Analog to Direct Current", "Audio to Digital Conversion"], ans: 0 },
+    { q: "Which component is used to store electrical charge temporarily?", opts: ["Resistor", "Inductor", "Capacitor", "Diode"], ans: 2 },
+    { q: "What is the function of a diode?", opts: ["Amplify signal", "Allow current in one direction", "Store charge", "Block DC"], ans: 1 },
+    { q: "Which logic gate outputs 1 only if all inputs are 1?", opts: ["OR", "NOR", "AND", "NAND"], ans: 2 },
+    { q: "What does AM stand for in radio?", opts: ["Amplitude Modulation", "Audio Modulation", "Active Modulation", "Antenna Modulation"], ans: 0 },
+    { q: "Which device is used to convert DC to AC?", opts: ["Rectifier", "Inverter", "Transformer", "Chopper"], ans: 1 },
+    { q: "What does an oscilloscope measure?", opts: ["Voltage over time", "Current over resistance", "Power", "Frequency only"], ans: 0 },
+    { q: "What is the unit of capacitance?", opts: ["Henry", "Farad", "Ohm", "Volt"], ans: 1 },
+    { q: "Which of the following is an active electronic component?", opts: ["Resistor", "Capacitor", "Transistor", "Inductor"], ans: 2 },
+    { q: "In a BJT, what are the three terminals?", opts: ["Source, Drain, Gate", "Emitter, Base, Collector", "Anode, Cathode, Gate", "Positive, Negative, Ground"], ans: 1 },
+    { q: "What does CMOS stand for?", opts: ["Complementary Metal-Oxide-Semiconductor", "Common Metal-Oxide-Semiconductor", "Complex Metal-Oxide-Semiconductor", "Current Metal-Oxide-Semiconductor"], ans: 0 },
+    { q: "What is the main advantage of optical fiber communication?", opts: ["Low cost", "High bandwidth", "Easy installation", "High voltage"], ans: 1 },
+    { q: "What does PCB stand for?", opts: ["Printed Circuit Board", "Plastic Circuit Board", "Power Control Board", "Primary Circuit Board"], ans: 0 },
+    { q: "Which is considered a universal logic gate?", opts: ["AND", "OR", "NAND", "NOT"], ans: 2 },
+    { q: "What is the primary function of a multiplexer?", opts: ["Selects one of many inputs", "Distributes one input to many outputs", "Amplifies signal", "Inverts signal"], ans: 0 },
+    { q: "What is the frequency of AC mains generally in India?", opts: ["50 Hz", "60 Hz", "100 Hz", "120 Hz"], ans: 0 },
+    { q: "What does LED stand for?", opts: ["Light Emitting Diode", "Liquid Emitting Display", "Light Electronic Diode", "Laser Emitting Diode"], ans: 0 }
   ],
   eee: [
     { q: "Unit of electrical resistance?", opts: ["Volts", "Amperes", "Ohms", "Watts"], ans: 2 },
     { q: "What does a transformer do?", opts: ["Converts AC to DC", "Converts DC to AC", "Steps up or steps down AC voltage", "Stores electrical energy"], ans: 2 },
     { q: "Ohm's law: V = ?", opts: ["I/R", "R/I", "IR", "I^2R"], ans: 2 },
+    { q: "What is the unit of electrical power?", opts: ["Joule", "Watt", "Volt", "Ampere"], ans: 1 },
+    { q: "Which device converts mechanical energy to electrical energy?", opts: ["Motor", "Generator", "Transformer", "Inverter"], ans: 1 },
+    { q: "What does a rectifier do?", opts: ["AC to DC", "DC to AC", "Step up voltage", "Step down voltage"], ans: 0 },
+    { q: "What is the SI unit of inductance?", opts: ["Farad", "Henry", "Tesla", "Weber"], ans: 1 },
+    { q: "Which motor is commonly used in household ceiling fans?", opts: ["DC motor", "Stepper motor", "Single-phase induction motor", "Synchronous motor"], ans: 2 },
+    { q: "What is the power factor of a purely resistive circuit?", opts: ["0", "0.5", "1", "Infinity"], ans: 2 },
+    { q: "Which of these materials is the best conductor of electricity?", opts: ["Aluminum", "Copper", "Silver", "Gold"], ans: 2 },
+    { q: "What is the main function of a fuse?", opts: ["Increase voltage", "Protect circuit from overcurrent", "Store energy", "Reduce resistance"], ans: 1 },
+    { q: "What does MCB stand for in electrical circuits?", opts: ["Miniature Circuit Breaker", "Main Circuit Breaker", "Maximum Current Breaker", "Molded Case Breaker"], ans: 0 },
+    { q: "Which part of a DC machine acts as a mechanical rectifier?", opts: ["Stator", "Rotor", "Commutator", "Brushes"], ans: 2 },
+    { q: "What is the slip in a synchronous motor under normal operation?", opts: ["0", "1", "100%", "Variable"], ans: 0 },
+    { q: "What causes skin effect in conductors?", opts: ["DC current", "AC current", "High voltage", "High temperature"], ans: 1 },
+    { q: "Which passive device stores energy in a magnetic field?", opts: ["Capacitor", "Inductor", "Resistor", "Battery"], ans: 1 },
+    { q: "What does UPS stand for?", opts: ["Uninterruptible Power Supply", "Unified Power System", "Universal Power Supply", "Under Power System"], ans: 0 },
+    { q: "What is the standard voltage for 3-phase supply in India?", opts: ["110V", "220V", "440V/415V", "11kV"], ans: 2 },
+    { q: "In a balanced 3-phase system, what is the phase difference between voltages?", opts: ["90 degrees", "120 degrees", "180 degrees", "360 degrees"], ans: 1 },
+    { q: "What is the SI unit of magnetic flux?", opts: ["Tesla", "Weber", "Henry", "Gauss"], ans: 1 }
   ],
   mech: [
     { q: "Study of fluids in motion?", opts: ["Thermodynamics", "Fluid Dynamics", "Statics", "Kinematics"], ans: 1 },
     { q: "Thermodynamic cycle for steam engine?", opts: ["Otto cycle", "Diesel cycle", "Rankine cycle", "Brayton cycle"], ans: 2 },
     { q: "What is stress?", opts: ["Force per unit Area", "Mass per unit Volume", "Change in length per unit length", "Work per unit time"], ans: 0 },
+    { q: "What is the SI unit of force?", opts: ["Joule", "Watt", "Newton", "Pascal"], ans: 2 },
+    { q: "What does CAD stand for?", opts: ["Computer Aided Design", "Computer Assisted Drawing", "Central Automated Design", "Control And Design"], ans: 0 },
+    { q: "Which thermodynamic cycle is used in petrol engines?", opts: ["Diesel cycle", "Rankine cycle", "Otto cycle", "Carnot cycle"], ans: 2 },
+    { q: "What does Hooke's Law state?", opts: ["Stress is proportional to strain", "Force equals mass times acceleration", "Pressure is constant", "Volume is proportional to temperature"], ans: 0 },
+    { q: "What is the property by which a material can be drawn into wires?", opts: ["Malleability", "Ductility", "Elasticity", "Hardness"], ans: 1 },
+    { q: "Which law of thermodynamics introduces the concept of entropy?", opts: ["Zeroth law", "First law", "Second law", "Third law"], ans: 2 },
+    { q: "What is the primary function of a flywheel?", opts: ["To change gears", "To store rotational energy", "To cool the engine", "To steer the vehicle"], ans: 1 },
+    { q: "Which gear is used to connect non-parallel and non-intersecting shafts?", opts: ["Spur gear", "Bevel gear", "Worm gear", "Helical gear"], ans: 2 },
+    { q: "What is the SI unit of pressure?", opts: ["Newton", "Pascal", "Joule", "Watt"], ans: 1 },
+    { q: "In an IC engine, what connects the piston to the crankshaft?", opts: ["Flywheel", "Camshaft", "Connecting rod", "Valve"], ans: 2 },
+    { q: "Which manufacturing process involves pouring molten metal into a mold?", opts: ["Forging", "Welding", "Machining", "Casting"], ans: 3 },
+    { q: "What does CNC stand for in manufacturing?", opts: ["Computer Numeric Control", "Central Network Control", "Computerized Natural Control", "Control Network Computer"], ans: 0 },
+    { q: "What is the main purpose of lubrication in machines?", opts: ["Increase friction", "Reduce friction and dissipate heat", "Cool the exhaust", "Hold parts together"], ans: 1 },
+    { q: "Which type of bearing can take both radial and axial loads simultaneously?", opts: ["Roller bearing", "Thrust bearing", "Tapered roller bearing", "Journal bearing"], ans: 2 },
+    { q: "What is the primary alloying element in steel?", opts: ["Copper", "Carbon", "Zinc", "Aluminum"], ans: 1 },
+    { q: "What is kinematics?", opts: ["Study of motion with forces", "Study of motion without considering forces", "Study of fluids at rest", "Study of heat transfer"], ans: 1 },
+    { q: "Which type of welding uses a non-consumable tungsten electrode?", opts: ["MIG", "TIG", "Stick", "Submerged arc"], ans: 1 }
   ],
 };
 
@@ -1048,24 +1140,141 @@ expose('closeModal', closeModal);
 //  MOCK INTERVIEW
 // ============================================================
 const interviewData = {
-  cse: ["Tell me about a time you debugged a complex issue.", "Explain the difference between REST and GraphQL.", "How do you handle state in a React application?"],
-  it: ["What is your process for troubleshooting a network issue?", "How do you ensure data security in a web application?", "Describe a time you worked with a cloud platform."],
-  ece: ["Explain how a multiplexer works.", "What challenges have you faced in PCB design?", "How would you optimize power consumption in a circuit?"],
-  eee: ["Describe the function of a relay.", "How do you analyze a power distribution system?", "Explain the principle of electromagnetic induction."],
-  mech: ["What are the key considerations in material selection?", "How do you approach a thermal analysis problem?", "Describe a CAD project you worked on recently."],
+  cse: [
+    "Tell me about a time you debugged a complex issue.",
+    "Explain the difference between REST and GraphQL.",
+    "How do you handle state in a React application?",
+    "Describe the process of optimizing a slow SQL query.",
+    "What are the key differences between SQL and NoSQL databases?",
+    "Explain the concept of closures in JavaScript with an example.",
+    "How do you ensure the security of a web application?",
+    "Can you describe your experience with CI/CD pipelines?",
+    "How would you approach designing a scalable microservices architecture?",
+    "What is your preferred method for managing application state in React?",
+    "Discuss a challenging bug you fixed recently and how you approached it.",
+    "How do you balance writing fast code versus maintaining code readability?",
+    "Explain the differences between procedural, object-oriented, and functional programming.",
+    "What design patterns do you frequently use and why?",
+    "Describe what Docker is and its advantages over traditional virtual machines.",
+    "Describe a situation where you had to work with a difficult team member. How did you handle it?",
+    "Tell me about a time you failed to meet a deadline. What happened and what did you learn?",
+    "How do you handle receiving negative feedback or criticism on your code?",
+    "Imagine you are given a task with no clear instructions. What is your first step?",
+    "What motivates you to keep learning in a constantly changing field like software engineering?"
+  ],
+  it: [
+    "What is your process for troubleshooting a network issue?",
+    "How do you ensure data security in a web application?",
+    "Describe a time you worked with a cloud platform like AWS or Azure.",
+    "Explain the OSI model and why it is important.",
+    "How do you handle user authentication and authorization securely?",
+    "What steps do you take to secure a Linux server?",
+    "Describe the difference between an intrusion detection system (IDS) and an intrusion prevention system (IPS).",
+    "How do you manage and monitor a large-scale database infrastructure?",
+    "What is your experience with container orchestration tools like Kubernetes?",
+    "Explain the concept of Infrastructure as Code (IaC).",
+    "Discuss a time when you had to recover data after a system failure.",
+    "How do you approach managing technology vendor relationships?",
+    "What is the difference between synchronous and asynchronous communication in microservices?",
+    "Explain the concept of load balancing and mention some algorithms used.",
+    "How do you ensure high availability in a web service architecture?",
+    "Can you share an experience where you had to persuade a client or manager to adopt a new technology?",
+    "How do you prioritize tasks when everything seems like an emergency?",
+    "Tell me about a time you made a critical mistake on a live system. How did you recover?",
+    "Describe a scenario where you had to explain a complex technical issue to a non-technical person.",
+    "What do you do when you disagree with a process or policy implemented by your leadership?"
+  ],
+  ece: [
+    "Explain how a multiplexer works.",
+    "What challenges have you faced in PCB design?",
+    "How would you optimize power consumption in a circuit?",
+    "Describe the difference between an analog and a digital signal.",
+    "Explain the working principle of a phase-locked loop (PLL).",
+    "What is the purpose of an Analog-to-Digital Converter (ADC), and what parameters are important?",
+    "Discuss your experience with microcontrollers such as Arduino, STM32, or PIC.",
+    "How do you mitigate electromagnetic interference (EMI) in a circuit design?",
+    "Explain the difference between combinational and sequential logic circuits.",
+    "What protocols do you typically use for inter-IC communication (e.g., I2C, SPI, UART)?",
+    "Describe what a Fourier Transform is and its relevance in signal processing.",
+    "How do you perform impedance matching in RF circuits?",
+    "Explain the concept of pulse-width modulation (PWM) and give an application.",
+    "Discuss a time you had to debug a faulty electronic prototype.",
+    "What are the differences between an FPGA and a generic microcontroller?",
+    "Tell me about a time when a project parameters changed midway. How did you adapt your approach?",
+    "Have you ever had to compromise on quality to meet a deadline? How did you justify it?",
+    "Describe a situation where you had to take the lead on a hardware project unexpectedly.",
+    "How do you stay calm and focused when a prototype constantly fails during testing?",
+    "What is your approach to handling conflicts of opinion during a design review?"
+  ],
+  eee: [
+    "Describe the function of a relay.",
+    "How do you analyze a power distribution system?",
+    "Explain the principle of electromagnetic induction.",
+    "What is the difference between synchronous and asynchronous motors?",
+    "Discuss the concept of power factor and why it needs to be corrected.",
+    "Explain how a three-phase power system is more advantageous than a single-phase system.",
+    "Describe the protective relays used in a power substation.",
+    "What is the skin effect in transmission lines?",
+    "Explain the working of a step-down transformer.",
+    "How is short-circuit current calculated in a power system?",
+    "Describe the differences between an alternator and a DC generator.",
+    "What role does a circuit breaker play, and how does it differentiate from a fuse?",
+    "Explain the importance of grounding in electrical installations.",
+    "How do variable frequency drives (VFDs) control motor speed?",
+    "Discuss your approach to designing a commercial building's lighting layout.",
+    "Tell me about a time you had to follow strict safety protocols even when it delayed the project.",
+    "How do you handle situations where a team member is not pulling their weight on a task?",
+    "Describe a time you identified a potential safety hazard and how you addressed it.",
+    "Have you ever had to work under intense pressure? How did you maintain your composure?",
+    "What steps do you take to build trust when working with a new engineering team?"
+  ],
+  mech: [
+    "What are the key considerations in material selection?",
+    "How do you approach a thermal analysis problem?",
+    "Describe a CAD project you worked on recently.",
+    "Explain the differences between stress and strain.",
+    "What are the basic laws of thermodynamics?",
+    "Describe the process of designing a robust gear train.",
+    "How do you perform finite element analysis (FEA) on a mechanical component?",
+    "Discuss the trade-offs between various manufacturing processes like casting vs. machining.",
+    "Explain the principle behind the Bernoulli equation in fluid dynamics.",
+    "How do you select the appropriate bearing type for a rotating shaft?",
+    "Describe the differences between a 2-stroke and a 4-stroke engine.",
+    "What is the importance of a factor of safety in mechanical design?",
+    "Explain the concept of fatigue failure in metals.",
+    "Discuss your experience with rapid prototyping techniques (e.g., 3D printing).",
+    "How do you optimize a design for manufacturability (DFM)?",
+    "Tell me about a time when a design you created completely failed in testing. How did you react?",
+    "Describe a scenario where you had to negotiate resources or time for your project.",
+    "How do you handle working with someone whose work style completely clashes with yours?",
+    "Can you share an instance where you had to make a quick decision without having all the data?",
+    "What keeps you passionate about engineering, even when dealing with tedious drafting or repetitive tasks?"
+  ],
 };
-let intState = { dept: null, qIndex: 0, timer: null, timeLeft: 300, messages: [] };
+let intState = { dept: null, qIndex: 0, timer: null, timeLeft: 300, messages: [], questions: [] };
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 function startInterviewForDept(dept) {
   intState.dept = dept;
   intState.qIndex = 0;
   intState.timeLeft = 300;
   intState.messages = [];
+  
+  // Clone and shuffle the questions for the chosen department so they are in random order
+  intState.questions = [...(interviewData[dept] || interviewData['cse'])];
+  shuffleArray(intState.questions);
+  
   document.getElementById('interview-step-dept').classList.add('hidden');
   document.getElementById('interview-step-chat').classList.remove('hidden');
   document.getElementById('interview-chat-area').innerHTML = '';
   startInterviewTimer();
-  appendInterviewMessage('bot', `Hi! I'm your mock interviewer for ${dept.toUpperCase()}. Let's get started. ${interviewData[dept][0]}`);
+  appendInterviewMessage('bot', `Hi! I'm your mock interviewer for ${dept.toUpperCase()}. Let's get started. ${intState.questions[0]}`);
 }
 expose('startInterviewForDept', startInterviewForDept);
 
@@ -1093,7 +1302,7 @@ function sendInterviewMessage() {
 expose('sendInterviewMessage', sendInterviewMessage);
 
 function botInterviewReply() {
-  const questions = interviewData[intState.dept] || interviewData['cse'];
+  const questions = intState.questions;
   if (intState.qIndex < questions.length) {
     appendInterviewMessage('bot', `Good point. Next question: ${questions[intState.qIndex]}`);
   } else {
@@ -1173,7 +1382,10 @@ function clearAptitudeTimer() { clearInterval(aptTimer); }
 // ============================================================
 //  ENROLL MODAL OPENER
 // ============================================================
-function openEnrollModal(courseName) {
+let pendingDownloadUrl = null;
+
+function openEnrollModal(courseName, downloadUrl = null) {
+  pendingDownloadUrl = downloadUrl;
   const form = document.getElementById('enroll-step-form');
   const success = document.getElementById('enroll-step-success');
   if (form) form.classList.remove('hidden');
@@ -1297,6 +1509,34 @@ async function submitEnrolment() {
     const successEl = document.getElementById('enroll-step-success');
     if (formEl) formEl.classList.add('hidden');
     if (successEl) successEl.classList.remove('hidden');
+
+    if (pendingDownloadUrl) {
+      setTimeout(() => {
+        showToast('Downloading your file...', 'success');
+
+        let fileUrl = pendingDownloadUrl;
+
+        // If it's a Cloudinary link, add 'fl_attachment' to force download from server
+        if (fileUrl.includes('res.cloudinary.com') && !fileUrl.includes('fl_attachment')) {
+          fileUrl = fileUrl.replace('/upload/', '/upload/fl_attachment/');
+        }
+
+        // Use a hidden iframe to trigger download so we stay on the same page
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = fileUrl;
+        document.body.appendChild(iframe);
+
+        // Remove iframe after 5 seconds
+        setTimeout(() => {
+          if (document.body.contains(iframe)) {
+            document.body.removeChild(iframe);
+          }
+        }, 5000);
+
+        pendingDownloadUrl = null;
+      }, 500);
+    }
 
   } catch (err) {
     console.error("[Enrolment] ❌ Firestore error:", err);
@@ -1919,6 +2159,10 @@ function initFloatingVideo() {
     if (fvControls) fvControls.style.display = 'none';
     if (fvCameraIcon) fvCameraIcon.classList.add('hidden');
   }
+
+  // Expose for external auto-triggers
+  window.maximizeFV = maximizeVideo;
+  window.minimizeFV = minimizeVideo;
 
   fvOverlay.addEventListener('click', function (e) { e.preventDefault(); maximizeVideo(); });
   if (fvCloseBtn) fvCloseBtn.addEventListener('click', function (e) { e.stopPropagation(); minimizeVideo(); });
