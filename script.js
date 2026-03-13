@@ -301,7 +301,7 @@ function showTab(tab) {
     renderPlacementSection();
     setTimeout(initHeroCarousel, 80);
     animateStats();
-    
+
     // Auto-maximize the camera floating layer
     if (window.maximizeFV && window.minimizeFV) {
       setTimeout(() => {
@@ -494,27 +494,27 @@ const mainCourses = [
   { title: 'Web Development', depts: ['cse', 'it'], desc: 'Full-stack mastery using modern frameworks.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125329/web_development_hsrufw.jpg' },
   { title: 'Cyber Security', depts: ['cse', 'it'], desc: 'Ethical hacking and network defense strategies.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125252/cyber_security_qbnna5.jpg' },
   { title: 'UI & UX', depts: ['cse', 'it'], desc: 'User-centric design and prototyping with Figma.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125322/UI_UX_llvgvn.jpg' },
-  { title: 'Networking & CCNA', depts: ['cse', 'it', 'ece'], desc: 'Cisco certified network associate training.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125315/Networking_in_cse_okyuvk.jpg' },
+  { title: 'Networking & CCNA', depts: ['cse', 'it', 'ece'], desc: 'Cisco certified network associate training.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378113/netwoking_ccna_e7yxwl.jpg' },
   { title: 'IoT', depts: ['cse', 'it'], desc: 'Connecting the physical world with smart devices.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125283/iot_in_cse_uxadyl.jpg' },
   { title: 'Deep Learning & Gen AI', depts: ['cse', 'it'], desc: 'Neural networks and Large Language Models.', duration: '14 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125271/deep_learning_ropsge.jpg' },
   { title: 'Data Analytics & Science', depts: ['cse', 'it'], desc: 'Statistical modeling and big data insights.', duration: '16 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125258/data_analysis_cycnmo.jpg' },
   { title: 'Cloud Computing', depts: ['cse', 'it'], desc: 'AWS/Azure infrastructure and deployment.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cloud_computing_dunn5i.jpg' },
   { title: 'AI & ML', depts: ['cse', 'it'], desc: 'Foundational machine learning algorithms.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125236/aiml_x0faze.jpg' },
-  { title: 'Antenna Design', depts: ['ece'], desc: 'RF engineering and electromagnetic simulation.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/antenna_design_g2m5h4.jpg' },
-  { title: 'Embedded Systems', depts: ['ece'], desc: 'Microcontroller programming and architecture.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/embedded_systems_n8k3j6.jpg' },
-  { title: 'PCB Design & Fab', depts: ['ece'], desc: 'Hardware design and manufacturing processes.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/pcb_design_r1l7m2.jpg' },
-  { title: 'Robotics', depts: ['ece', 'mech'], desc: 'Mechatronics and automated system design.', duration: '14 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/robotics_s4p9m8.jpg' },
-  { title: 'IoT & Energy Monitoring', depts: ['eee'], desc: 'Smart metering and grid power management.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/iot_energy_t5k2n7.jpg' },
-  { title: 'BMS', depts: ['eee'], desc: 'Building Management Systems & Automation.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/bms_automation_u3j8l1.jpg' },
-  { title: 'Electrical Safety', depts: ['eee'], desc: 'Compliance and safety standards for industry.', duration: '6 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/electrical_safety_v7m4k5.jpg' },
-  { title: 'EV Technology', depts: ['eee', 'mech'], desc: 'Electric vehicle powertrain and battery tech.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/ev_technology_w2n6p9.jpg' },
-  { title: 'Industrial Automation', depts: ['eee', 'mech'], desc: 'PLC, SCADA, and manufacturing workflows.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/industrial_automation_x6k1m3.jpg' },
-  { title: 'Power Electronics', depts: ['eee'], desc: 'Power conversion and semiconductor devices.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/power_electronics_y8l3n4.jpg' },
-  { title: 'Smart Grid Tech', depts: ['eee'], desc: 'Modern power distribution and networking.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/smart_grid_z5p2m6.jpg' },
-  { title: '3D Printing', depts: ['mech'], desc: 'Additive manufacturing and rapid prototyping.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/3d_printing_a4m9k7.jpg' },
-  { title: 'CAD, CAM, CAE', depts: ['mech'], desc: 'Computer-aided design and engineering analysis.', duration: '16 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cad_cam_cae_b8n5j1.jpg' },
-  { title: 'CNC Programming', depts: ['mech'], desc: 'Precision manufacturing and toolpathing.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/cnc_programming_c3k7m4.jpg' },
-  { title: 'EV Design & Dynamics', depts: ['mech'], desc: 'Vehicle dynamics and structural chassis design.', duration: '14 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/ev_design_dynamics_d7l2n8.jpg' },
+  { title: 'Antenna Design', depts: ['ece'], desc: 'RF engineering and electromagnetic simulation.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378185/antenna_design_ns4c23.jpg' },
+  { title: 'Embedded Systems', depts: ['ece'], desc: 'Microcontroller programming and architecture.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378143/embedded_system_fv6utq.jpg' },
+  { title: 'PCB Design & Fab', depts: ['ece'], desc: 'Hardware design and manufacturing processes.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378320/pcb_design_ujtmag.jpg' },
+  { title: 'Robotics', depts: ['ece', 'mech'], desc: 'Mechatronics and automated system design.', duration: '14 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378026/robotics_vjpxuc.jpg' },
+  { title: 'IoT & Energy Monitoring', depts: ['eee'], desc: 'Smart metering and grid power management.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378212/IOT_and_energy_monitoring_ny1ra1.jpg' },
+  { title: 'BMS', depts: ['eee'], desc: 'Building Management Systems & Automation.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378224/Bms_loayit.jpg' },
+  { title: 'Electrical Safety', depts: ['eee'], desc: 'Compliance and safety standards for industry.', duration: '6 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378238/electrical_safety_standards_wy1fkx.jpg' },
+  { title: 'EV Technology', depts: ['eee', 'mech'], desc: 'Electric vehicle powertrain and battery tech.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378256/EV_technology_wpfmfh.jpg' },
+  { title: 'Industrial Automation', depts: ['eee', 'mech'], desc: 'PLC, SCADA, and manufacturing workflows.', duration: '10 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378284/industrial_automation_tec8x6.jpg' },
+  { title: 'Power Electronics', depts: ['eee'], desc: 'Power conversion and semiconductor devices.', duration: '12 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378345/power_electronics_rylarw.jpg' },
+  { title: 'Smart Grid Tech', depts: ['eee'], desc: 'Modern power distribution and networking.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378362/Smart_grid_and_technology_myzatj.jpg' },
+  { title: '3D Printing', depts: ['mech'], desc: 'Additive manufacturing and rapid prototyping.', duration: '8 Weeks', level: 'Beginner', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378386/3d_printing_and_additive_manufacturing_ljsnri.jpg' },
+  { title: 'CAD, CAM, CAE', depts: ['mech'], desc: 'Computer-aided design and engineering analysis.', duration: '16 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378400/cad_cam_cae_dd1ola.jpg' },
+  { title: 'CNC Programming', depts: ['mech'], desc: 'Precision manufacturing and toolpathing.', duration: '10 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378408/cnc_programing_and_manufacturing_pzvm2x.jpg' },
+  { title: 'EV Design & Dynamics', depts: ['mech'], desc: 'Vehicle dynamics and structural chassis design.', duration: '14 Weeks', level: 'Advanced', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773378421/ev_design_amd_dynamics_mcurer.jpg' },
 ];
 
 const bundleCourses = [
@@ -1265,11 +1265,11 @@ function startInterviewForDept(dept) {
   intState.qIndex = 0;
   intState.timeLeft = 300;
   intState.messages = [];
-  
+
   // Clone and shuffle the questions for the chosen department so they are in random order
   intState.questions = [...(interviewData[dept] || interviewData['cse'])];
   shuffleArray(intState.questions);
-  
+
   document.getElementById('interview-step-dept').classList.add('hidden');
   document.getElementById('interview-step-chat').classList.remove('hidden');
   document.getElementById('interview-chat-area').innerHTML = '';
