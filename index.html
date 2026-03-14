@@ -138,6 +138,31 @@
     </div>
   </div>
 
+  <style>
+    #exit-intent-resources .resource-card {
+      margin-bottom: 0;
+      padding: 16px;
+    }
+  </style>
+
+  <!-- ===== EXIT INTENT MODAL ===== -->
+  <div id="modal-exit-intent" class="hidden">
+    <div class="modal-overlay" onclick="closeModal('modal-exit-intent')">
+      <div class="modal" onclick="event.stopPropagation()"
+        style="max-width:700px; padding:40px; border-top:6px solid #FFD600; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-close" onclick="closeModal('modal-exit-intent')">✕</div>
+        <div style="text-align:center; margin-bottom: 24px;">
+          <h2 style="font-size: 28px; margin-bottom: 12px; color: var(--dark);">Wait a second!</h2>
+          <p style="font-size: 16px; color: var(--grey-mid); font-weight: 500;">We give free career guidance by
+            providing resources. Access them below!</p>
+        </div>
+        <div id="exit-intent-resources" style="display:grid; grid-template-columns: 1fr; gap:16px;">
+          <!-- Resources will be injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== SYLLABUS MODAL ===== -->
   <div id="modal-syllabus" class="hidden" onscroll="checkSyllabusScroll()">
     <div class="modal-overlay" onclick="closeModal('modal-syllabus')">
@@ -866,25 +891,41 @@
           <div class="footer-grid">
             <div class="footer-brand">
               <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772577611/Seed_Joined_White_o9i2rr.png"
-              alt="MSEED" style="height:120px;width:auto;object-fit:contain;display:block;">
+                alt="MSEED" style="height:120px;width:auto;object-fit:contain;display:block;">
               <p>Empowering students with industry-relevant skills, ATS-ready tools, and real career outcomes since
                 2018.</p>
               <div class="social-links">
-                <a class="social-btn" href="https://www.instagram.com/mechnidoseed/" target="_blank" aria-label="Instagram" style="color:#E1306C;">
+                <a class="social-btn" href="https://www.instagram.com/mechnidoseed/" target="_blank"
+                  aria-label="Instagram" style="color:#E1306C;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <rect width="24" height="24" rx="6" fill="#fff"/>
+                    <rect width="24" height="24" rx="6" fill="#fff" />
                     <g>
-                      <rect x="5" y="5" width="14" height="14" rx="4.2" stroke="#E1306C" stroke-width="1.5" fill="none"/>
-                      <circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.5" fill="none"/>
-                      <circle cx="16.2" cy="7.8" r="1" fill="#E1306C"/>
+                      <rect x="5" y="5" width="14" height="14" rx="4.2" stroke="#E1306C" stroke-width="1.5"
+                        fill="none" />
+                      <circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.5" fill="none" />
+                      <circle cx="16.2" cy="7.8" r="1" fill="#E1306C" />
                     </g>
                   </svg>
                 </a>
-                <a class="social-btn" href="https://l.instagram.com/?u=https%3A%2F%2Fwww.linkedin.com%2Fshowcase%2Fideaedu%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGny8RCCCBlMLncbwZ-4fVuEIacLFt3kiO71VAlCU_qR4Ky3UI2KI0JLsVVNxw_aem_qeeaRlmAnevAhAn1yXIplw&e=AT57m1N8sGsw1Kfjfo4zdtpmcavs82TO1LMDoFK6AO-Wp-jqUOGDDg12gS6IJw--BwCByVahyyulbn4eN4O7EYl8CbrViwxok30UTDJzJalodRJIhCevoDdHUQ" target="_blank" aria-label="LinkedIn" style="color:#0077B5;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M6.94 7.5A1.44 1.44 0 1 1 8.38 6a1.44 1.44 0 0 1-1.44 1.5zm.06 2.25h2.75v8.25H7V9.75zm4.25 0h2.63v1.13h.04a2.89 2.89 0 0 1 2.6-1.43c2.78 0 3.29 1.83 3.29 4.21v4.34h-2.75v-3.85c0-.92-.02-2.1-1.28-2.1-1.28 0-1.48 1-1.48 2.03v3.92h-2.75V9.75z" fill="#0077B5"/></svg>
+                <a class="social-btn"
+                  href="https://l.instagram.com/?u=https%3A%2F%2Fwww.linkedin.com%2Fshowcase%2Fideaedu%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGny8RCCCBlMLncbwZ-4fVuEIacLFt3kiO71VAlCU_qR4Ky3UI2KI0JLsVVNxw_aem_qeeaRlmAnevAhAn1yXIplw&e=AT57m1N8sGsw1Kfjfo4zdtpmcavs82TO1LMDoFK6AO-Wp-jqUOGDDg12gS6IJw--BwCByVahyyulbn4eN4O7EYl8CbrViwxok30UTDJzJalodRJIhCevoDdHUQ"
+                  target="_blank" aria-label="LinkedIn" style="color:#0077B5;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="6" fill="#fff" />
+                    <path
+                      d="M6.94 7.5A1.44 1.44 0 1 1 8.38 6a1.44 1.44 0 0 1-1.44 1.5zm.06 2.25h2.75v8.25H7V9.75zm4.25 0h2.63v1.13h.04a2.89 2.89 0 0 1 2.6-1.43c2.78 0 3.29 1.83 3.29 4.21v4.34h-2.75v-3.85c0-.92-.02-2.1-1.28-2.1-1.28 0-1.48 1-1.48 2.03v3.92h-2.75V9.75z"
+                      fill="#0077B5" />
+                  </svg>
                 </a>
-                <a class="social-btn" href="https://l.instagram.com/?u=https%3A%2F%2Fyoutube.com%2F%40mechnidoseed%3Fsi%3DD0rlLu7DHyUyx_fO%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnB9ASF7-C2WnTPZ9SHt74c5tJwI4pXW5_oAdJ33BG7Zzx7TUrax09URbTyFU_aem_7f7_5dRr3uwYXEG1z0EcKA&e=AT4_Le6FFBZ8vJJFaHiIXky11u-vSubmXNV0dyMuixiiq7E_yfn5t7sifmXgXPpSgqXZDgt0ksm_IKcDBkd4gqDEyB4Ghso8g5vuQnHm6opFHejIqfxmmWEBhQ" target="_blank" aria-label="YouTube" style="color:#FF0000;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M21.8 8.001a2.75 2.75 0 0 0-1.94-1.94C18.1 6 12 6 12 6s-6.1 0-7.86.061A2.75 2.75 0 0 0 2.2 8.001 28.2 28.2 0 0 0 2 12a28.2 28.2 0 0 0 .2 3.999 2.75 2.75 0 0 0 1.94 1.94C5.9 18 12 18 12 18s6.1 0 7.86-.061a2.75 2.75 0 0 0 1.94-1.94A28.2 28.2 0 0 0 22 12a28.2 28.2 0 0 0-.2-3.999zM10 15.5v-7l6 3.5-6 3.5z" fill="#FF0000"/></svg>
+                <a class="social-btn"
+                  href="https://l.instagram.com/?u=https%3A%2F%2Fyoutube.com%2F%40mechnidoseed%3Fsi%3DD0rlLu7DHyUyx_fO%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnB9ASF7-C2WnTPZ9SHt74c5tJwI4pXW5_oAdJ33BG7Zzx7TUrax09URbTyFU_aem_7f7_5dRr3uwYXEG1z0EcKA&e=AT4_Le6FFBZ8vJJFaHiIXky11u-vSubmXNV0dyMuixiiq7E_yfn5t7sifmXgXPpSgqXZDgt0ksm_IKcDBkd4gqDEyB4Ghso8g5vuQnHm6opFHejIqfxmmWEBhQ"
+                  target="_blank" aria-label="YouTube" style="color:#FF0000;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="6" fill="#fff" />
+                    <path
+                      d="M21.8 8.001a2.75 2.75 0 0 0-1.94-1.94C18.1 6 12 6 12 6s-6.1 0-7.86.061A2.75 2.75 0 0 0 2.2 8.001 28.2 28.2 0 0 0 2 12a28.2 28.2 0 0 0 .2 3.999 2.75 2.75 0 0 0 1.94 1.94C5.9 18 12 18 12 18s6.1 0 7.86-.061a2.75 2.75 0 0 0 1.94-1.94A28.2 28.2 0 0 0 22 12a28.2 28.2 0 0 0-.2-3.999zM10 15.5v-7l6 3.5-6 3.5z"
+                      fill="#FF0000" />
+                  </svg>
                 </a>
 
               </div>
@@ -1123,7 +1164,7 @@
           </div>
 
           <!-- GET TEMPLATE -->
-          <div class="tpl-banner" id="tplBanner" style="display:none">
+          <div class="tpl-banner" id="tplBanner" style="display:none; visibility:hidden;">
             <div>
               <h3>Get Your Free ATS-Optimized Template</h3>
               <p>Fully editable · Auto-filled with your details · Download as PDF</p>
@@ -1828,13 +1869,13 @@
             <a class="inst-mob-link"
               onclick="renderAboutSection();showInstTab('inst-tab-about');closeInstMobileMenu()">About</a>
           </li>
-          <li><a href="#inst-services" class="inst-nav-link" onclick="instNavScroll(null,'inst-services')">Services</a>
+          <li><a href="javascript:void(0)" class="inst-nav-link" onclick="instNavScroll(null,'inst-services')">Services</a>
           </li>
           <li><a href="ev-project.html" class="inst-nav-link">EV Projects</a></li>
-          <li><a href="#inst-articles" class="inst-nav-link" onclick="instNavScroll(null,'inst-articles')">Articles</a>
+          <li><a href="javascript:void(0)" class="inst-nav-link" onclick="instNavScroll(null,'inst-articles')">Articles</a>
           </li>
           <span class="inst-nav-link" style="cursor:pointer;" onclick="navigate('inst-partners')">Partnership</span>
-          <li><a href="#inst-contact" class="inst-nav-link" onclick="instNavScroll(null,'inst-contact')">Contact</a>
+          <li><a href="javascript:void(0)" class="inst-nav-link" onclick="instNavScroll(null,'inst-contact')">Contact</a>
           </li>
         </ul>
 
@@ -1908,8 +1949,7 @@
               <div class="inst-hero-eyebrow position-relative" id="ih-eyebrow">
                 <span class="inst-live-dot"></span>
                 Industry-Integrated Education Partner
-                <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/2-01_jho0gj.png" alt="Mascot"
-                  class="inst-page-mascot mascot-hero-pos">
+
               </div>
 
               <h1 class="inst-hero-headline" id="ih-headline">
@@ -1953,8 +1993,7 @@
             <!-- Right: Stats cards -->
             <div class="col-lg-5 inst-hero-right" id="ih-right">
               <div class="inst-stats-cluster position-relative">
-                <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-9-01_cjtsa7.png"
-                  alt="Mascot" class="inst-page-mascot mascot-stats-pos">
+
 
                 <div class="inst-stat-card inst-stat-main">
                   <div class="inst-stat-icon">🎓</div>
@@ -2122,8 +2161,7 @@
       <section id="inst-services" class="inst-section" style="padding: 100px 0; background: var(--inst-dark-3);">
         <div class="container">
           <div class="inst-section-header position-relative" style="text-align: center; margin-bottom: 60px;">
-            <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453726/Untitled-3-01_uin6cn.png"
-              alt="Mascot" class="inst-page-mascot mascot-services-pos">
+
             <div class="inst-tieups-tag">Our Expertise</div>
             <h2 class="inst-tieups-title" style="font-size: clamp(32px, 4vw, 42px);">Comprehensive Institutional
               Services
@@ -2228,8 +2266,7 @@
         <div class="container">
           <div class="row align-items-center mb-5">
             <div class="col-lg-6 ev-left-col position-relative">
-              <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/10-01_stcdi5.png" alt="Mascot"
-                class="inst-page-mascot mascot-ev-pos">
+
               <div class="inst-tieups-tag"
                 style="color: var(--inst-gold); background: rgba(240, 180, 41, 0.1); border-color: rgba(240, 180, 41, 0.3);">
                 Innovation Hub</div>
@@ -2304,8 +2341,7 @@
       <section id="inst-articles" class="inst-section" style="padding: 100px 0; background: var(--inst-dark-2);">
         <div class="container">
           <div class="inst-section-header position-relative" style="text-align: center; margin-bottom: 60px;">
-            <img src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772453725/Untitled-5-01_zxq3cn.png"
-              alt="Mascot" class="inst-page-mascot mascot-articles-pos">
+
             <div class="inst-tieups-tag">Campus Insights</div>
             <h2 class="inst-tieups-title">Student Articles & Research</h2>
             <p class="inst-tieups-desc" style="max-width: 600px; margin: 0 auto;">Showcasing top academic achievements,
@@ -2413,9 +2449,9 @@
         <!-- Main Footer Content -->
         <div class="inst-footer-main">
           <div class="container">
-            <div class="row g-5">
+            <div class="inst-footer-flex">
               <!-- Col 1: Brand -->
-              <div class="col-lg-4 col-md-6">
+              <div class="inst-footer-col brand">
                 <div class="inst-footer-logo mb-4">
                   <img
                     src="https://res.cloudinary.com/dn6ljz4uo/image/upload/v1772561971/WhatsApp_Image_2026-03-03_at_11.47.25_PM-removebg-preview_cwt05o.png"
@@ -2424,24 +2460,23 @@
                 </div>
                 <p class="inst-footer-text">
                   MSEED bridges the gap between traditional academics and the rapidly evolving tech industry through
-                  live
-                  classes, EV labs, and expert placement training.
+                  live classes, EV labs, and expert placement training.
                 </p>
               </div>
 
               <!-- Col 2: Quick Links -->
-              <div class="col-lg-3 col-md-6">
+              <div class="inst-footer-col">
                 <h4 class="inst-footer-title">Quick Links</h4>
                 <ul class="inst-footer-links">
-                  <li><a href="#inst-hero" onclick="instNavScroll(null,'inst-hero')">Home</a></li>
-                  <li><a href="#inst-services" onclick="instNavScroll(null,'inst-services')">Our Services</a></li>
-                  <li><a href="#inst-articles" onclick="instNavScroll(null,'inst-articles')">Student Research</a></li>
-                  <li><a href="#inst-tieups" onclick="instNavScroll(null,'inst-tieups')">Partnerships</a></li>
+                  <li><a href="javascript:void(0)" onclick="instNavScroll(null,'inst-hero')">Home</a></li>
+                  <li><a href="javascript:void(0)" onclick="instNavScroll(null,'inst-services')">Our Services</a></li>
+                  <li><a href="javascript:void(0)" onclick="instNavScroll(null,'inst-articles')">Student Research</a></li>
+                  <li><a href="javascript:void(0)" onclick="instNavScroll(null,'inst-tieups')">Partnerships</a></li>
                 </ul>
               </div>
 
               <!-- Col 3: Contact -->
-              <div class="col-lg-3 col-md-6">
+              <div class="inst-footer-col">
                 <h4 class="inst-footer-title">Contact Us</h4>
                 <ul class="inst-footer-links">
                   <li><span style="color: var(--inst-green);">Email:</span> <a
@@ -2453,16 +2488,145 @@
               </div>
 
               <!-- Col 4: Socials -->
-              <div class="col-lg-2 col-md-6">
+              <div class="inst-footer-col socials">
                 <h4 class="inst-footer-title">Connect</h4>
-                <div class="inst-footer-socials">
-                  <a href="#" class="inst-social-icon">IN</a>
-                  <a href="#" class="inst-social-icon">TW</a>
-                  <a href="#" class="inst-social-icon">IG</a>
+                <div class="social-links">
+                  <a class="social-btn" href="https://www.instagram.com/mechnidoseed/" target="_blank"
+                    aria-label="Instagram" style="color:#E1306C;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect width="24" height="24" rx="6" fill="#fff" />
+                      <g>
+                        <rect x="5" y="5" width="14" height="14" rx="4.2" stroke="#E1306C" stroke-width="1.5"
+                          fill="none" />
+                        <circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.5" fill="none" />
+                        <circle cx="16.2" cy="7.8" r="1" fill="#E1306C" />
+                      </g>
+                    </svg>
+                  </a>
+                  <a class="social-btn"
+                    href="https://l.instagram.com/?u=https%3A%2F%2Fwww.linkedin.com%2Fshowcase%2Fideaedu%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGny8RCCCBlMLncbwZ-4fVuEIacLFt3kiO71VAlCU_qR4Ky3UI2KI0JLsVVNxw_aem_qeeaRlmAnevAhAn1yXIplw&e=AT57m1N8sGsw1Kfjfo4zdtpmcavs82TO1LMDoFK6AO-Wp-jqUOGDDg12gS6IJw--BwCByVahyyulbn4eN4O7EYl8CbrViwxok30UTDJzJalodRJIhCevoDdHUQ"
+                    target="_blank" aria-label="LinkedIn" style="color:#0077B5;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect width="24" height="24" rx="6" fill="#fff" />
+                      <path
+                        d="M6.94 7.5A1.44 1.44 0 1 1 8.38 6a1.44 1.44 0 0 1-1.44 1.5zm.06 2.25h2.75v8.25H7V9.75zm4.25 0h2.63v1.13h.04a2.89 2.89 0 0 1 2.6-1.43c2.78 0 3.29 1.83 3.29 4.21v4.34h-2.75v-3.85c0-.92-.02-2.1-1.28-2.1-1.28 0-1.48 1-1.48 2.03v3.92h-2.75V9.75z"
+                        fill="#0077B5" />
+                    </svg>
+                  </a>
+                  <a class="social-btn"
+                    href="https://l.instagram.com/?u=https%3A%2F%2Fyoutube.com%2F%40mechnidoseed%3Fsi%3DD0rlLu7DHyUyx_fO%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnB9ASF7-C2WnTPZ9SHt74c5tJwI4pXW5_oAdJ33BG7Zzx7TUrax09URbTyFU_aem_7f7_5dRr3uwYXEG1z0EcKA&e=AT4_Le6FFBZ8vJJFaHiIXky11u-vSubmXNV0dyMuixiiq7E_yfn5t7sifmXgXPpSgqXZDgt0ksm_IKcDBkd4gqDEyB4Ghso8g5vuQnHm6opFHejIqfxmmWEBhQ"
+                    target="_blank" aria-label="YouTube" style="color:#FF0000;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <rect width="24" height="24" rx="6" fill="#fff" />
+                      <path
+                        d="M21.8 8.001a2.75 2.75 0 0 0-1.94-1.94C18.1 6 12 6 12 6s-6.1 0-7.86.061A2.75 2.75 0 0 0 2.2 8.001 28.2 28.2 0 0 0 2 12a28.2 28.2 0 0 0 .2 3.999 2.75 2.75 0 0 0 1.94 1.94C5.9 18 12 18 12 18s6.1 0 7.86-.061a2.75 2.75 0 0 0 1.94-1.94A28.2 28.2 0 0 0 22 12a28.2 28.2 0 0 0-.2-3.999zM10 15.5v-7l6 3.5-6 3.5z"
+                        fill="#FF0000" />
+                    </svg>
+                  </a>
+
                 </div>
               </div>
             </div>
           </div>
+          <style>
+            .inst-footer-flex {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 32px;
+              justify-content: space-between;
+            }
+
+            .inst-footer-col {
+              min-width: 220px;
+              flex: 1 1 220px;
+              margin-bottom: 24px;
+              max-width: 340px;
+            }
+
+            .inst-footer-col.brand {
+              min-width: 240px;
+              max-width: 380px;
+            }
+
+            .inst-footer-col.socials {
+              min-width: 120px;
+              max-width: 180px;
+            }
+
+            .inst-footer-logo {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+            }
+
+            .inst-footer-socials {
+              display: flex;
+              gap: 12px;
+              margin-top: 8px;
+            }
+
+            .inst-social-icon {
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              background: #fff;
+              color: #00b17b;
+              border-radius: 50%;
+              text-align: center;
+              line-height: 32px;
+              font-weight: bold;
+              font-size: 15px;
+              box-shadow: 0 2px 8px rgba(0, 177, 123, 0.08);
+              transition: background 0.2s, color 0.2s;
+            }
+
+            .inst-social-icon:hover {
+              background: #00b17b;
+              color: #fff;
+            }
+
+            @media (max-width: 900px) {
+              .inst-footer-flex {
+                flex-direction: column;
+                gap: 0;
+              }
+
+              .inst-footer-col {
+                max-width: 100%;
+                min-width: 0;
+              }
+
+              .inst-footer-col.brand {
+                max-width: 100%;
+              }
+
+              .inst-footer-col.socials {
+                max-width: 100%;
+              }
+            }
+
+            @media (max-width: 600px) {
+              .inst-footer-main .container {
+                padding-left: 12px;
+                padding-right: 12px;
+              }
+
+              .inst-footer-title {
+                font-size: 16px;
+              }
+
+              .inst-footer-logo img {
+                height: 36px;
+              }
+
+              .inst-footer-socials .inst-social-icon {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 13px;
+              }
+            }
+          </style>
         </div>
 
         <!-- Bottom Bar -->
