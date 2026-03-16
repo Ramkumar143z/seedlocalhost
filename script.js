@@ -485,10 +485,10 @@ expose('animateStats', animateStats);
 //  COURSES DATA
 // ============================================================
 const freeCourses = [
-  { title: 'Web Dev Foundations', desc: 'HTML, CSS & basic JavaScript — build your first webpage. Zero to deployed in 2 weeks.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/web_dev_q7k2x1.jpg' },
-  { title: 'Python Basics', desc: 'Learn Python syntax, loops, functions, and basic projects. The best first programming language.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/python_basics_a8m9p2.jpg' },
-  { title: 'Resume Writing 101', desc: "Craft an ATS-ready resume from scratch. Understand keywords, formatting, and the do's and don'ts.", duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'ece', 'eee', 'mech'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/resume_writing_b5n3k8.jpg' },
-  { title: 'Excel for Beginners', desc: 'Master Excel basics — formulas, charts, pivot tables. Essential for any career path.', duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'mech', 'eee'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125245/excel_basics_c2l7m9.jpg' },
+  { title: 'Web Dev Foundations', desc: 'HTML, CSS & basic JavaScript — build your first webpage. Zero to deployed in 2 weeks.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773656802/web_dev_foundation_ipsh2r.jpg' },
+  { title: 'Python Basics', desc: 'Learn Python syntax, loops, functions, and basic projects. The best first programming language.', duration: '2 Weeks', level: 'Beginner', depts: ['free', 'cse', 'it'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773656814/python_basic_pnkbjx.jpg' },
+  { title: 'Resume Writing 101', desc: "Craft an ATS-ready resume from scratch. Understand keywords, formatting, and the do's and don'ts.", duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'ece', 'eee', 'mech'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773656822/resume_writing_klbllc.jpg' },
+  { title: 'Excel for Beginners', desc: 'Master Excel basics — formulas, charts, pivot tables. Essential for any career path.', duration: '1 Week', level: 'Beginner', depts: ['free', 'cse', 'it', 'mech', 'eee'], isFree: true, image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773656828/excel_dgugyl.jpg' },
 ];
 const mainCourses = [
   { title: 'Web Development', depts: ['cse', 'it'], desc: 'Full-stack mastery using modern frameworks.', duration: '12 Weeks', level: 'Intermediate', image: 'https://res.cloudinary.com/dn6ljz4uo/image/upload/v1773125329/web_development_hsrufw.jpg' },
@@ -2189,3 +2189,21 @@ function showSchTab(tab) {
   window.scrollTo(0, 0);
 }
 expose('showSchTab', showSchTab);
+
+function openUniversalGallery() {
+  if (document.getElementById('page-college-student').classList.contains('active')) {
+    showTab('gallery');
+  } else if (document.getElementById('page-institution').classList.contains('active')) {
+    showInstTab('gallery');
+  } else if (document.getElementById('page-junior-student').classList.contains('active')) {
+    showJrTab('gallery');
+  } else if (document.getElementById('page-school-inst').classList.contains('active')) {
+    showSchTab('gallery');
+  } else {
+    // Default fallback if on portal select pages - maybe navigate to college gallery or just show a toast
+    navigate('college-student');
+    showTab('gallery');
+  }
+}
+expose('openUniversalGallery', openUniversalGallery);
+//
