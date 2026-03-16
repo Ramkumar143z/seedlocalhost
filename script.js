@@ -112,7 +112,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // ============================================================
 const pages = ['portal', 'mseed', 'college-student', 'institution', 'inst-partners', 'inst-ev', 'junior', 'junior-student', 'school-inst'];
 
-function navigate(page, skipHistory = false) {
+function navigate(page) {
   pages.forEach(p => {
     const el = document.getElementById('page-' + p);
     if (el) el.classList.remove('active');
@@ -130,7 +130,7 @@ function navigate(page, skipHistory = false) {
     animateMseedSelect();
   } else if (page === 'college-student') {
     document.getElementById('page-college-student').classList.add('active');
-    // We defer the initial tab setup to hash change logic
+    showTab('home');
   } else if (page === 'institution') {
     document.getElementById('page-institution').classList.add('active');
     setTimeout(initInstitutionPortal, 100);
@@ -146,72 +146,17 @@ function navigate(page, skipHistory = false) {
     animateJuniorSelect();
   } else if (page === 'junior-student') {
     document.getElementById('page-junior-student').classList.add('active');
+    showJrTab('jrhome');
     animateJuniorStudentPortal();
   } else if (page === 'school-inst') {
     document.getElementById('page-school-inst').classList.add('active');
+    showSchTab('schservices');
     animateSchoolInstPortal();
   }
   window.scrollTo(0, 0);
-
-  // Instead of pushState, we manage the portal search param so refresh works
-  if (!skipHistory) {
-    const url = new URL(window.location);
-    url.searchParams.set('portal', page);
-    // Remove the hash if we are changing portals
-    url.hash = '';
-    history.pushState({ portal: page }, '', url);
-  }
 }
 expose('navigate', navigate);
 
-// Safe navigation history system
-window.addEventListener('popstate', (e) => {
-  // 1. Get current active portal from DOM
-  let currentPortal = null;
-  pages.forEach(p => {
-    const el = document.getElementById('page-' + p);
-    if (el && el.classList.contains('active')) currentPortal = p;
-  });
-
-  // 2. Determine what portal we SHOULD be on based on URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const targetPortal = urlParams.get('portal') || 'portal';
-
-  // 3. Switch portals if necessary
-  if (currentPortal !== targetPortal) {
-    navigate(targetPortal, true);
-  }
-
-  // 4. Handle inner tabs based on hash
-  const hash = window.location.hash.replace('#', '');
-  
-  if (targetPortal === 'college-student') {
-    showTab(hash || 'home', true);
-  } else if (targetPortal === 'institution') {
-    showInstTab(hash || 'inst-tab-home', true);
-  } else if (targetPortal === 'junior-student') {
-    showJrTab(hash || 'jrhome', true);
-  } else if (targetPortal === 'school-inst') {
-    if (typeof showSchTab === 'function') showSchTab(hash || 'schservices', true);
-  }
-});
-
-// Initialization check for hashes
-window.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const targetPortal = urlParams.get('portal');
-  const hash = window.location.hash.replace('#', '');
-  
-  if (targetPortal === 'college-student') {
-    setTimeout(() => showTab(hash || 'home', true), 100);
-  } else if (targetPortal === 'institution') {
-    setTimeout(() => showInstTab(hash || 'inst-tab-home', true), 100);
-  } else if (targetPortal === 'junior-student') {
-    setTimeout(() => showJrTab(hash || 'jrhome', true), 100);
-  } else if (targetPortal === 'school-inst') {
-    if (typeof showSchTab === 'function') setTimeout(() => showSchTab(hash || 'schservices', true), 100);
-  }
-});
 // Sub-portal entrance animations (GSAP, runs on each navigation)
 function animateMseedSelect() {
   if (!window.gsap) return;
@@ -333,7 +278,7 @@ function triggerAutoEnroll() {
 }
 expose('triggerAutoEnroll', triggerAutoEnroll);
 
-function showTab(tab, skipHistory = false) {
+function showTab(tab) {
   if (tab !== 'home' && autoEnrollTimer) clearTimeout(autoEnrollTimer);
 
   document.querySelectorAll('#page-college-student .tab-content').forEach(t => t.classList.add('hidden'));
@@ -373,15 +318,10 @@ function showTab(tab, skipHistory = false) {
   if (tab === 'games') renderGames();
   if (tab === 'precourses') { currentPreCourseFilter = 'all'; renderPreCourses(); }
   window.scrollTo(0, 0);
-
-  if (!skipHistory) {
-    if (tab === 'home') history.pushState(null, '', window.location.pathname + window.location.search);
-    else history.pushState(null, '', '#' + tab);
-  }
 }
 expose('showTab', showTab);
 
-function showInstTab(tab, skipHistory = false) {
+function showInstTab(tab) {
   document.querySelectorAll('#page-institution .inst-tab-content').forEach(t => t.classList.add('hidden'));
   document.querySelectorAll('#page-institution .inst-nav-link').forEach(l => l.classList.remove('active'));
   const target = document.getElementById(tab);
@@ -391,15 +331,10 @@ function showInstTab(tab, skipHistory = false) {
   });
   if (tab === 'inst-tab-about') renderAboutSection();
   window.scrollTo(0, 0);
-
-  if (!skipHistory) {
-    if (tab === 'inst-tab-home') history.pushState(null, '', window.location.pathname + window.location.search);
-    else history.pushState(null, '', '#' + tab);
-  }
 }
 expose('showInstTab', showInstTab);
 
-function showJrTab(tab, skipHistory = false) {
+function showJrTab(tab) {
   document.querySelectorAll('#page-junior-student .jrtab-content').forEach(t => {
     t.classList.add('hidden');
     t.style.display = 'none';
@@ -429,11 +364,6 @@ function showJrTab(tab, skipHistory = false) {
     if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + tab + "'")) l.classList.add('active');
   });
   window.scrollTo(0, 0);
-
-  if (!skipHistory) {
-    if (tab === 'jrhome') history.pushState(null, '', window.location.pathname + window.location.search);
-    else history.pushState(null, '', '#' + tab);
-  }
 }
 expose('showJrTab', showJrTab);
 
@@ -1517,7 +1447,6 @@ async function submitAutoEnrolment() {
     });
 
     console.log("[AutoEnrol] ✅ Saved! Doc ID:", docRef.id);
-    localStorage.setItem('hasEnrolled', 'true');
 
     const formEl = document.getElementById('auto-enroll-step-form');
     const successEl = document.getElementById('auto-enroll-step-success');
@@ -1575,7 +1504,6 @@ async function submitEnrolment() {
     });
 
     console.log("[Enrolment] ✅ Saved! Doc ID:", docRef.id);
-    localStorage.setItem('hasEnrolled', 'true');
 
     const formEl = document.getElementById('enroll-step-form');
     const successEl = document.getElementById('enroll-step-success');
@@ -2250,7 +2178,7 @@ if (document.readyState === 'loading') {
 // ============================================================
 //  showSchTab  (school institution tabs)
 // ============================================================
-function showSchTab(tab, skipHistory = false) {
+function showSchTab(tab) {
   document.querySelectorAll('#page-school-inst .sch-tab-content').forEach(t => t.classList.add('hidden'));
   document.querySelectorAll('#page-school-inst .sch-nav-link').forEach(l => l.classList.remove('active'));
   const target = document.getElementById('schtab-' + tab);
@@ -2259,47 +2187,5 @@ function showSchTab(tab, skipHistory = false) {
     if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + tab + "'")) l.classList.add('active');
   });
   window.scrollTo(0, 0);
-
-  if (!skipHistory) {
-    if (tab === 'schservices') history.pushState(null, '', window.location.pathname + window.location.search);
-    else history.pushState(null, '', '#' + tab);
-  }
 }
 expose('showSchTab', showSchTab);
-
-// ============================================================
-//  EXIT INTENT POPUP
-// ============================================================
-let exitIntentShown = false;
-
-document.addEventListener('mouseout', (e) => {
-  // Check if mouse left the window (no related target) and exited near the top
-  if (!e.relatedTarget && e.clientY < 20 && !exitIntentShown) {
-    if (localStorage.getItem('hasEnrolled') === 'true') {
-      return;
-    }
-
-    exitIntentShown = true;
-    showExitIntentModal();
-  }
-});
-
-function showExitIntentModal() {
-  const modal = document.getElementById('modal-exit-intent');
-  const container = document.getElementById('exit-intent-resources');
-  if (!modal || !container) return;
-
-  // Render resources into the exit intent modal
-  container.innerHTML = resources.map(r => `
-    <div class="resource-card" style="box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid var(--grey-pale);">
-      <div class="resource-icon">${r.icon}</div>
-      <div class="resource-info"><h4 style="margin-bottom: 4px;">${r.title}</h4><p style="font-size: 13px;">${r.desc}</p></div>
-      <div class="resource-meta" style="flex-direction: column; align-items: stretch; gap: 8px;">
-        <span class="pdf-badge" style="align-self: flex-start;">${r.type} · ${r.size}</span>
-        <button class="btn btn-primary" style="padding:8px 16px;font-size:13px; width:100%; justify-content:center;" onclick="closeModal('modal-exit-intent'); ${r.url && r.url !== '#' ? `openEnrollModal('${r.title.replace(/'/g, "\\'")}', '${r.url}')` : `showToast('📥 Downloading: ${r.title.split(' ').slice(0, 3).join(' ')}...','success')`}">Download Now</button>
-      </div>
-    </div>`).join('');
-
-  openModal('modal-exit-intent');
-}
-expose('showExitIntentModal', showExitIntentModal);
