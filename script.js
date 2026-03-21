@@ -411,6 +411,7 @@ function showInstTab(tab, isPopState = false) {
     } else {
         setTimeout(initInstitutionPortal, 50);
     }
+    setTimeout(initInstFloatingBar, 300);
     if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 200);
   }
   
@@ -2207,16 +2208,29 @@ expose('openJrAbout', openJrAbout);
 // ============================================================
 //  INSTITUTION FLOATING ENROLL BAR
 // ============================================================
+let instScrollListenerSet = false;
 function initInstFloatingBar() {
   const bar = document.getElementById('inst-floating-enroll-bar');
   const tieups = document.getElementById('inst-tieups');
   const footer = document.getElementById('inst-contact');
   if (!bar || !tieups || !footer) return;
-  window.addEventListener('scroll', function () {
+
+  function checkScroll() {
+    const portal = document.getElementById('page-institution');
+    if (!portal || !portal.classList.contains('active')) {
+        bar.classList.remove('show');
+        return;
+    }
     const tieupsTop = tieups.getBoundingClientRect().top;
     const footerBottom = footer.getBoundingClientRect().bottom;
     bar.classList.toggle('show', tieupsTop <= 0 && footerBottom > 0);
-  }, { passive: true });
+  }
+
+  if (!instScrollListenerSet) {
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    instScrollListenerSet = true;
+  }
+  checkScroll();
 }
 expose('initInstFloatingBar', initInstFloatingBar);
 
