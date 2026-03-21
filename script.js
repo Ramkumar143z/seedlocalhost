@@ -2371,3 +2371,10 @@ window.addEventListener('popstate', (event) => {
 document.addEventListener('DOMContentLoaded', () => {
   initialHistoryLock();
 });
+
+// Exit confirmation alert
+window.addEventListener('beforeunload', (event) => {
+  // Standard way to trigger a browser confirmation dialog
+  event.preventDefault();
+  event.returnValue = ''; // Universal support
+});
