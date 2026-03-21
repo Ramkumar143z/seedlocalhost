@@ -791,6 +791,181 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
+        /* ─── Export Mode ────────────────────────── */
+        .export-mode .export-check-wrap {
+            display: flex !important;
+        }
+
+        .export-check-wrap {
+            display: none;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 5;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg4);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 0.5px solid var(--border2);
+            cursor: pointer;
+        }
+
+        .export-check-wrap input {
+            cursor: pointer;
+        }
+
+        .export-check-wrap span {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .export-mode .metric,
+        .export-mode .card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .export-mode .metric:hover,
+        .export-mode .card:hover {
+            border-color: var(--green);
+        }
+
+        .export-mode-active .metric:not(.selected),
+        .export-mode-active .card:not(.selected) {
+            opacity: 0.3;
+            filter: grayscale(0.5);
+        }
+
+        .export-bar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg2);
+            border: 0.5px solid var(--green);
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .export-bar-text {
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .export-bar-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-export {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel {
+            background: var(--bg3);
+            color: var(--text2);
+        }
+
+        .btn-download {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .btn-topbar-export {
+            background: var(--bg3);
+            color: var(--text2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 0.5px solid var(--border);
+            transition: all 0.2s;
+            margin-right: 8px;
+        }
+
+        .btn-topbar-export:hover {
+            background: var(--bg4);
+            color: var(--text);
+            border-color: var(--green);
+        }
+
+        .csv-download {
+            font-size: 10px;
+            color: var(--text3);
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .csv-download:hover {
+            color: var(--green);
+        }
+
+        /* ─── Print ──────────────────────────────── */
+        @media print {
+            .sidebar, .topbar, .nav-item, .tab-row, .export-bar, .export-check-wrap, .csv-download, .nav-badge, .live-indicator {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .main {
+                padding: 0;
+            }
+
+            .content {
+                padding: 0;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .card, .metric {
+                break-inside: avoid;
+                border: 1px solid #eee !important;
+                background: #fff !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+
+            .metric-value, .card-title, .bar-label, .bar-count, .session-name, .funnel-label, td, th {
+                color: #000 !important;
+            }
+
+            .export-mode-active .metric:not(.selected),
+            .export-mode-active .card:not(.selected) {
+                display: none !important;
+            }
+
+            canvas {
+                max-width: 100% !important;
+            }
+        }
     </style>
 </head>
 
@@ -887,11 +1062,17 @@
                     <h1>Analytics Dashboard</h1>
                     <p>MSEED — All portals overview · Last updated just now</p>
                 </div>
-                <div class="tab-row">
-                    <button class="tab active" onclick="setRange('today',this)">Today</button>
-                    <button class="tab" onclick="setRange('week',this)">Week</button>
-                    <button class="tab" onclick="setRange('month',this)">Month</button>
-                    <button class="tab" onclick="setRange('all',this)">All time</button>
+                <div style="display: flex; align-items: center;">
+                    <button class="btn-topbar-export" onclick="toggleExportMode()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Export
+                    </button>
+                    <div class="tab-row">
+                        <button class="tab active" onclick="setRange('today',this)">Today</button>
+                        <button class="tab" onclick="setRange('week',this)">Week</button>
+                        <button class="tab" onclick="setRange('month',this)">Month</button>
+                        <button class="tab" onclick="setRange('all',this)">All time</button>
+                    </div>
                 </div>
             </div>
 
@@ -900,25 +1081,29 @@
                 <!-- Metrics -->
                 <p class="section-label">Overview</p>
                 <div class="metric-grid">
-                    <div class="metric c-green">
+                    <div class="metric c-green" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="metric-icon">👁</div>
                         <div class="metric-label">Total sessions</div>
                         <div class="metric-value" id="m-sessions">1,284</div>
                         <div class="metric-delta delta-up" id="m-sessions-d">▲ +12% vs yesterday</div>
                     </div>
-                    <div class="metric c-blue">
+                    <div class="metric c-blue" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="metric-icon">👤</div>
                         <div class="metric-label">Unique visitors</div>
                         <div class="metric-value" id="m-visitors">847</div>
                         <div class="metric-delta delta-up" id="m-visitors-d">▲ +8% vs yesterday</div>
                     </div>
-                    <div class="metric c-coral">
+                    <div class="metric c-coral" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="metric-icon">⏱</div>
                         <div class="metric-label">Avg. time on site</div>
                         <div class="metric-value" id="m-time">4m 32s</div>
                         <div class="metric-delta delta-up" id="m-time-d">▲ +23s vs yesterday</div>
                     </div>
-                    <div class="metric c-amber">
+                    <div class="metric c-amber" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="metric-icon">📋</div>
                         <div class="metric-label">Enrol form opens</div>
                         <div class="metric-value" id="m-enroll">213</div>
@@ -928,7 +1113,8 @@
 
                 <!-- Visit line + Donut -->
                 <div class="charts-row">
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div>
                                 <div class="card-title">Portal visits over time</div>
@@ -949,7 +1135,8 @@
                         <div style="position:relative;height:210px"><canvas id="visitChart"></canvas></div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div>
                                 <div class="card-title">Portal share</div>
@@ -972,14 +1159,16 @@
 
                 <!-- Btn clicks + Session + Tab nav -->
                 <div class="bottom-row">
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">Most clicked buttons</div>
                         </div>
                         <div id="btn-bars"></div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">Avg. session duration</div>
                             <div class="card-sub">by portal</div>
@@ -987,7 +1176,8 @@
                         <div id="session-list"></div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">College portal tabs</div>
                             <div class="card-sub">Navigation clicks</div>
@@ -998,18 +1188,26 @@
 
                 <!-- Funnel + Heatmap -->
                 <div class="charts-row">
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div>
                                 <div class="card-title">Enrolment funnel</div>
                                 <div class="card-sub">Visitor → submission</div>
                             </div>
-                            <span class="card-badge badge-blue">11.5% conversion</span>
+                            <div style="display:flex; align-items:center; gap:10px">
+                                <span class="card-badge badge-blue">11.5% conversion</span>
+                                <div class="csv-download" onclick="event.stopPropagation(); downloadCSV('FUNNEL')">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                    CSV
+                                </div>
+                            </div>
                         </div>
                         <div id="funnel"></div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">Traffic heatmap</div>
                             <div class="card-sub">Visits by hour × day</div>
@@ -1022,9 +1220,14 @@
 
                 <!-- Top pages table + Live feed -->
                 <div class="charts-row full-row">
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">Top pages / sections</div>
+                            <div class="csv-download" onclick="event.stopPropagation(); downloadCSV('PAGES')">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                CSV
+                            </div>
                         </div>
                         <div class="table-wrap">
                             <table>
@@ -1043,7 +1246,8 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
                         <div class="card-header">
                             <div class="card-title">Live activity feed</div>
                             <span class="card-badge badge-green">Realtime</span>
@@ -1055,6 +1259,14 @@
             </div><!-- /content -->
         </div><!-- /main -->
     </div><!-- /layout -->
+
+    <div class="export-bar" id="exportBar">
+        <div class="export-bar-text" id="exportStatus">Select components to include in report</div>
+        <div class="export-bar-btns">
+            <button class="btn-export btn-cancel" onclick="toggleExportMode()">Cancel</button>
+            <button class="btn-export btn-download" onclick="downloadReport()">Download PDF</button>
+        </div>
+    </div>
 
     <script>
         /* ── Data ─────────────────────────────────── */
@@ -1311,6 +1523,89 @@
         buildHeatmap();
         buildPagesTable();
         buildActivityFeed();
+        /* ── Export Logic ───────────────────────── */
+        let exportMode = false;
+
+        function toggleExportMode() {
+            exportMode = !exportMode;
+            const body = document.body;
+            const bar = document.getElementById('exportBar');
+            
+            if (exportMode) {
+                body.classList.add('export-mode');
+                bar.style.display = 'flex';
+                updateExportStatus();
+            } else {
+                body.classList.remove('export-mode', 'export-mode-active');
+                bar.style.display = 'none';
+                document.querySelectorAll('.selected').forEach(el => {
+                    el.classList.remove('selected');
+                    el.querySelector('input').checked = false;
+                });
+            }
+        }
+
+        function selectItem(el) {
+            if (!exportMode) return;
+            el.classList.toggle('selected');
+            const cb = el.querySelector('input');
+            cb.checked = el.classList.contains('selected');
+            
+            const anySelected = document.querySelectorAll('.selected').length > 0;
+            if (anySelected) {
+                document.body.classList.add('export-mode-active');
+            } else {
+                document.body.classList.remove('export-mode-active');
+            }
+            updateExportStatus();
+        }
+
+        function updateExportStatus() {
+            const count = document.querySelectorAll('.selected').length;
+            const status = document.getElementById('exportStatus');
+            if (count === 0) {
+                status.textContent = 'Select components to include in report';
+            } else {
+                status.textContent = `${count} component${count > 1 ? 's' : ''} selected`;
+            }
+        }
+
+        function downloadReport() {
+            const selected = document.querySelectorAll('.selected');
+            if (selected.length === 0) {
+                alert('Please select at least one component to export.');
+                return;
+            }
+            window.print();
+        }
+
+        function downloadCSV(dataId) {
+            let data = [];
+            let filename = 'export.csv';
+            
+            if (dataId === 'PAGES') {
+                data = PAGES;
+                filename = 'top_pages_report.csv';
+            } else if (dataId === 'FUNNEL') {
+                data = FUNNEL;
+                filename = 'enrolment_funnel_data.csv';
+            }
+
+            if (data.length === 0) return;
+
+            const headers = Object.keys(data[0]).join(',');
+            const rows = data.map(obj => Object.values(obj).map(v => `"${v}"`).join(',')).join('\n');
+            const csvContent = "data:text/csv;charset=utf-8," + headers + "\n" + rows;
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", filename);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         simulateLive();
     </script>
 </body>

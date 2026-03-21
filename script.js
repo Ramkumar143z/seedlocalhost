@@ -38,6 +38,65 @@ function expose(name, fn) {
   window[name] = fn;
 }
 
+// ── HISTORY API NAVIGATION ─────────────────────────────────────
+let isPopStateNav = false;
+let navStack = []; // Global navigation stack
+const DEFAULT_STATE = { portal: 'main', page: 'portal', tab: null };
+
+function getPortalForPage(page) {
+  if (['mseed', 'college-student', 'institution', 'inst-partners', 'inst-ev'].includes(page)) return 'mseed';
+  if (['junior', 'junior-student', 'school-inst'].includes(page)) return 'junior';
+  return 'main';
+}
+
+function pushNavigation(page, tab) {
+  if (isPopStateNav) return;
+  try {
+    const portal = getPortalForPage(page);
+    const newState = { portal, page, tab };
+    
+    // Avoid double-pushing the exact same state
+    const lastState = navStack[navStack.length - 1];
+    if (lastState && lastState.portal === newState.portal && lastState.page === newState.page && lastState.tab === newState.tab) {
+        return;
+    }
+
+    navStack.push(newState);
+    
+    // Sync with browser history
+    const url = new URL(window.location);
+    if (portal) url.searchParams.set('portal', portal);
+    if (page) url.searchParams.set('page', page);
+    if (tab) url.searchParams.set('tab', tab);
+    else url.searchParams.delete('tab');
+    
+    history.pushState(newState, "", url.toString());
+  } catch (e) {
+    console.warn("[History] pushState failed:", e);
+  }
+}
+
+function initialHistoryLock() {
+    try {
+        // Push a dummy state to prevent immediate exit
+        history.pushState({ lock: true }, "", window.location.href);
+        
+        // Push the actual initial state
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page') || 'portal';
+        const tab = urlParams.get('tab') || null;
+        const portal = getPortalForPage(page);
+        
+        const initialState = { portal, page, tab };
+        navStack.push(initialState);
+        history.pushState(initialState, "", window.location.href);
+        
+        console.log("[History] Navigation stack initialised with lock.");
+    } catch (e) {
+        console.warn("[History] Lock failed:", e);
+    }
+}
+
 // ============================================================
 //  LOGO LOADER
 // ============================================================
@@ -112,48 +171,56 @@ window.addEventListener('DOMContentLoaded', function () {
 // ============================================================
 const pages = ['portal', 'mseed', 'college-student', 'institution', 'inst-partners', 'inst-ev', 'junior', 'junior-student', 'school-inst'];
 
-function navigate(page) {
-  pages.forEach(p => {
-    const el = document.getElementById('page-' + p);
-    if (el) el.classList.remove('active');
-  });
-  ['mseed-portal-select', 'junior-portal-select'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-
-  if (page === 'portal') {
-    document.getElementById('page-portal').classList.add('active');
-  } else if (page === 'mseed') {
-    document.getElementById('page-mseed').classList.add('active');
-    document.getElementById('mseed-portal-select').style.display = 'block';
-    animateMseedSelect();
-  } else if (page === 'college-student') {
-    document.getElementById('page-college-student').classList.add('active');
-    showTab('home');
-  } else if (page === 'institution') {
-    document.getElementById('page-institution').classList.add('active');
-    setTimeout(initInstitutionPortal, 100);
-  } else if (page === 'inst-partners') {
-    const el = document.getElementById('page-inst-partners');
-    if (el) { el.classList.add('active'); setTimeout(() => { initPartnersSection(); }, 150); }
-  } else if (page === 'inst-ev') {
-    const el = document.getElementById('page-inst-ev');
-    if (el) el.classList.add('active');
-  } else if (page === 'junior') {
-    document.getElementById('page-junior').classList.add('active');
-    document.getElementById('junior-portal-select').style.display = 'block';
-    animateJuniorSelect();
-  } else if (page === 'junior-student') {
-    document.getElementById('page-junior-student').classList.add('active');
-    showJrTab('jrhome');
-    animateJuniorStudentPortal();
-  } else if (page === 'school-inst') {
-    document.getElementById('page-school-inst').classList.add('active');
-    showSchTab('schservices');
-    animateSchoolInstPortal();
+function navigate(page, isPopState = false) {
+  isPopStateNav = isPopState;
+  try {
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) el.classList.remove('active');
+    });
+    ['mseed-portal-select', 'junior-portal-select'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  
+    if (page === 'portal') {
+      document.getElementById('page-portal').classList.add('active');
+      pushNavigation('portal', null);
+    } else if (page === 'mseed') {
+      document.getElementById('page-mseed').classList.add('active');
+      document.getElementById('mseed-portal-select').style.display = 'block';
+      animateMseedSelect();
+      pushNavigation('mseed', null);
+    } else if (page === 'college-student') {
+      document.getElementById('page-college-student').classList.add('active');
+      showTab('home', isPopState);
+    } else if (page === 'institution') {
+      document.getElementById('page-institution').classList.add('active');
+      showInstTab('inst-tab-home', isPopState);
+    } else if (page === 'inst-partners') {
+      const el = document.getElementById('page-inst-partners');
+      if (el) { el.classList.add('active'); setTimeout(() => { initPartnersSection(); }, 150); }
+      pushNavigation('inst-partners', null);
+    } else if (page === 'inst-ev') {
+      const el = document.getElementById('page-inst-ev');
+      if (el) el.classList.add('active');
+      pushNavigation('inst-ev', null);
+    } else if (page === 'junior') {
+      document.getElementById('page-junior').classList.add('active');
+      document.getElementById('junior-portal-select').style.display = 'block';
+      animateJuniorSelect();
+      pushNavigation('junior', null);
+    } else if (page === 'junior-student') {
+      document.getElementById('page-junior-student').classList.add('active');
+      showJrTab('jrhome', isPopState);
+    } else if (page === 'school-inst') {
+      document.getElementById('page-school-inst').classList.add('active');
+      showSchTab('schservices', isPopState);
+    }
+    window.scrollTo(0, 0);
+  } finally {
+    isPopStateNav = false;
   }
-  window.scrollTo(0, 0);
 }
 expose('navigate', navigate);
 
@@ -278,7 +345,8 @@ function triggerAutoEnroll() {
 }
 expose('triggerAutoEnroll', triggerAutoEnroll);
 
-function showTab(tab) {
+function showTab(tab, isPopState = false) {
+  isPopStateNav = isPopState;
   if (tab !== 'home' && autoEnrollTimer) clearTimeout(autoEnrollTimer);
 
   document.querySelectorAll('#page-college-student .tab-content').forEach(t => t.classList.add('hidden'));
@@ -317,24 +385,45 @@ function showTab(tab) {
   if (tab === 'resources') renderResources();
   if (tab === 'games') renderGames();
   if (tab === 'precourses') { currentPreCourseFilter = 'all'; renderPreCourses(); }
+  
+  pushNavigation('college-student', tab);
   window.scrollTo(0, 0);
+  isPopStateNav = false;
 }
 expose('showTab', showTab);
 
-function showInstTab(tab) {
+function showInstTab(tab, isPopState = false) {
+  isPopStateNav = isPopState;
+  
   document.querySelectorAll('#page-institution .inst-tab-content').forEach(t => t.classList.add('hidden'));
-  document.querySelectorAll('#page-institution .inst-nav-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('#page-institution .inst-nav-link, #page-institution .inst-mob-link').forEach(l => l.classList.remove('active'));
+  
   const target = document.getElementById(tab);
   if (target) target.classList.remove('hidden');
-  document.querySelectorAll('#page-institution .inst-nav-link').forEach(l => {
+  
+  document.querySelectorAll('#page-institution .inst-nav-link, #page-institution .inst-mob-link').forEach(l => {
     if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + tab + "'")) l.classList.add('active');
   });
+
+  if (tab === 'inst-tab-home') {
+    if (window.gsap) {
+        initInstHeroGSAP();
+    } else {
+        setTimeout(initInstitutionPortal, 50);
+    }
+    if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 200);
+  }
+  
   if (tab === 'inst-tab-about') renderAboutSection();
+  
+  pushNavigation('institution', tab);
   window.scrollTo(0, 0);
+  isPopStateNav = false;
 }
 expose('showInstTab', showInstTab);
 
-function showJrTab(tab) {
+function showJrTab(tab, isPopState = false) {
+  isPopStateNav = isPopState;
   document.querySelectorAll('#page-junior-student .jrtab-content').forEach(t => {
     t.classList.add('hidden');
     t.style.display = 'none';
@@ -363,7 +452,15 @@ function showJrTab(tab) {
     l.classList.remove('active');
     if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + tab + "'")) l.classList.add('active');
   });
+  
+  if (tab === 'jrhome' && typeof animateJuniorStudentPortal === 'function') {
+      animateJuniorStudentPortal();
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }
+  
+  pushNavigation('junior-student', tab);
   window.scrollTo(0, 0);
+  isPopStateNav = false;
 }
 expose('showJrTab', showJrTab);
 
@@ -2182,7 +2279,8 @@ if (document.readyState === 'loading') {
 // ============================================================
 //  showSchTab  (school institution tabs)
 // ============================================================
-function showSchTab(tab) {
+function showSchTab(tab, isPopState = false) {
+  isPopStateNav = isPopState;
   document.querySelectorAll('#page-school-inst .sch-tab-content').forEach(t => t.classList.add('hidden'));
   document.querySelectorAll('#page-school-inst .sch-nav-link').forEach(l => l.classList.remove('active'));
   const target = document.getElementById('schtab-' + tab);
@@ -2190,7 +2288,15 @@ function showSchTab(tab) {
   document.querySelectorAll('#page-school-inst .sch-nav-link').forEach(l => {
     if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + tab + "'")) l.classList.add('active');
   });
+  
+  if (tab === 'schservices' && typeof animateSchoolInstPortal === 'function') {
+      animateSchoolInstPortal();
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }
+
+  pushNavigation('school-inst', tab);
   window.scrollTo(0, 0);
+  isPopStateNav = false;
 }
 expose('showSchTab', showSchTab);
 
@@ -2210,4 +2316,58 @@ function openUniversalGallery() {
   }
 }
 expose('openUniversalGallery', openUniversalGallery);
-//
+window.addEventListener('popstate', (event) => {
+  if (isPopStateNav) return;
+  
+  const state = event.state;
+  
+  // If we hit the lock or state is missing, prevent exit and reset
+  if (!state || state.lock || navStack.length <= 1) {
+    window.scrollTo(0, 0);
+    // If it's a lock state, we might have gone back too far. Re-lock and go to default.
+    if (navStack.length <= 1) {
+        navStack = [DEFAULT_STATE];
+        const url = new URL(window.location.origin + window.location.pathname);
+        isPopStateNav = true;
+        navigate('portal', true);
+        isPopStateNav = false;
+        history.pushState({ lock: true }, "", url.toString());
+        history.pushState(DEFAULT_STATE, "", url.toString());
+    }
+    return;
+  }
+
+  // Handle actual back navigation
+  isPopStateNav = true;
+  try {
+    navStack.pop(); // Remove current
+    const prevState = navStack[navStack.length - 1] || DEFAULT_STATE;
+    
+    if (prevState.page === 'college-student' && prevState.tab) {
+        navigate('college-student', true);
+        showTab(prevState.tab, true);
+    } else if (prevState.page === 'institution' && prevState.tab) {
+        navigate('institution', true);
+        showInstTab(prevState.tab, true);
+    } else if (prevState.page === 'junior-student' && prevState.tab) {
+        navigate('junior-student', true);
+        showJrTab(prevState.tab, true);
+    } else if (prevState.page === 'school-inst' && prevState.tab) {
+        navigate('school-inst', true);
+        showSchTab(prevState.tab, true);
+    } else {
+        navigate(prevState.page, true);
+    }
+    
+    // Always push a dummy state after handling popstate to keep the back button "hot"
+    // and prevent accidental swipe exit on mobile.
+    history.pushState(prevState, "", window.location.href);
+  } finally {
+    isPopStateNav = false;
+  }
+});
+
+// Initial state recording
+document.addEventListener('DOMContentLoaded', () => {
+  initialHistoryLock();
+});

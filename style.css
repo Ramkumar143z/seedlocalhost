@@ -42,6 +42,12 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 body {
@@ -50,6 +56,22 @@ body {
   color: var(--grey);
   line-height: 1.6;
   overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for all elements */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 img {
@@ -11418,7 +11440,8 @@ textarea.form-input {
   }
 
   .gallery-overlay {
-    opacity: 1; /* Always show overlay on mobile */
+    opacity: 1;
+    /* Always show overlay on mobile */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
   }
 }
@@ -11427,7 +11450,8 @@ textarea.form-input {
 #gallery-float-btn {
   position: fixed;
   bottom: 24px;
-  right: 96px; /* Positioned to the left of the mascot help button (24 + 60 + 12) */
+  right: 96px;
+  /* Positioned to the left of the mascot help button (24 + 60 + 12) */
   width: 60px;
   height: 60px;
   background: linear-gradient(135deg, #00b17b, #008f63);
@@ -11466,7 +11490,8 @@ textarea.form-input {
 @media (max-width: 600px) {
   #gallery-float-btn {
     bottom: 16px;
-    right: 76px; /* (12 + 52 + 12) */
+    right: 76px;
+    /* (12 + 52 + 12) */
     width: 52px;
     height: 52px;
   }
@@ -11478,4 +11503,4 @@ textarea.form-input {
   #gallery-float-btn .g-label {
     font-size: 8px;
   }
-}
+}
