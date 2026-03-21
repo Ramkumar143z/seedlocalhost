@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSEED — Analytics Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+        :root {
+            --green: #00b17b;
+            --green-light: rgba(0, 177, 123, 0.1);
+            --green-dim: rgba(0, 177, 123, 0.06);
+            --blue: #378ADD;
+            --teal: #1D9E75;
+            --coral: #D85A30;
+            --amber: #BA7517;
+            --pink: #D4537E;
+            --gray: #888780;
+            --bg: #0f1117;
+            --bg2: #161920;
+            --bg3: #1e222c;
+            --bg4: #252a35;
+            --border: rgba(255, 255, 255, 0.07);
+            --border2: rgba(255, 255, 255, 0.12);
+            --text: #eaedf3;
+            --text2: #8b90a0;
+            --text3: #565c6e;
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            min-height: 100vh;
+        }
+
+        /* ─── Layout ─────────────────────────────── */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ─── Sidebar ────────────────────────────── */
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            background: var(--bg2);
+            border-right: 0.5px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 20px 28px;
+            border-bottom: 0.5px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        .logo-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            color: var(--text2);
+            margin-top: 1px;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-section {
+            padding: 0 12px;
+            margin-bottom: 6px;
+        }
+
+        .nav-section-label {
+            font-size: 10px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text2);
+            font-size: 13px;
+            transition: all 0.15s;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: var(--bg3);
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            background: var(--green-dim);
+            color: var(--green);
+            border: 0.5px solid rgba(0, 177, 123, 0.2);
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+            flex-shrink: 0;
+        }
+
+        .nav-item.active .nav-icon {
+            opacity: 1;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            background: var(--green);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 20px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 16px 20px 0;
+            border-top: 0.5px solid var(--border);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text2);
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        /* ─── Main ───────────────────────────────── */
+        .main {
+            flex: 1;
+            overflow-x: hidden;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 28px;
+            border-bottom: 0.5px solid var(--border);
+            background: var(--bg2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .topbar-left h1 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .topbar-left p {
+            font-size: 12px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+
+        .tab-row {
+            display: flex;
+            gap: 4px;
+            background: var(--bg3);
+            padding: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .tab {
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text2);
+            transition: all 0.15s;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .tab.active {
+            background: var(--bg4);
+            color: var(--text);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text);
+        }
+
+        .content {
+            padding: 24px 28px;
+        }
+
+        /* ─── Section label ──────────────────────── */
+        .section-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        /* ─── Metric cards ───────────────────────── */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            background: var(--bg2);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .metric:hover {
+            border-color: var(--border2);
+        }
+
+        .metric::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+
+        .metric.c-green::before {
+            background: var(--green);
+        }
+
+        .metric.c-blue::before {
+            background: var(--blue);
+        }
+
+        .metric.c-coral::before {
+            background: var(--coral);
+        }
+
+        .metric.c-amber::before {
+            background: var(--amber);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--text2);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-delta {
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .delta-up {
+            color: #3fc78a;
+        }
+
+        .delta-dn {
+            color: #e05555;
+        }
+
+        .metric-icon {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            font-size: 18px;
+            opacity: 0.18;
+        }
+
+        /* ─── Charts row ─────────────────────────── */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .card {
+            background: var(--bg2);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--border2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-sub {
+            font-size: 11px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+
+        .card-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .badge-green {
+            background: rgba(0, 177, 123, 0.15);
+            color: var(--green);
+        }
+
+        .badge-blue {
+            background: rgba(55, 138, 221, 0.15);
+            color: var(--blue);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--text2);
+        }
+
+        .swatch {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* ─── Bottom row ─────────────────────────── */
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 9px;
+        }
+
+        .bar-label {
+            width: 120px;
+            font-size: 12px;
+            color: var(--text2);
+            flex-shrink: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 6px;
+            background: var(--bg3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bar-count {
+            width: 40px;
+            text-align: right;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+        }
+
+        .session-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 0.5px solid var(--border);
+            font-size: 12px;
+        }
+
+        .session-row:last-child {
+            border-bottom: none;
+        }
+
+        .session-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+
+        .session-name {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .session-time {
+            color: var(--text2);
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+        }
+
+        /* ─── Funnel ─────────────────────────────── */
+        .funnel-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        .funnel-row:last-child {
+            border-bottom: none;
+        }
+
+        .funnel-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--text3);
+            width: 20px;
+            text-align: right;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .funnel-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .funnel-stats {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            color: var(--text2);
+        }
+
+        .funnel-bar-wrap {
+            flex: 1;
+            height: 5px;
+            background: var(--bg3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .funnel-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .funnel-pct {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .funnel-content {
+            flex: 1;
+        }
+
+        /* ─── Heatmap ────────────────────────────── */
+        .heatmap-wrap {
+            overflow-x: auto;
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 38px repeat(7, 1fr);
+            gap: 3px;
+            align-items: center;
+            min-width: 320px;
+        }
+
+        .hm-label {
+            font-size: 10px;
+            color: var(--text3);
+            text-align: right;
+            padding-right: 6px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .hm-day {
+            font-size: 10px;
+            color: var(--text3);
+            text-align: center;
+            margin-bottom: 3px;
+        }
+
+        .hm-cell {
+            height: 20px;
+            border-radius: 3px;
+            cursor: default;
+            transition: opacity 0.15s;
+        }
+
+        .hm-cell:hover {
+            opacity: 0.7;
+        }
+
+        /* ─── Top pages table ────────────────────── */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0 12px 10px 0;
+            text-align: left;
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        td {
+            padding: 11px 12px 11px 0;
+            border-bottom: 0.5px solid var(--border);
+            color: var(--text2);
+            vertical-align: middle;
+        }
+
+        td:first-child {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .tag-blue {
+            background: rgba(55, 138, 221, 0.15);
+            color: var(--blue);
+        }
+
+        .tag-green {
+            background: rgba(0, 177, 123, 0.15);
+            color: var(--green);
+        }
+
+        .tag-coral {
+            background: rgba(216, 90, 48, 0.15);
+            color: var(--coral);
+        }
+
+        .tag-amber {
+            background: rgba(186, 117, 23, 0.15);
+            color: var(--amber);
+        }
+
+        .mini-sparkline {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 20px;
+        }
+
+        .spark-bar {
+            width: 4px;
+            border-radius: 2px;
+            background: var(--green);
+            opacity: 0.6;
+        }
+
+        /* ─── Live activity feed ─────────────────── */
+        .activity-item {
+            display: flex;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .activity-text {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.5;
+        }
+
+        .activity-text strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .activity-time {
+            font-size: 10px;
+            color: var(--text3);
+            font-family: 'DM Mono', monospace;
+            margin-top: 2px;
+        }
+
+        /* ─── Conversion gauge ───────────────────── */
+        .gauge-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .gauge-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            line-height: 1;
+            margin: 10px 0 4px;
+        }
+
+        .gauge-label {
+            font-size: 11px;
+            color: var(--text2);
+        }
+
+        .gauge-sub {
+            font-size: 11px;
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        .full-row {
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 1100px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .sidebar {
+                display: none;
+            }
+
+            .bottom-row {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ─── Export Mode ────────────────────────── */
+        .export-mode .export-check-wrap {
+            display: flex !important;
+        }
+
+        .export-check-wrap {
+            display: none;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 5;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg4);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 0.5px solid var(--border2);
+            cursor: pointer;
+        }
+
+        .export-check-wrap input {
+            cursor: pointer;
+        }
+
+        .export-check-wrap span {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .export-mode .metric,
+        .export-mode .card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .export-mode .metric:hover,
+        .export-mode .card:hover {
+            border-color: var(--green);
+        }
+
+        .export-mode-active .metric:not(.selected),
+        .export-mode-active .card:not(.selected) {
+            opacity: 0.3;
+            filter: grayscale(0.5);
+        }
+
+        .export-bar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg2);
+            border: 0.5px solid var(--green);
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .export-bar-text {
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .export-bar-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-export {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel {
+            background: var(--bg3);
+            color: var(--text2);
+        }
+
+        .btn-download {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .btn-topbar-export {
+            background: var(--bg3);
+            color: var(--text2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 0.5px solid var(--border);
+            transition: all 0.2s;
+            margin-right: 8px;
+        }
+
+        .btn-topbar-export:hover {
+            background: var(--bg4);
+            color: var(--text);
+            border-color: var(--green);
+        }
+
+        .csv-download {
+            font-size: 10px;
+            color: var(--text3);
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .csv-download:hover {
+            color: var(--green);
+        }
+
+        /* ─── Print ──────────────────────────────── */
+        @media print {
+            .sidebar, .topbar, .nav-item, .tab-row, .export-bar, .export-check-wrap, .csv-download, .nav-badge, .live-indicator {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .main {
+                padding: 0;
+            }
+
+            .content {
+                padding: 0;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .card, .metric {
+                break-inside: avoid;
+                border: 1px solid #eee !important;
+                background: #fff !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+
+            .metric-value, .card-title, .bar-label, .bar-count, .session-name, .funnel-label, td, th {
+                color: #000 !important;
+            }
+
+            .export-mode-active .metric:not(.selected),
+            .export-mode-active .card:not(.selected) {
+                display: none !important;
+            }
+
+            canvas {
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- ── Sidebar ───────────────────────────── -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                <div>
+                    <div class="logo-name">MSEED</div>
+                    <div class="logo-sub">Analytics</div>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-label">Overview</div>
+                <div class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" />
+                        <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5" />
+                        <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5" />
+                        <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5" />
+                    </svg>
+                    Dashboard
+                    <span class="nav-badge">Live</span>
+                </div>
+            </div>
+
+            <div class="nav-section" style="margin-top:6px">
+                <div class="nav-section-label">Portals</div>
+                <div class="nav-item" onclick="scrollTo(0,0)">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                    </svg>
+                    College Student
+                </div>
+                <div class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M5 4V3a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                    Institution
+                </div>
+                <div class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2l1.8 3.6L14 6.3l-3 2.9.7 4.1L8 11.4l-3.7 1.9.7-4.1-3-2.9 4.2-.7z"
+                            stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
+                    </svg>
+                    Junior Student
+                </div>
+                <div class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 12L8 4l6 8H2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                    </svg>
+                    School Inst.
+                </div>
+            </div>
+
+            <div class="nav-section" style="margin-top:6px">
+                <div class="nav-section-label">Reports</div>
+                <div class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                    </svg>
+                    Enrolment
+                </div>
+                <div class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 12l3.5-4 3 3 3-5 2.5 2" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Conversions
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span>47 active users now</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ── Main ──────────────────────────────── -->
+        <div class="main">
+
+            <div class="topbar">
+                <div class="topbar-left">
+                    <h1>Analytics Dashboard</h1>
+                    <p>MSEED — All portals overview · Last updated just now</p>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <button class="btn-topbar-export" onclick="toggleExportMode()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Export
+                    </button>
+                    <div class="tab-row">
+                        <button class="tab active" onclick="setRange('today',this)">Today</button>
+                        <button class="tab" onclick="setRange('week',this)">Week</button>
+                        <button class="tab" onclick="setRange('month',this)">Month</button>
+                        <button class="tab" onclick="setRange('all',this)">All time</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <!-- Metrics -->
+                <p class="section-label">Overview</p>
+                <div class="metric-grid">
+                    <div class="metric c-green" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="metric-icon">👁</div>
+                        <div class="metric-label">Total sessions</div>
+                        <div class="metric-value" id="m-sessions">1,284</div>
+                        <div class="metric-delta delta-up" id="m-sessions-d">▲ +12% vs yesterday</div>
+                    </div>
+                    <div class="metric c-blue" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="metric-icon">👤</div>
+                        <div class="metric-label">Unique visitors</div>
+                        <div class="metric-value" id="m-visitors">847</div>
+                        <div class="metric-delta delta-up" id="m-visitors-d">▲ +8% vs yesterday</div>
+                    </div>
+                    <div class="metric c-coral" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="metric-icon">⏱</div>
+                        <div class="metric-label">Avg. time on site</div>
+                        <div class="metric-value" id="m-time">4m 32s</div>
+                        <div class="metric-delta delta-up" id="m-time-d">▲ +23s vs yesterday</div>
+                    </div>
+                    <div class="metric c-amber" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="metric-icon">📋</div>
+                        <div class="metric-label">Enrol form opens</div>
+                        <div class="metric-value" id="m-enroll">213</div>
+                        <div class="metric-delta delta-up" id="m-enroll-d">▲ +31% vs yesterday</div>
+                    </div>
+                </div>
+
+                <!-- Visit line + Donut -->
+                <div class="charts-row">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Portal visits over time</div>
+                                <div class="card-sub">All portals · click legend to toggle</div>
+                            </div>
+                            <span class="card-badge badge-green">Live</span>
+                        </div>
+                        <div class="legend" id="visit-legend">
+                            <div class="legend-item"><span class="swatch" style="background:#378ADD"></span>College
+                                student</div>
+                            <div class="legend-item"><span class="swatch" style="background:#1D9E75"></span>Institution
+                            </div>
+                            <div class="legend-item"><span class="swatch" style="background:#D85A30"></span>Junior
+                                student</div>
+                            <div class="legend-item"><span class="swatch" style="background:#BA7517"></span>School inst.
+                            </div>
+                        </div>
+                        <div style="position:relative;height:210px"><canvas id="visitChart"></canvas></div>
+                    </div>
+
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Portal share</div>
+                                <div class="card-sub">Session distribution</div>
+                            </div>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item"><span class="swatch" style="background:#378ADD"></span>College 46%
+                            </div>
+                            <div class="legend-item"><span class="swatch" style="background:#1D9E75"></span>Inst. 27%
+                            </div>
+                            <div class="legend-item"><span class="swatch" style="background:#D85A30"></span>Junior 16%
+                            </div>
+                            <div class="legend-item"><span class="swatch" style="background:#BA7517"></span>School 11%
+                            </div>
+                        </div>
+                        <div style="position:relative;height:180px"><canvas id="donutChart"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- Btn clicks + Session + Tab nav -->
+                <div class="bottom-row">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">Most clicked buttons</div>
+                        </div>
+                        <div id="btn-bars"></div>
+                    </div>
+
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">Avg. session duration</div>
+                            <div class="card-sub">by portal</div>
+                        </div>
+                        <div id="session-list"></div>
+                    </div>
+
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">College portal tabs</div>
+                            <div class="card-sub">Navigation clicks</div>
+                        </div>
+                        <div id="tab-bars"></div>
+                    </div>
+                </div>
+
+                <!-- Funnel + Heatmap -->
+                <div class="charts-row">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Enrolment funnel</div>
+                                <div class="card-sub">Visitor → submission</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px">
+                                <span class="card-badge badge-blue">11.5% conversion</span>
+                                <div class="csv-download" onclick="event.stopPropagation(); downloadCSV('FUNNEL')">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                    CSV
+                                </div>
+                            </div>
+                        </div>
+                        <div id="funnel"></div>
+                    </div>
+
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">Traffic heatmap</div>
+                            <div class="card-sub">Visits by hour × day</div>
+                        </div>
+                        <div class="heatmap-wrap">
+                            <div class="heatmap-grid" id="heatmap"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top pages table + Live feed -->
+                <div class="charts-row full-row">
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">Top pages / sections</div>
+                            <div class="csv-download" onclick="event.stopPropagation(); downloadCSV('PAGES')">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                CSV
+                            </div>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Page / Section</th>
+                                        <th>Portal</th>
+                                        <th>Views</th>
+                                        <th>Avg. time</th>
+                                        <th>Bounce</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pages-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" onclick="selectItem(this)">
+                        <div class="export-check-wrap"><input type="checkbox"><span onclick="event.stopPropagation()">Select</span></div>
+                        <div class="card-header">
+                            <div class="card-title">Live activity feed</div>
+                            <span class="card-badge badge-green">Realtime</span>
+                        </div>
+                        <div id="activity-feed"></div>
+                    </div>
+                </div>
+
+            </div><!-- /content -->
+        </div><!-- /main -->
+    </div><!-- /layout -->
+
+    <div class="export-bar" id="exportBar">
+        <div class="export-bar-text" id="exportStatus">Select components to include in report</div>
+        <div class="export-bar-btns">
+            <button class="btn-export btn-cancel" onclick="toggleExportMode()">Cancel</button>
+            <button class="btn-export btn-download" onclick="downloadReport()">Download PDF</button>
+        </div>
+    </div>
+
+    <script>
+        /* ── Data ─────────────────────────────────── */
+        const RANGES = {
+            today: { sessions: '1,284', visitors: '847', time: '4m 32s', enroll: '213', sdelta: '▲ +12% vs yesterday', vdelta: '▲ +8% vs yesterday', tdelta: '▲ +23s vs yesterday', edelta: '▲ +31% vs yesterday' },
+            week: { sessions: '7,841', visitors: '4,320', time: '5m 10s', enroll: '1,104', sdelta: '▲ +9% vs prev week', vdelta: '▲ +14% vs prev week', tdelta: '▲ +41s vs prev week', edelta: '▲ +18% vs prev week' },
+            month: { sessions: '31,200', visitors: '17,600', time: '4m 55s', enroll: '4,280', sdelta: '▲ +22% vs prev month', vdelta: '▲ +19% vs prev month', tdelta: '▲ +1m 12s vs prev month', edelta: '▲ +27% vs prev month' },
+            all: { sessions: '142,880', visitors: '68,400', time: '4m 44s', enroll: '18,930', sdelta: '— all time', vdelta: '— all time', tdelta: '— all time', edelta: '— all time' }
+        };
+
+        const VISIT_DATA = {
+            today: { labels: ['6am', '9am', '12pm', '3pm', '6pm', '9pm'], college: [40, 90, 130, 120, 80, 50], inst: [10, 30, 60, 70, 40, 20], junior: [5, 15, 30, 35, 20, 10], school: [3, 8, 18, 22, 12, 7] },
+            week: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], college: [340, 480, 510, 430, 390, 220, 160], inst: [140, 200, 230, 190, 170, 80, 60], junior: [70, 100, 120, 110, 80, 40, 30], school: [50, 70, 80, 60, 55, 30, 20] },
+            month: { labels: ['W1', 'W2', 'W3', 'W4'], college: [3200, 3800, 4100, 3700], inst: [1400, 1800, 2000, 1600], junior: [700, 900, 1000, 880], school: [520, 640, 680, 560] },
+            all: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], college: [8000, 9200, 10400, 11000, 12500, 14000], inst: [3400, 4000, 4800, 5200, 6000, 7200], junior: [1800, 2100, 2400, 2600, 3000, 3600], school: [1200, 1400, 1700, 1900, 2200, 2700] }
+        };
+
+        const BTNS = [
+            { label: 'Enroll Now', clicks: 840, color: '#378ADD' },
+            { label: 'Enter Student Portal', clicks: 712, color: '#378ADD' },
+            { label: 'Check ATS Score', clicks: 540, color: '#1D9E75' },
+            { label: 'Enter Inst. Portal', clicks: 380, color: '#1D9E75' },
+            { label: 'Live Classes Tab', clicks: 330, color: '#BA7517' },
+            { label: 'Enter Junior Portal', clicks: 210, color: '#D85A30' },
+            { label: 'View Courses', clicks: 190, color: '#639922' },
+        ];
+
+        const SESSIONS = [
+            { name: 'College student', time: '6m 14s', color: '#378ADD' },
+            { name: 'Institution', time: '4m 48s', color: '#1D9E75' },
+            { name: 'School institution', time: '3m 22s', color: '#BA7517' },
+            { name: 'Junior student', time: '2m 55s', color: '#D85A30' },
+            { name: 'Home / landing', time: '1m 12s', color: '#888780' },
+        ];
+
+        const TABS = [
+            { label: 'Live Classes', pct: 31, color: '#378ADD' },
+            { label: 'Home', pct: 22, color: '#1D9E75' },
+            { label: 'ATS Tools', pct: 18, color: '#BA7517' },
+            { label: 'Courses', pct: 14, color: '#639922' },
+            { label: 'Resources', pct: 9, color: '#D85A30' },
+            { label: 'Games', pct: 4, color: '#D4537E' },
+            { label: 'About Us', pct: 2, color: '#888780' },
+        ];
+
+        const FUNNEL = [
+            { label: 'Portal visitors', value: 1284, pct: 100, color: '#378ADD' },
+            { label: 'Clicked portal button', value: 712, pct: 55, color: '#1D9E75' },
+            { label: 'Enroll modal opened', value: 380, pct: 30, color: '#BA7517' },
+            { label: 'Form filled (step 1)', value: 213, pct: 17, color: '#D85A30' },
+            { label: 'Enrolment submitted', value: 148, pct: 12, color: '#D4537E' },
+        ];
+
+        const PAGES = [
+            { page: 'Home (College)', portal: 'College', tag: 'tag-blue', views: 4820, time: '2m 14s', bounce: '38%', spark: [30, 40, 55, 50, 65, 60, 80] },
+            { page: 'Live Classes', portal: 'College', tag: 'tag-blue', views: 3940, time: '5m 42s', bounce: '22%', spark: [20, 35, 45, 55, 70, 65, 90] },
+            { page: 'ATS Checker', portal: 'College', tag: 'tag-blue', views: 2180, time: '7m 08s', bounce: '14%', spark: [15, 20, 30, 35, 45, 50, 60] },
+            { page: 'Institution Home', portal: 'Institution', tag: 'tag-green', views: 1740, time: '4m 22s', bounce: '31%', spark: [10, 15, 22, 28, 35, 30, 40] },
+            { page: 'Junior Student', portal: 'Junior', tag: 'tag-coral', views: 820, time: '2m 55s', bounce: '49%', spark: [8, 10, 14, 18, 20, 16, 22] },
+            { page: 'School Inst.', portal: 'School', tag: 'tag-amber', views: 560, time: '3m 10s', bounce: '42%', spark: [5, 7, 10, 12, 15, 12, 18] },
+        ];
+
+        const ACTIVITY = [
+            { text: '<strong>New enrolment</strong> submitted from College Student portal', time: '2s ago', color: '#1D9E75' },
+            { text: '<strong>User entered</strong> College Student portal via portal card', time: '14s ago', color: '#378ADD' },
+            { text: '<strong>ATS Checker</strong> opened — resume scan started', time: '31s ago', color: '#BA7517' },
+            { text: '<strong>Enroll modal</strong> opened on Junior Student page', time: '55s ago', color: '#D85A30' },
+            { text: '<strong>Institution portal</strong> — EV Projects link clicked', time: '1m 12s ago', color: '#1D9E75' },
+            { text: '<strong>Syllabus modal</strong> triggered from Live Classes tab', time: '1m 48s ago', color: '#378ADD' },
+            { text: '<strong>School institution</strong> portal visited', time: '2m 03s ago', color: '#BA7517' },
+        ];
+
+        /* ── Charts ───────────────────────────────── */
+        let visitChart, donutChart;
+
+        function buildVisitChart() {
+            const vd = VISIT_DATA.today;
+            visitChart = new Chart(document.getElementById('visitChart'), {
+                type: 'line',
+                data: {
+                    labels: vd.labels,
+                    datasets: [
+                        { label: 'College student', data: vd.college, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.08)', tension: 0.4, pointRadius: 3, pointHoverRadius: 5, fill: true, borderWidth: 2 },
+                        { label: 'Institution', data: vd.inst, borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.07)', tension: 0.4, pointRadius: 3, pointHoverRadius: 5, fill: true, borderWidth: 2 },
+                        { label: 'Junior student', data: vd.junior, borderColor: '#D85A30', backgroundColor: 'rgba(216,90,48,0.06)', tension: 0.4, pointRadius: 3, pointHoverRadius: 5, fill: true, borderWidth: 2 },
+                        { label: 'School inst.', data: vd.school, borderColor: '#BA7517', backgroundColor: 'rgba(186,117,23,0.05)', tension: 0.4, pointRadius: 3, pointHoverRadius: 5, fill: true, borderWidth: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1e222c', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, titleColor: '#eaedf3', bodyColor: '#8b90a0', padding: 10 } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 11 }, color: '#565c6e' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 11 }, color: '#565c6e' }, beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function buildDonut() {
+            donutChart = new Chart(document.getElementById('donutChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['College student', 'Institution', 'Junior student', 'School inst.'],
+                    datasets: [{ data: [46, 27, 16, 11], backgroundColor: ['#378ADD', '#1D9E75', '#D85A30', '#BA7517'], borderWidth: 0, hoverOffset: 6 }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1e222c', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, titleColor: '#eaedf3', bodyColor: '#8b90a0', padding: 10 } },
+                    cutout: '68%'
+                }
+            });
+        }
+
+        /* ── Static renders ───────────────────────── */
+        function buildBtnBars() {
+            const max = BTNS[0].clicks;
+            document.getElementById('btn-bars').innerHTML = BTNS.map(b =>
+                `<div class="bar-row">
+      <span class="bar-label" title="${b.label}">${b.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(b.clicks / max * 100)}%;background:${b.color}"></div></div>
+      <span class="bar-count">${b.clicks}</span>
+    </div>`
+            ).join('');
+        }
+
+        function buildSessionList() {
+            document.getElementById('session-list').innerHTML = SESSIONS.map(p =>
+                `<div class="session-row">
+      <span class="session-name"><span class="session-dot" style="background:${p.color}"></span>${p.name}</span>
+      <span class="session-time">${p.time}</span>
+    </div>`
+            ).join('');
+        }
+
+        function buildTabBars() {
+            document.getElementById('tab-bars').innerHTML = TABS.map(t =>
+                `<div class="bar-row">
+      <span class="bar-label">${t.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${t.pct}%;background:${t.color}"></div></div>
+      <span class="bar-count">${t.pct}%</span>
+    </div>`
+            ).join('');
+        }
+
+        function buildFunnel() {
+            document.getElementById('funnel').innerHTML = FUNNEL.map((s, i) =>
+                `<div class="funnel-row">
+      <div class="funnel-num">${i + 1}</div>
+      <div class="funnel-content">
+        <div class="funnel-label">${s.label}</div>
+        <div class="funnel-stats">
+          <span>${s.value.toLocaleString()} users</span>
+          <div class="funnel-bar-wrap" style="flex:1"><div class="funnel-bar-fill" style="width:${s.pct}%;background:${s.color}"></div></div>
+          <span class="funnel-pct" style="color:${s.color}">${s.pct}%</span>
+        </div>
+      </div>
+    </div>`
+            ).join('');
+        }
+
+        function buildHeatmap() {
+            const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+            const hours = ['6am', '9am', '12pm', '3pm', '6pm', '9pm', '11pm'];
+            const data = [
+                [10, 32, 80, 75, 45, 25, 8],
+                [8, 28, 70, 80, 50, 20, 6],
+                [12, 35, 90, 88, 55, 30, 10],
+                [9, 30, 85, 82, 48, 28, 9],
+                [11, 33, 78, 70, 40, 22, 7],
+                [5, 15, 40, 45, 30, 18, 5],
+                [3, 10, 25, 30, 20, 12, 3]
+            ];
+            const max = 90;
+            let html = '<div></div>' + days.map(d => `<div class="hm-day">${d}</div>`).join('');
+            hours.forEach((h, hi) => {
+                html += `<div class="hm-label">${h}</div>`;
+                data.forEach((row, di) => {
+                    const v = data[di][hi];
+                    const a = (v / max).toFixed(2);
+                    html += `<div class="hm-cell" title="${v} visits on ${days[di]} at ${h}" style="background:rgba(0,177,123,${a})"></div>`;
+                });
+            });
+            document.getElementById('heatmap').innerHTML = html;
+        }
+
+        function buildPagesTable() {
+            document.getElementById('pages-table').innerHTML = PAGES.map(p => {
+                const sparks = p.spark.map((v, i) => `<div class="spark-bar" style="height:${Math.round(v / p.spark[p.spark.length - 1] * 18) + 2}px;opacity:${0.4 + (i / p.spark.length) * 0.6}"></div>`).join('');
+                return `<tr>
+      <td>${p.page}</td>
+      <td><span class="tag ${p.tag}">${p.portal}</span></td>
+      <td>${p.views.toLocaleString()}</td>
+      <td>${p.time}</td>
+      <td>${p.bounce}</td>
+      <td><div class="mini-sparkline">${sparks}</div></td>
+    </tr>`;
+            }).join('');
+        }
+
+        function buildActivityFeed() {
+            document.getElementById('activity-feed').innerHTML = ACTIVITY.map(a =>
+                `<div class="activity-item">
+      <div class="activity-dot" style="background:${a.color}"></div>
+      <div>
+        <div class="activity-text">${a.text}</div>
+        <div class="activity-time">${a.time}</div>
+      </div>
+    </div>`
+            ).join('');
+        }
+
+        /* ── Range switch ─────────────────────────── */
+        function setRange(r, el) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            const d = RANGES[r];
+            document.getElementById('m-sessions').textContent = d.sessions;
+            document.getElementById('m-visitors').textContent = d.visitors;
+            document.getElementById('m-time').textContent = d.time;
+            document.getElementById('m-enroll').textContent = d.enroll;
+            document.getElementById('m-sessions-d').textContent = d.sdelta;
+            document.getElementById('m-visitors-d').textContent = d.vdelta;
+            document.getElementById('m-time-d').textContent = d.tdelta;
+            document.getElementById('m-enroll-d').textContent = d.edelta;
+            const vd = VISIT_DATA[r];
+            visitChart.data.labels = vd.labels;
+            visitChart.data.datasets[0].data = vd.college;
+            visitChart.data.datasets[1].data = vd.inst;
+            visitChart.data.datasets[2].data = vd.junior;
+            visitChart.data.datasets[3].data = vd.school;
+            visitChart.update();
+        }
+
+        /* ── Simulate live counter ────────────────── */
+        function simulateLive() {
+            const el = document.querySelector('.sidebar-bottom .live-indicator span');
+            let count = 47;
+            setInterval(() => {
+                count += Math.floor(Math.random() * 5) - 2;
+                if (count < 10) count = 10;
+                if (count > 120) count = 120;
+                el.textContent = count + ' active users now';
+            }, 3000);
+        }
+
+        /* ── Init ─────────────────────────────────── */
+        buildVisitChart();
+        buildDonut();
+        buildBtnBars();
+        buildSessionList();
+        buildTabBars();
+        buildFunnel();
+        buildHeatmap();
+        buildPagesTable();
+        buildActivityFeed();
+        /* ── Export Logic ───────────────────────── */
+        let exportMode = false;
+
+        function toggleExportMode() {
+            exportMode = !exportMode;
+            const body = document.body;
+            const bar = document.getElementById('exportBar');
+            
+            if (exportMode) {
+                body.classList.add('export-mode');
+                bar.style.display = 'flex';
+                updateExportStatus();
+            } else {
+                body.classList.remove('export-mode', 'export-mode-active');
+                bar.style.display = 'none';
+                document.querySelectorAll('.selected').forEach(el => {
+                    el.classList.remove('selected');
+                    el.querySelector('input').checked = false;
+                });
+            }
+        }
+
+        function selectItem(el) {
+            if (!exportMode) return;
+            el.classList.toggle('selected');
+            const cb = el.querySelector('input');
+            cb.checked = el.classList.contains('selected');
+            
+            const anySelected = document.querySelectorAll('.selected').length > 0;
+            if (anySelected) {
+                document.body.classList.add('export-mode-active');
+            } else {
+                document.body.classList.remove('export-mode-active');
+            }
+            updateExportStatus();
+        }
+
+        function updateExportStatus() {
+            const count = document.querySelectorAll('.selected').length;
+            const status = document.getElementById('exportStatus');
+            if (count === 0) {
+                status.textContent = 'Select components to include in report';
+            } else {
+                status.textContent = `${count} component${count > 1 ? 's' : ''} selected`;
+            }
+        }
+
+        function downloadReport() {
+            const selected = document.querySelectorAll('.selected');
+            if (selected.length === 0) {
+                alert('Please select at least one component to export.');
+                return;
+            }
+            window.print();
+        }
+
+        function downloadCSV(dataId) {
+            let data = [];
+            let filename = 'export.csv';
+            
+            if (dataId === 'PAGES') {
+                data = PAGES;
+                filename = 'top_pages_report.csv';
+            } else if (dataId === 'FUNNEL') {
+                data = FUNNEL;
+                filename = 'enrolment_funnel_data.csv';
+            }
+
+            if (data.length === 0) return;
+
+            const headers = Object.keys(data[0]).join(',');
+            const rows = data.map(obj => Object.values(obj).map(v => `"${v}"`).join(',')).join('\n');
+            const csvContent = "data:text/csv;charset=utf-8," + headers + "\n" + rows;
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", filename);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        simulateLive();
+    </script>
+</body>
+
+</html>

@@ -340,7 +340,7 @@ function showJrTab(tab) {
     t.style.display = 'none';
   });
   const mainSections = ['#courses', '#practice', '#zen', '#roadmaps', '#trends', '#scholarships', '#mentors', '#govt', '#career-quiz'];
-  if (tab === 'jrabout') {
+  if (tab === 'jrabout' || tab === 'gallery') {
     mainSections.forEach(sel => {
       const el = document.querySelector('#page-junior-student ' + sel);
       if (el) el.style.display = 'none';
@@ -1414,13 +1414,14 @@ async function submitAutoEnrolment() {
   const dept = document.getElementById('ae-dept')?.value?.trim();
   const course = document.getElementById('ae-course')?.value?.trim();
   const phone = document.getElementById('ae-phone')?.value?.trim();
+  const college = document.getElementById('ae-college')?.value?.trim();
   const email = document.getElementById('ae-email')?.value?.trim();
 
-  console.log("[AutoEnrol] Fields →", { name, dept, course, phone, email });
+  console.log("[AutoEnrol] Fields →", { name, dept, course, phone, college, email });
 
-  if (!name || !email || !phone) {
+  if (!name || !email || !phone || !college) {
     console.warn("[AutoEnrol] ⚠️ Validation failed.");
-    showToast('Please fill in Name, Email and Phone!', 'error');
+    showToast('Please fill in Name, Email, Phone and College!', 'error');
     return;
   }
 
@@ -1441,6 +1442,7 @@ async function submitAutoEnrolment() {
       department: dept || 'Not specified',
       domainCourse: course || 'Not specified',
       mobileNumber: phone,
+      collegeName: college || 'Not specified',
       emailId: email,
       submittedAt: serverTimestamp(),
       source: 'career-support-modal',
@@ -1471,13 +1473,14 @@ async function submitEnrolment() {
   const dept = document.getElementById('en-dept')?.value?.trim();
   const course = document.getElementById('en-course')?.value?.trim();
   const phone = document.getElementById('en-phone')?.value?.trim();
+  const college = document.getElementById('en-college')?.value?.trim();
   const email = document.getElementById('en-email')?.value?.trim();
 
-  console.log("[Enrolment] Fields →", { name, dept, course, phone, email });
+  console.log("[Enrolment] Fields →", { name, dept, course, phone, college, email });
 
-  if (!name || !phone || !email) {
+  if (!name || !phone || !email || !college) {
     console.warn("[Enrolment] ⚠️ Validation failed.");
-    showToast('Please fill in Name, Phone and Email!', 'error');
+    showToast('Please fill in Name, Phone, Email and College!', 'error');
     return;
   }
 
@@ -1498,6 +1501,7 @@ async function submitEnrolment() {
       department: dept || 'Not specified',
       domainCourse: course || 'Not specified',
       mobileNumber: phone,
+      collegeName: college || 'Not specified',
       emailId: email,
       submittedAt: serverTimestamp(),
       source: 'live-class-modal',

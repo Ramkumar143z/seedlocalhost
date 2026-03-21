@@ -42,6 +42,12 @@
       padding: 12px;
       border-color: var(--green);
     }
+
+    @media (max-width: 768px) {
+      .desktop-only {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -72,6 +78,8 @@
           </div>
           <div class="form-group"><label>Mobile Number</label><input type="tel" class="form-input" id="en-phone"
               placeholder="+91 00000 00000"></div>
+          <div class="form-group"><label>College Name</label><input type="text" class="form-input" id="en-college"
+              placeholder="Enter your college name"></div>
           <div class="form-group"><label>Email ID</label><input type="email" class="form-input" id="en-email"
               placeholder="example@email.com"></div>
           <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="submitEnrolment()">Next
@@ -117,6 +125,8 @@
           </div>
           <div class="form-group"><label>Mobile Number</label><input type="tel" class="form-input" id="ae-phone"
               placeholder="+91 00000 00000"></div>
+          <div class="form-group"><label>College Name</label><input type="text" class="form-input" id="ae-college"
+              placeholder="Enter your college name"></div>
           <div class="form-group"><label>Email ID</label><input type="email" class="form-input" id="ae-email"
               placeholder="example@email.com"></div>
           <button class="btn btn-primary"
@@ -142,6 +152,36 @@
     #exit-intent-resources .resource-card {
       margin-bottom: 0;
       padding: 16px;
+    }
+
+    .gallery-exit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #f8fafc;
+      color: #64748b;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 24px;
+    }
+
+    .gallery-exit-btn:hover {
+      background: #fff;
+      color: #00b17b;
+      border-color: #00b17b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 177, 123, 0.1);
+    }
+
+    .gallery-exit-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2.5;
     }
   </style>
 
@@ -394,6 +434,7 @@
         <span class="nav-link" onclick="showTab('games');closeMobileMenu()">Games</span>
         <span class="nav-link" onclick="showTab('ats');closeMobileMenu()">ATS Tools</span>
         <span class="nav-link" onclick="showTab('precourses');closeMobileMenu()">Courses</span>
+        <span class="nav-link" onclick="showTab('gallery');closeMobileMenu()">Gallery</span>
         <span class="nav-link" onclick="showTab('about');closeMobileMenu()">About Us</span>
       </div>
     </nav>
@@ -947,8 +988,10 @@
                   onclick="navigate('college-student');showTab('about');renderAboutSection()"
                   style="cursor:pointer">About Us</span><span class="footer-link"
                   onclick="navigate('institution');showInstTab('inst-tab-home')" style="cursor:pointer">Partner With
-                  Us</span></div>
+                  Us</span><span class="footer-link" style="cursor:pointer">📞 +91-9361286834</span></div>
+
             </div>
+
           </div>
         </div>
         <div class="footer-bottom">
@@ -1825,6 +1868,175 @@
             HR preparation</p>
         </div>
         <div class="grid-2" id="pdf-grid"></div>
+      </div>
+    </div>
+    <!-- GALLERY TAB -->
+    <div id="tab-gallery" class="tab-content hidden">
+      <div class="gallery-container" style="padding:40px 24px;">
+        <button class="gallery-exit-btn" onclick="showTab('courses')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to Home
+        </button>
+        <div class="section-header" style="text-align:center;margin-bottom:48px;">
+          <div class="section-tag">✦ Visual Journey</div>
+          <h2 class="section-title">MSEED <span>Gallery</span></h2>
+          <p style="color:var(--grey-mid);max-width:600px;margin:16px auto 0;">Explore our moments of innovation,
+            learning, and celebration across various campuses and events.</p>
+        </div>
+        <div class="gallery-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:24px;">
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Anniversary"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                MSEED Anniversary</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating years of excellence
+                and innovation in education.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80" alt="Campus"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Tech Inauguration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Unveiling our state-of-the-art
+                campus facilities.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Workshop"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                EV Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Hands-on training sessions with
+                industry experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1523240715632-d983bb274c43?w=800&q=80" alt="Success"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Career Success</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Empowering the next generation
+                of industry leaders.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1523050335456-c4d968b0f948?w=800&q=80" alt="Graduation"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Graduation Day</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating the milestones of
+                our ambitious graduates.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb7f?w=800&q=80" alt="Research Lab"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Advanced Research Lab</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Where innovation meets
+                practical implementation.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80" alt="Library"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Digital Library</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Accessing a world of knowledge
+                at your fingertips.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Robotics"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Robotics Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Building the machines of
+                tomorrow, today.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Collaboration"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Student Collaboration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Teamwork driving impactful
+                projects and learning.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1475721027187-40247339d248?w=800&q=80" alt="Seminar"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Industry Seminar</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Learning from global industry
+                leaders and experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="Coding"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Coding Hackathon</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Intense coding sessions solving
+                real-world challenges.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Campus Life"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Campus Life</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Vibrant student community and
+                extracurricular excellence.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -2765,6 +2977,174 @@
     <div id="inst-tab-about" class="inst-tab-content hidden">
       <div class="about-seed-container inst-seed" style="padding: 120px 0;"></div>
     </div>
+    <!-- GALLERY TAB -->
+    <div id="gallery" class="inst-tab-content hidden">
+      <div class="gallery-container" style="padding:40px 24px;">
+        <button class="gallery-exit-btn" onclick="showInstTab('inst-tab-home')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to Home
+        </button>
+        <div class="section-header" style="text-align:center;margin-bottom:48px;">
+          <div class="section-tag">✦ Visual Journey</div>
+          <h2 class="section-title">MSEED <span>Gallery</span></h2>
+          <p style="color:var(--grey-mid);max-width:600px;margin:16px auto 0;">Explore our moments of innovation,
+            learning, and celebration across various campuses and events.</p>
+        </div>
+        <div class="gallery-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:24px;">
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Anniversary"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                MSEED Anniversary</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating years of excellence
+                and innovation in education.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80" alt="Campus"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Tech Inauguration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Unveiling our state-of-the-art
+                campus facilities.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Workshop"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                EV Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Hands-on training sessions with
+                industry experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1523240715632-d983bb274c43?w=800&q=80" alt="Success"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Career Success</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Empowering the next generation
+                of industry leaders.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1523050335456-c4d968b0f948?w=800&q=80" alt="Graduation"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Graduation Day</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating the milestones of
+                our ambitious graduates.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb7f?w=800&q=80" alt="Research Lab"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Advanced Research Lab</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Where innovation meets
+                practical implementation.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80" alt="Library"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Digital Library</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Accessing a world of knowledge
+                at your fingertips.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Robotics"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Robotics Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Building the machines of
+                tomorrow, today.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Collaboration"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Student Collaboration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Teamwork driving impactful
+                projects and learning.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1475721027187-40247339d248?w=800&q=80" alt="Seminar"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Industry Seminar</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Learning from global industry
+                leaders and experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="Coding"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Coding Hackathon</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Intense coding sessions solving
+                real-world challenges.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Campus Life"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Campus Life</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Vibrant student community and
+                extracurricular excellence.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div><!-- /page-institution -->
 
@@ -3603,6 +3983,175 @@
     <div id="jrtab-jrabout" class="jrtab-content hidden">
       <div class="about-seed-container" style="color:var(--text)"></div>
     </div>
+    <!-- GALLERY TAB -->
+    <div id="jrtab-gallery" class="jrtab-content hidden">
+      <div class="gallery-container" style="padding:40px 24px;">
+        <button class="gallery-exit-btn" onclick="showJrTab('jrhome')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to Home
+        </button>
+        <div class="section-header" style="text-align:center;margin-bottom:48px;">
+          <div class="section-tag">✦ Visual Journey</div>
+          <h2 class="section-title">MSEED <span>Gallery</span></h2>
+          <p style="color:var(--grey-mid);max-width:600px;margin:16px auto 0;">Explore our moments of innovation,
+            learning, and celebration across various campuses and events.</p>
+        </div>
+        <div class="gallery-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:24px;">
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Anniversary"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                MSEED Anniversary</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating years of excellence
+                and innovation in education.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80" alt="Campus"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Tech Inauguration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Unveiling our state-of-the-art
+                campus facilities.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Workshop"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                EV Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Hands-on training sessions with
+                industry experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1523240715632-d983bb274c43?w=800&q=80" alt="Success"
+                style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Career Success</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Empowering the next generation
+                of industry leaders.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1523050335456-c4d968b0f948?w=800&q=80" alt="Graduation"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Graduation Day</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating the milestones of
+                our ambitious graduates.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb7f?w=800&q=80" alt="Research Lab"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Advanced Research Lab</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Where innovation meets
+                practical implementation.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80" alt="Library"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Digital Library</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Accessing a world of knowledge
+                at your fingertips.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Robotics"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Robotics Workshop</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Building the machines of
+                tomorrow, today.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Collaboration"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Student Collaboration</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Teamwork driving impactful
+                projects and learning.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1475721027187-40247339d248?w=800&q=80" alt="Seminar"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Industry Seminar</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Learning from global industry
+                leaders and experts.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="Coding"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Coding Hackathon</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Intense coding sessions solving
+                real-world challenges.</p>
+            </div>
+          </div>
+          <div class="gallery-card"
+            style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+            <div style="width:100%; height:210px; overflow:hidden;"><img
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Campus Life"
+                style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="padding:18px;">
+              <h4 style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                Campus Life</h4>
+              <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Vibrant student community and
+                extracurricular excellence.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
       (function () {
@@ -4075,7 +4624,7 @@
             <li><a href="#" onclick="event.preventDefault();showSchoolAbout();toggleInstMenu()">About Us</a></li>
           </ul>
           <!-- RIGHT: Back + Book Session + Hamburger -->
-          <div style="display:flex;align-items:center;gap:10px;">
+          <div style="display:flex;align-items:center;gap:15px;">
             <button class="back-btn" onclick="navigate('portal')"
               style="background:transparent;border:1px solid #ddd;border-radius:8px;color:#444;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:13px;font-weight:600;padding:7px 14px;">
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -4199,6 +4748,188 @@
               <div class="card-title">Analytics Template</div>
               <div class="card-desc">Export-ready interest tracking sheets for local institution use.</div>
               <div class="card-footer"><span class="badge badge-stable">XLSX</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GALLERY TAB -->
+        <section id="schtab-gallery" class="sch-tab-content hidden"
+          style="background:#fff;border-radius:24px;padding:32px;margin-bottom:32px;">
+          <div class="gallery-container">
+            <button class="gallery-exit-btn" onclick="showSchTab('schhome')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Back to Home
+            </button>
+            <div class="section-header" style="text-align:center;margin-bottom:48px;">
+              <div class="section-tag">✦ Visual Journey</div>
+              <h2 class="section-title">MSEED <span>Gallery</span></h2>
+              <p style="color:var(--grey-mid);max-width:600px;margin:16px auto 0;">Explore our moments of innovation,
+                learning, and celebration across various campuses and events.</p>
+            </div>
+            <div class="gallery-grid"
+              style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:24px;">
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Anniversary"
+                    style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    MSEED Anniversary</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating years of
+                    excellence and innovation in education.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80" alt="Campus"
+                    style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Tech Inauguration</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Unveiling our
+                    state-of-the-art campus facilities.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Workshop"
+                    style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    EV Workshop</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Hands-on training sessions
+                    with industry experts.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1523240715632-d983bb274c43?w=800&q=80" alt="Success"
+                    style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Career Success</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Empowering the next
+                    generation of industry leaders.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1523050335456-c4d968b0f948?w=800&q=80" alt="Graduation"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Graduation Day</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Celebrating the milestones
+                    of our ambitious graduates.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1581093458791-9f3c3250bb7f?w=800&q=80" alt="Research Lab"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Advanced Research Lab</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Where innovation meets
+                    practical implementation.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&q=80" alt="Library"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Digital Library</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Accessing a world of
+                    knowledge at your fingertips.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Robotics"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Robotics Workshop</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Building the machines of
+                    tomorrow, today.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Collaboration"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Student Collaboration</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Teamwork driving impactful
+                    projects and learning.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1475721027187-40247339d248?w=800&q=80" alt="Seminar"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Industry Seminar</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Learning from global
+                    industry leaders and experts.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80" alt="Coding"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Coding Hackathon</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Intense coding sessions
+                    solving real-world challenges.</p>
+                </div>
+              </div>
+              <div class="gallery-card"
+                style="background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05); transition:all 0.3s ease;">
+                <div style="width:100%; height:210px; overflow:hidden;"><img
+                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Campus Life"
+                    style="width:100%; height:100%; object-fit:cover;"></div>
+                <div style="padding:18px;">
+                  <h4
+                    style="font-size:15px; font-weight:700; color:#1a2a1f; margin:0; font-family:'DM Sans', sans-serif;">
+                    Campus Life</h4>
+                  <p style="font-size:12px; color:#6b8f7e; margin-top:6px; line-height:1.4;">Vibrant student community
+                    and extracurricular excellence.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
