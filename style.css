@@ -2748,7 +2748,7 @@ textarea.form-input {
   .grid-4,
   .portal-cards,
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .hero h1,
@@ -2774,7 +2774,20 @@ textarea.form-input {
     overflow-x: auto;
   }
 
-  /* Carousel mobile */
+  .hero-carousel-wrap {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .hc-track,
+  .hc-slide {
+    height: auto !important;
+  }
+
+  .hc-slide {
+    padding: 40px 0 !important;
+  }
+
   .hc-inner {
     grid-template-columns: 1fr;
   }
