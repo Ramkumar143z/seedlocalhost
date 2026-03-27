@@ -351,20 +351,22 @@ h4 {
 
 .portal-cards {
   max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
   padding: 80px 24px 40px;
   /* Increased top padding for better gap from hero */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;
   /* Increased gap between cards */
   justify-content: center;
+  box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .portal-cards {
     grid-template-columns: 1fr;
-    max-width: 450px;
+    max-width: 500px;
     padding: 60px 24px 30px;
   }
 }
@@ -438,6 +440,8 @@ h4 {
   font-size: 28px;
   color: var(--grey);
   margin-bottom: 12px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .portal-card .sub {
