@@ -352,12 +352,21 @@ h4 {
 .portal-cards {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 40px 24px 20px;
-  /* Adjusted padding to add gap between hero and cards */
+  padding: 80px 24px 40px;
+  /* Increased top padding for better gap from hero */
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  /* Reduced gap from 32px */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  /* Increased gap between cards */
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .portal-cards {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    padding: 60px 24px 30px;
+  }
 }
 
 .portal-card {
