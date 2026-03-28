@@ -10945,8 +10945,8 @@ textarea.form-input {
 /* INST SERVICES – SIMPLE HORIZONTAL SCROLL */
 /* ========================================= */
 
-@media (max-width: 768px) {
-
+/* Institution Services horizontal scroll only for mobile */
+@media (max-width: 576px) {
   #inst-services {
     overflow: hidden;
   }
@@ -10954,24 +10954,27 @@ textarea.form-input {
   #inst-services .row.g-4.justify-content-center {
     display: flex !important;
     flex-wrap: nowrap !important;
-    /* prevent wrapping */
     overflow-x: auto;
-    /* horizontal scroll */
+    /* Use flex-start to prevent first card from being cut off */
+    justify-content: flex-start !important;
     gap: 16px;
     scroll-behavior: smooth;
-    padding-bottom: 10px;
+    padding: 0 20px 20px 20px !important;
+    /* Add padding for scroller */
+    margin: 0 !important;
+    /* Remove negative margins */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   #inst-services .row.g-4.justify-content-center::-webkit-scrollbar {
     display: none;
-    /* hide scrollbar */
   }
 
   #inst-services .row.g-4.justify-content-center>div {
-    flex: 0 0 220px;
-    max-width: 220px;
+    flex: 0 0 260px;
+    max-width: 260px;
   }
-
 }
 
 /*ithoda instituition mutinchu
@@ -11224,15 +11227,23 @@ textarea.form-input {
 
 }
 
-/* Tablet */
+/* Tablet: 2 columns */
 @media (min-width: 577px) and (max-width: 991px) {
-
   #page-institution #inst-tab-home #inst-services .col-md-6.col-lg-4 {
     width: 50%;
     max-width: 50%;
     flex: 0 0 50%;
   }
 
+  #inst-services .container {
+    padding: 0 24px;
+  }
+
+  #inst-services .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+  }
 }
 
 /* Desktop */
